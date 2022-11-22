@@ -1,4 +1,10 @@
 import { FooterStyled } from "./FooterStyled";
+import {
+  FacebookOutlined,
+  InstagramOutlined,
+  TwitterOutlined,
+  YoutubeOutlined,
+} from "@ant-design/icons";
 
 export default function Footer() {
   return (
@@ -12,7 +18,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
               className="social-icon"
             >
-              FB
+              <FacebookOutlined />
             </a>
             <a
               target="_blank"
@@ -20,7 +26,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
               className="social-icon"
             >
-              IG
+              <InstagramOutlined />
             </a>
             <a
               target="_blank"
@@ -28,7 +34,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
               className="social-icon"
             >
-              TT
+              <TwitterOutlined />
             </a>
             <a
               target="_blank"
@@ -36,12 +42,16 @@ export default function Footer() {
               href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
               className="social-icon"
             >
-              YT
+              <YoutubeOutlined />
             </a>
           </div>
           <p className="copyright">&copy; 2022 Wine Supply, Inc</p>
         </div>
-        <div className="business-info">BUSINESS INFO</div>
+        <div className="business-info">
+          <p>Carlos Pellegrini 507, CABA</p>
+          <p>Buenos Aires, Argentina</p>
+          <p>info@winesupply.com</p>
+        </div>
       </div>
     </FooterStyled>
   );
