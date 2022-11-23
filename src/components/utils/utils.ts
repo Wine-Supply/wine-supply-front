@@ -8,6 +8,7 @@ const ButtonBuyNow = styled.button`
   padding: 1rem;
   width: 10rem;
   margin: 0.2rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
@@ -24,9 +25,10 @@ const ButtonAddToCart = styled.button`
   color: var(--white);
   border: 0.1rem solid var(--red);
   border-radius: 5rem;
-  padding: 1rem;
+  padding: 0.7rem 1rem;
   width: 10rem;
   margin: 0.2rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
