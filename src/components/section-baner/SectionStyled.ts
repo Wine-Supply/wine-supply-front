@@ -82,16 +82,9 @@ export const SectionStyled = styled.section`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--black);
     font-weight: 600;
     font-size: 1.2rem;
-    border-color: var(--red);
     transition: all 0.3s;
-  }
-
-  .sub-btn:hover {
-    background-color: var(--red);
-    color: var(--white);
   }
 
   @media (min-width: 600px) {
