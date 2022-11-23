@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const SectionStyled = styled.section`
   color: var(--white);
   background-color: var(--color-light);
-  padding-bottom: 9.6rem;
 
   .section-img {
     max-width: 100%;
@@ -71,7 +70,32 @@ export const SectionStyled = styled.section`
     border-bottom: 2px solid currentColor;
   }
 
+  .club-baner {
+    position: relative;
+  }
+
+  .sub-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--black);
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-color: var(--red);
+    transition: all 0.3s;
+  }
+
+  .sub-btn:hover {
+    background-color: var(--red);
+    color: var(--white);
+  }
+
   @media (min-width: 600px) {
+    padding-bottom: 9.6rem;
     .explore-baner-info {
       gap: 3rem;
     }
@@ -82,6 +106,10 @@ export const SectionStyled = styled.section`
 
     .wine-type {
       font-size: 1.6rem;
+    }
+
+    .sub-btn {
+      transform: translate(-50%, -50%) scale(1.2);
     }
   }
 
@@ -96,6 +124,10 @@ export const SectionStyled = styled.section`
 
     .wine-type {
       font-size: 1.8rem;
+    }
+
+    .sub-btn {
+      transform: translate(-50%, -50%) scale(1.8);
     }
   }
 `;
