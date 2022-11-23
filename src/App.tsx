@@ -1,9 +1,6 @@
-
 import Footer from "./components/footer/Footer";
 import AboutUs from "./components/section-about-us/AboutUs";
-
 import Navbar from "./components/nav/Navbar";
-
 
 import "./App.css";
 
