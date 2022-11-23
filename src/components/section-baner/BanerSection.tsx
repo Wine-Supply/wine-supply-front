@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SectionStyled } from "./SectionStyled";
+import { ButtonSubscribe } from "../utils/utils";
 import baner1 from "../../images/banner1.png";
 import baner2 from "../../images/banner2.png";
 
@@ -36,6 +37,7 @@ const BanerSection = () => {
       </div>
       <div className="baner-container club-baner">
         <img className="section-img" src={baner2} alt="Bottles of wine" />
+        <ButtonSubscribe className="sub-btn">SUBSCRIBE</ButtonSubscribe>
       </div>
     </SectionStyled>
   );
