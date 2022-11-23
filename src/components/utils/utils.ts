@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const ButtonBuyNow = styled.nav`
+const ButtonBuyNow = styled.button`
   background-color: var(--black);
   color: var(--white);
   border: 0.1rem solid var(--black);
@@ -8,6 +8,7 @@ const ButtonBuyNow = styled.nav`
   padding: 1rem;
   width: 10rem;
   margin: 0.2rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
@@ -19,14 +20,15 @@ const ButtonBuyNow = styled.nav`
   }
 `
 
-const ButtonAddToCart = styled.nav`
+const ButtonAddToCart = styled.button`
   background-color: var(--red);
   color: var(--white);
   border: 0.1rem solid var(--red);
   border-radius: 5rem;
-  padding: 1rem;
+  padding: 0.7rem 1rem;
   width: 10rem;
   margin: 0.2rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
@@ -38,7 +40,7 @@ const ButtonAddToCart = styled.nav`
     border-color: var(--color-light);
   }
 `
-const ButtonSaveChanges = styled.nav`
+const ButtonSaveChanges = styled.button`
   background-color: var(--black);
   color: var(--white);
   border: 0.1rem solid var(--black);
@@ -52,7 +54,7 @@ const ButtonSaveChanges = styled.nav`
     color: var(--color-dark);
   }
 `
-const ButtonDeleteAccount = styled.nav`
+const ButtonDeleteAccount = styled.button`
   background-color: var(--white);
   color: var(--black);
   border: 0.1rem solid var(--color-light);
@@ -66,7 +68,7 @@ const ButtonDeleteAccount = styled.nav`
     background-color: var(--color-light);
   }
 `
-const ButtonSubscribe = styled.nav`
+const ButtonSubscribe = styled.button`
   background-color: var(--white);
   color: var(--black);
   border: 0.1rem solid var(--black);
@@ -83,7 +85,7 @@ const ButtonSubscribe = styled.nav`
     background-color: var(--black);
   }
 `
-const ButtonSubscribeRed = styled.nav`
+const ButtonSubscribeRed = styled.button`
   background-color: var(--red);
   color: var(--white);
   border: 0.1rem solid var(--red);
