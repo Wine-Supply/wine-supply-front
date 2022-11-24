@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { NavbarStyled } from "./NavbarStyled";
 import {BurguerButtonStyled} from "./BurguerButtonStyled";
-import logo from './logo.svg';
+import logo from '../../images/logo.svg';
 import BurguerButton from './BurguerButton';
 import {
   ShoppingCartOutlined, 
