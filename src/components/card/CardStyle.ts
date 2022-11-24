@@ -7,7 +7,7 @@ const CardContainer = styled.div`
   padding: 10px;
 
   img{
-    max-height: 100px;
+    max-height: 110px;
   }
 `
 
@@ -17,6 +17,11 @@ flex-direction: column;
 justify-content: space-around;
 margin-left: 20px;
 margin-right: 10px;
+width: 90px;
+height:120px;
+max-width: 100px;
+min-height: 100px;
+
 
 .descriptionStyle{
   min-width: 100px;
@@ -24,6 +29,7 @@ margin-right: 10px;
 
 .descriptionStyle p{
   font-size: 8px;
+  text-overflow: ellipsis;
 } 
 .rankingStyle{
   display: flex;
@@ -39,7 +45,7 @@ h2{
 .cardFooter{
   display: flex;
   justify-content:flex-end;
-  padding-right: 5px;
+ // padding-right: 5px;
 }
 `
 
