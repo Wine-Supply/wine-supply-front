@@ -88,7 +88,7 @@ export const SectionStyled = styled.section`
   }
 
   @media (min-width: 600px) {
-    padding-bottom: 9.6rem;
+    padding-bottom: 4.8rem;
     .explore-baner-info {
       gap: 3rem;
     }
@@ -107,6 +107,7 @@ export const SectionStyled = styled.section`
   }
 
   @media (min-width: 1024px) {
+    padding-bottom: 9.6rem;
     .explore-baner-info {
       gap: 5rem;
     }
