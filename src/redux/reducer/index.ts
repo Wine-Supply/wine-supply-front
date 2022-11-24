@@ -13,7 +13,7 @@ interface Wine {
 
 interface Actions {
   type: string;
-  payload?: Array<Wine>;
+  payload: Array<Wine>;
 }
 
 export interface State {
