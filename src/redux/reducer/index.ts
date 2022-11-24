@@ -1,5 +1,32 @@
-const initialState = {};
+import { GET_WINES } from '../actions/index'
 
-const rootReducer = (state = initialState, action: Object) => {};
+interface Actions{
+  type: string,
+  payload?:Array<Object>
+}
+
+export interface State{
+  allWines?:Array<Object>
+}
+
+const initialState = {
+  allWines:[]
+};
+
+const rootReducer = (state:State= initialState, action: Actions) => {
+  switch (action.type) {
+    case GET_WINES:
+      console.log('rex', action.payload)
+      return{
+        ...state,
+        allWines: action.payload
+      }
+  
+    default:
+     return {
+      ...state
+    };
+  }
+};
 
 export default rootReducer;
