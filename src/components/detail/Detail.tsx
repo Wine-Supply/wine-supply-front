@@ -1,6 +1,5 @@
 import { DetailStyled, WineData,} from "./DetailStyled"
-//import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils"
-import { Link } from "react-router-dom";
+import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils"
 
 interface Props {
   propsItem:{
@@ -57,14 +56,9 @@ export default function Detail({propsItem}: Props){
       <div className="column">
         <h3 className={"price"}>${propsItem.price}</h3>
         <p className={"add"}>Add to WishList +</p>
-        <button>add</button>
-        <button>buy</button>
+        <ButtonAddToCart>Add to Cart</ButtonAddToCart>
+        <ButtonBuyNow>Buy now</ButtonBuyNow>
       </div>
     </DetailStyled>
   )
 }
-
-/*
-<ButtonAddToCart>Add to Cart</ButtonAddToCart>
-<ButtonBuyNow>Buy now</ButtonBuyNow>
-*/
