@@ -16,7 +16,6 @@ const initialState = {
 const rootReducer = (state:State= initialState, action: Actions) => {
   switch (action.type) {
     case GET_WINES:
-      console.log('rex', action.payload)
       return{
         ...state,
         allWines: action.payload
