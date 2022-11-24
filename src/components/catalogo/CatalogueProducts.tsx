@@ -5,7 +5,7 @@ import { getWines } from '../../redux/action-creators'
 import { Link } from "react-router-dom"
 import Card from "../card/Card"
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle"
-import {State} from '../../redux/reducer/index'
+import {State, Wine} from '../../redux/reducer/index'
 
 export default function CatalogueProducts() {
 
@@ -18,7 +18,7 @@ export default function CatalogueProducts() {
     if(Products!.length === 0){
       dispatch(getWines())
     }
- //   setAllProducts(Products)
+   //setAllProducts(Products)
   },[]) 
 
 console.log(Products)
@@ -27,9 +27,9 @@ console.log(Products)
     <CatalogoContainer>
       <div>
         <TitleCategory>Most Recommended</TitleCategory>
-        {/* <div className="productCointainer">
+        <div className="productCointainer">
           {Products?.map((el) =>{
-            return <Link to={''} key={el.id}>
+            return <Link to={`detail/${el.id}`} key={el.id}>
             <Card
               name = {el.name}
               descriptions = {el.description}
@@ -39,7 +39,7 @@ console.log(Products)
             />
             </Link>
           })}
-        </div> */}
+        </div>
       </div>
      {/*  
       <div>

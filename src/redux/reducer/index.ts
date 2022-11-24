@@ -1,6 +1,6 @@
 import { GET_TOP_RATED_WINES, GET_WINES } from "../actions/index";
 
-interface Wine {
+export interface Wine {
   id: string;
   name: string;
   brand: string;
