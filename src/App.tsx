@@ -1,9 +1,6 @@
-
-import Footer from "./components/Footer/Footer";
-import AboutUs from "./components/section-about-us/AboutUs";
-
-import Navbar from "./components/nav/navbar";
-
+import Home from "./components/home/Home";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/nav/Navbar";
 
 import "./App.css";
 import CatalogueProducts from "./components/catalogo/CatalogueProducts";
@@ -12,8 +9,11 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+
       <CatalogueProducts/>
-      <AboutUs />
+
+      <Home />
+
       <Footer />
     </div>
   );
