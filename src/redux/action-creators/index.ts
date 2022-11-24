@@ -12,7 +12,3 @@ export const getWines = () => {
 
 export const getTopRatedWines = () => ({ type: GET_TOP_RATED_WINES });
 
-/* export const getWines = () => {
-  console.log('aca estamos')
-  return ({type: GET_WINES, payload: 'llego'})
-} */

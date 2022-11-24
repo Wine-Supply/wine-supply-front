@@ -4,11 +4,11 @@ type CardProps ={
     name: string
     img: string
     descriptions: string
-    precio: number
-    ranking: number
+    price: number
+    rating: number
 }
 
-const Card: React.FC<CardProps> = ({name, img, descriptions, precio, ranking}) => {
+const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => {
   return (
     <CardContainer>
       <div>
@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({name, img, descriptions, precio, ranking}) =
       </div>
       <CardInformation>
         <div className='rankingStyle'>
-          <p>{ranking}/5</p>
+          <p>{rating}/5</p>
         </div>
 
         <h2>{name}</h2>
@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({name, img, descriptions, precio, ranking}) =
         </div>
 
         <div className='cardFooter'>
-          <p>${precio}</p>
+          <p>${price}</p>
           <ButtonAddCart>add to cart</ButtonAddCart>
         </div>
       </CardInformation>      
