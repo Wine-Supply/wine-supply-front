@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SectionStyled } from "./SectionStyled";
-import { ButtonSubscribe } from "../utils/utils";
-import baner1 from "../../images/banner1.png";
-import baner2 from "../../images/banner2.png";
+import { ButtonSubscribe } from "../../utils/utils";
+import baner1 from "../../../images/banner1.png";
+import baner2 from "../../../images/banner2.png";
 
 const BanerSection = () => {
   return (

@@ -1,19 +1,16 @@
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/nav/Navbar";
+import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 
 import "./App.css";
-import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-
-      <CatalogueProducts/>
-
+      <CatalogueProducts />
       <Home />
-
       <Footer />
     </div>
   );
