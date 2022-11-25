@@ -4,30 +4,30 @@ type CardProps ={
     name: string
     img: string
     descriptions: string
-    precio: number
-    ranking: number
+    price: number
+    rating: number
 }
 
-const Card: React.FC<CardProps> = ({name, img, descriptions, precio, ranking}) => {
+const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => {
   return (
     <CardContainer>
-      <div>
+      <div className='imageMain' >
         <img src={img} alt={name} />
       </div>
       <CardInformation>
         <div className='rankingStyle'>
-          <p>{ranking}/5</p>
+          <p>{rating}/5</p>
         </div>
 
         <h2>{name}</h2>
         
         <div className='descriptionStyle'>
           <span>Description</span>
-          <p>{descriptions}</p>
+          <p>{descriptions.substring(0,30)}...</p>
         </div>
 
         <div className='cardFooter'>
-          <p>${precio}</p>
+          <p>${price}</p>
           <ButtonAddCart>add to cart</ButtonAddCart>
         </div>
       </CardInformation>      

@@ -26,8 +26,8 @@ export default function TopRated() {
               name={item.name}
               descriptions={item.description}
               img={item.images[0]}
-              precio={item.price}
-              ranking={item.rating}
+              price={item.price}
+              rating={item.rating}
             />
           ))}
       </div>
