@@ -2,7 +2,7 @@ import Home from "./components/home/Home";
 import Navbar from "./components/nav/Navbar";
 import Footer from "./components/footer/Footer";
 import CatalogueProducts from "./components/catalogo/CatalogueProducts";
-import Filter from "./components/filter/Filter";
+
 import Form from "./components/form/Form";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Filter />
+
       <Routes>
         <Route path="/" element={<>landing</>} />
         <Route path="/home/products/detail/:id" element={<Detail />} />
