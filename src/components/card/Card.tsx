@@ -11,7 +11,7 @@ type CardProps ={
 const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => {
   return (
     <CardContainer>
-      <div>
+      <div className='imageMain' >
         <img src={img} alt={name} />
       </div>
       <CardInformation>
@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => 
         
         <div className='descriptionStyle'>
           <span>Description</span>
-          <p>{descriptions}</p>
+          <p>{descriptions.substring(0,30)}...</p>
         </div>
 
         <div className='cardFooter'>

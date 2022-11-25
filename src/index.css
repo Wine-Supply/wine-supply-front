@@ -4,6 +4,7 @@
   /*colors*/
   --black: #141414;
   --white: #fdfdfd;
+  --red: #6a2424;
   --color-dark: #474540;
   --color-light: #dedede;
 
@@ -16,6 +17,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 html {

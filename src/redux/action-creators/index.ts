@@ -13,14 +13,10 @@ export const getWines = () => {
 export const getTopRatedWines = () => ({ type: GET_TOP_RATED_WINES });
 
 export const getWineDetail = (id: any) => {
+  console.log('ac',id)
   return async function(dispatch: Dispatch) {
-    const resp = await fetch(`http://localhost:3001/${id}`);
+    const resp = await fetch(`http://localhost:3001/wine/${id}`);
     const data = await resp.json();
     return dispatch({type: GET_WINE_DETAIL, payload: data });
   }
 }
-
-/* export const getWines = () => {
-  console.log('aca estamos')
-  return ({type: GET_WINES, payload: 'llego'})
-} */
