@@ -120,9 +120,26 @@ export default function Form() {
 		setErrors(validate(formData));
 
 		try {
+			const data = new FormData();
+			data.append('name', formData.name); 
+			data.append('brand', formData.brand); 
+			data.append('description', formData.description); 
+			data.append('type', formData.type); 
+			data.append('body', formData.body); 
+			data.append('cropYear', formData.cropYear); 
+			data.append('origin', formData.origin); 
+			data.append('zone', formData.zone); 
+			data.append('volume', formData.volume); 
+			data.append('alcoholVolume', formData.alcoholVolume); 
+			data.append('rating', formData.rating); 
+			data.append('strain', formData.strain); 
+			data.append('stock', formData.stock); 
+			data.append('price', formData.price); 
+			data.append('images', formData.images); 
+
 			const response = await axios.post(
 				"http://localhost:3001/admin/post",
-				formData
+				data
 			);
 			if (response.status >= 200 && response.status <= 205) {
 				alert("Product added");
@@ -261,17 +278,18 @@ export default function Form() {
 					name="images"
 					onChange={handleChangeImages}
 				/> */}
-			
+			<br />
 				<label htmlFor="stock">Stock:</label>
-				<br />
+				
 				<input
 					type="number"
 					onChange={handleChangeText}
 					name="stock"
 					value={formData.stock}
 				/>
-				<label htmlFor="price">Price:</label>
 				<br />
+				<label htmlFor="price">Price:</label>
+				
 				<input
 					type="number"
 					onChange={handleChangeText}
