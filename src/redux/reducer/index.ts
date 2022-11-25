@@ -1,11 +1,16 @@
-import { GET_TOP_RATED_WINES, GET_WINES } from "../actions/index";
+import {
+  GET_TOP_RATED_WINES,
+  GET_WINES,
+  GET_WINE_NAMES_AND_BRANDS,
+  FILTER_BY_QUERY,
+} from "../actions/index";
 
-interface Wine {
+export interface Wine {
   id: string;
   name: string;
   brand: string;
   description: string;
-  images: Array<string>;
+  images: string[];
   alcoholVolume: number;
   rating: number;
   price: number;
@@ -13,17 +18,21 @@ interface Wine {
 
 interface Actions {
   type: string;
-  payload: Array<Wine>;
+  payload: Wine[];
 }
 
 export interface State {
-  allWines: Array<Wine>;
-  topRatedWines: Array<Wine>;
+  allWines: Wine[];
+  topRatedWines: Wine[];
+  wineNames: string[];
+  wineBrands: string[];
 }
 
 const initialState = {
   allWines: [],
   topRatedWines: [],
+  wineNames: [],
+  wineBrands: [],
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -36,12 +45,33 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_TOP_RATED_WINES:
-      const topRated = [...state.allWines!]
+      const topRated = [...state.allWines]
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 3);
       return {
         ...state,
         topRatedWines: topRated,
+      };
+
+    case GET_WINE_NAMES_AND_BRANDS:
+      let names: string[] = [];
+      let brands: string[] = [];
+
+      for (const wine of state.allWines) {
+        if (!names.includes(wine.name)) names.push(wine.name);
+        if (!brands.includes(wine.brand)) brands.push(wine.brand);
+      }
+
+      return {
+        ...state,
+        wineNames: names,
+        wineBrands: brands,
+      };
+
+    case FILTER_BY_QUERY:
+      return {
+        ...state,
+        allWines: action.payload,
       };
 
     default:

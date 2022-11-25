@@ -1,4 +1,9 @@
-import { GET_WINES, GET_TOP_RATED_WINES } from "../actions";
+import {
+  GET_WINES,
+  GET_TOP_RATED_WINES,
+  GET_WINE_NAMES_AND_BRANDS,
+  FILTER_BY_QUERY,
+} from "../actions";
 import { Dispatch } from "redux";
 
 export const getWines = () => {
@@ -10,7 +15,18 @@ export const getWines = () => {
   };
 };
 
+export const filterByQuery = (url: string) => {
+  return async function (dispatch: Dispatch) {
+    const resp = await fetch(`http://localhost:3001/wines/filters?${url}`);
+    const data = await resp.json();
+    return dispatch({ type: FILTER_BY_QUERY, payload: data });
+  };
+};
+
 export const getTopRatedWines = () => ({ type: GET_TOP_RATED_WINES });
+export const getWineNamesAndBrands = () => ({
+  type: GET_WINE_NAMES_AND_BRANDS,
+});
 
 /* export const getWines = () => {
   console.log('aca estamos')
