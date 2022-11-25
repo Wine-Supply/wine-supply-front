@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NavbarStyled = styled.nav`
-  z-index: 2;
+  z-index: 90;
   background-color: var(--black);
   color: var(--color-light);
   font-size: 3rem;
@@ -15,25 +15,25 @@ export const NavbarStyled = styled.nav`
   }
 
   div {
-    z-index: 2;
+    z-index: 90;
     display: flex;
     flex-direction: row;
   }
 
   h2 {
-    z-index: 2;
+    z-index: 90;
     font-family: var(--font-title);
     font-size: 3rem;
   }
 
   .logo {
-    z-index: 2;
+    z-index: 90;
     margin-inline: 2rem;
     width: 3rem;
   }
 
   .links {
-    z-index: 2;
+    z-index: 90;
     display: none;
   }
 

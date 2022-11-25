@@ -31,7 +31,7 @@ const DetailStyled = styled.div`
     left: 1rem;
     margin-left: 3rem;
     object-fit: cover;
-    width: 19rem;
+    width: 10rem;
     transform: rotate(-10deg)
   }
 
@@ -61,6 +61,11 @@ const DetailStyled = styled.div`
     margin-bottom: 3rem;
   }
 
+  .btns {
+    margin-left: 1rem;
+    margin-top: -1.5rem;
+  }
+
   @media(max-width: 768px){
     flex-direction: column;
     text-align: center;
@@ -74,7 +79,7 @@ const DetailStyled = styled.div`
     }
     .img {
       left: 0;
-      width: 16rem;
+      width: 8rem;
       transform: none;
     }
     .body {
@@ -143,8 +148,6 @@ const WineData = styled.div`
     
   }
 `
-
-
 
 export {
   DetailStyled,

@@ -45,7 +45,8 @@ const ButtonSaveChanges = styled.button`
   color: var(--white);
   border: 0.1rem solid var(--black);
   padding: 0.7rem 1rem;
-  width: 10rem;
+  min-width: 10rem;
+  height: 4.5rem;
   margin: 0.2rem;
   text-align: center;
   
@@ -59,6 +60,8 @@ const ButtonDeleteAccount = styled.button`
   color: var(--black);
   border: 0.1rem solid var(--color-light);
   padding: 0.7rem 1rem;
+  min-width: 10rem;
+  height: 4.5rem;
   width: 10rem;
   margin: 0.2rem;
   text-align: center;

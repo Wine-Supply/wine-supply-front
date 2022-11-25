@@ -12,6 +12,7 @@ export default function TopRated() {
 
   useEffect(() => {
     dispatch(getTopRatedWines());
+    console.log("hola");
   }, []);
 
   return (
