@@ -11,7 +11,7 @@ import {
 } from "./wineClubSections";
 import Tilt from "react-parallax-tilt";
 
-export const WineClub = ({ title, date, imgUrl }: CardType) => {
+export const WineClub = ({ title,imgUrl }: CardType) => {
   return (
     <Tilt>
       <CardWrapper>
