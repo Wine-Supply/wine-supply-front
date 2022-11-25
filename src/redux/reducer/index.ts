@@ -9,6 +9,12 @@ export interface Wine {
   alcoholVolume: number;
   rating: number;
   price: number;
+  body?: string;
+  type?: string;
+  cropYear?: number;
+  origin?: string;
+  strain?: string;
+  volume?: number;
 }
 
 interface Actions {
@@ -47,6 +53,7 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
     
     case GET_WINE_DETAIL:
+      console.log('act', action.payload)
       return {
         ...state,
         wineDetail: action.payload,
