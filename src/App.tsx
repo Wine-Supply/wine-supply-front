@@ -1,17 +1,21 @@
-
-import Footer from "./components/footer/Footer";
-import AboutUs from "./components/section-about-us/AboutUs";
+import Home from "./components/home/Home";
 import Navbar from "./components/nav/Navbar";
-import WineClubApp from "./components/section-wine-club/index";
-
+import Footer from "./components/footer/Footer";
+import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <AboutUs />
-      <WineClubApp />
+      <Routes>
+        <Route path="/" element={<>landing</>} /> 
+        <Route path="/wine/:id" element={<>WineDetail</>}/>
+        <Route path="/home" element={<Home />} />
+        <Route path="/home/products" element={<CatalogueProducts />} />
+      </Routes>
       <Footer />
     </div>
   );

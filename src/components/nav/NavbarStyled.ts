@@ -14,30 +14,30 @@ export const NavbarStyled = styled.nav`
     list-style-type: none;
   }
 
-  div{
+  div {
     z-index: 2;
     display: flex;
     flex-direction: row;
   }
 
-  h2{
+  h2 {
     z-index: 2;
     font-family: var(--font-title);
     font-size: 3rem;
   }
-  
-  .logo{
+
+  .logo {
     z-index: 2;
     margin-inline: 2rem;
     width: 3rem;
   }
 
-  .links{
+  .links {
     z-index: 2;
     display: none;
   }
 
-  .link{
+  .link {
     text-decoration: none;
     color: var(--color-light);
     font-size: 1.8rem;
@@ -46,7 +46,7 @@ export const NavbarStyled = styled.nav`
     display: block;
   }
 
-  .links.active{
+  .links.active {
     width: 100%;
     display: block;
     position: absolute;
@@ -54,10 +54,10 @@ export const NavbarStyled = styled.nav`
     text-align: center;
   }
 
-  .links.active > ul > li > a{
+  .links.active > ul > li > a {
     margin-top: 1rem;
     font-size: 3.5rem;
-    padding: 2rem
+    padding: 2rem;
   }
 
   .link:hover {
@@ -65,15 +65,16 @@ export const NavbarStyled = styled.nav`
     text-decoration: underline;
   }
 
-  @media(min-width: 768px){
+  @media (min-width: 768px) {
     .burguer {
       display: none;
     }
     .links {
       display: block;
     }
-    li, .link {
+    li,
+    .link {
       display: inline;
     }
   }
-`
+`;
