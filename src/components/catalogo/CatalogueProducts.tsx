@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { getWines } from "../../redux/action-creators";
-
+import Filter from "../filter/Filter";
 import { Link } from "react-router-dom";
 import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
@@ -21,6 +21,7 @@ export default function CatalogueProducts() {
 
   return (
     <CatalogoContainer>
+      <Filter />
       <div>
         <TitleCategory>Most Recommended</TitleCategory>
         <div className="productCointainer">
