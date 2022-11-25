@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
+  margin: 2rem;
   display: grid;
   grid-template-columns: 300px;
   grid-template-rows: 310px 160px 50px;
   grid-template-areas: "image" "text" "stats";
   border-radius: 18px;
-  background: #fdfdfd;
+  background: var(--white);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
   text-align: center;
 `;
@@ -55,7 +56,7 @@ export const CardStatWrapper = styled.div`
   grid-template-rows: 1fr;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background: #7A000d;
+  background: var(--red);
 `;
 
 export const CardStats = styled.div`
@@ -69,7 +70,7 @@ export const CardStats = styled.div`
 `;
 
 export const LinkText = styled.a`
-  color: #fdfdfd;
+  color: var(--white);
   text-decoration: none;
   font-size: 2rem;
   

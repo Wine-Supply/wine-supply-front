@@ -25,7 +25,9 @@ export default function Navbar() {
       <nav className={`links ${clicked ? 'active' : ''}`}>
         <ul>
           <li>
-          <Link to={"WineClubp"}> The Club </Link>
+            <a href="http://localhost:3000/WineClubp" className={'link'} onClick={handleClicked}>
+              The Club
+            </a>
           </li>
           <li>
             <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
