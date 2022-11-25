@@ -1,6 +1,6 @@
 import Home from "./components/home/Home";
-import Navbar from "./components/nav/Navbar";
 import Footer from "./components/footer/Footer";
+import Navbar from "./components/nav/Navbar";
 import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
