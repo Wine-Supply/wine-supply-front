@@ -1,9 +1,10 @@
 import Home from "./components/home/Home";
-import Footer from "./components/footer/Footer";
 import Navbar from "./components/nav/Navbar";
+import Footer from "./components/footer/Footer";
 import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import Detail from "./components/detail/Detail";
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<>landing</>} /> 
-        <Route path="/wine/:id" element={<>WineDetail</>}/>
+        <Route path="home/products/detail/:id" element={<Detail/>}/>
         <Route path="/home" element={<Home />} />
         <Route path="/home/products" element={<CatalogueProducts />} />
       </Routes>
