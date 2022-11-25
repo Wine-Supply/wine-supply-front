@@ -1,4 +1,4 @@
-import { GET_TOP_RATED_WINES, GET_WINES } from "../actions/index";
+import { GET_TOP_RATED_WINES, GET_WINES, GET_WINE_DETAIL } from "../actions/index";
 
 export interface Wine {
   id: string;
@@ -19,11 +19,13 @@ interface Actions {
 export interface State {
   allWines: Array<Wine>;
   topRatedWines: Array<Wine>;
+  wineDetail: Array<Wine>;
 }
 
 const initialState = {
   allWines: [],
   topRatedWines: [],
+  wineDetail: [],
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -43,6 +45,12 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
         topRatedWines: topRated,
       };
+    
+    case GET_WINE_DETAIL:
+      return {
+        ...state,
+        wineDetail: action.payload,
+      }
 
     default:
       return {
