@@ -1,10 +1,10 @@
 import Home from "./components/home/Home";
-import Footer from "./components/Footer/Footer";
-import Navbar from "./components/nav/navbar";
+import Navbar from "./components/nav/Navbar";
+import Footer from "./components/footer/Footer";
 import CatalogueProducts from "./components/catalogo/CatalogueProducts";
-
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+
 
 function App() {
   return (
