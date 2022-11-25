@@ -1,4 +1,4 @@
-import { GET_TOP_RATED_WINES, GET_WINES, GET_WINE_DETAIL } from "../actions/index";
+import { GET_TOP_RATED_WINES, GET_WINES, GET_WINE_DETAIL, POST_WINE } from "../actions/index";
 
 export interface Wine {
   id: string;
@@ -58,6 +58,11 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
         wineDetail: action.payload,
       }
+
+    case POST_WINE:
+      return {
+        ...state,
+      };
 
     default:
       return {

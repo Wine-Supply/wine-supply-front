@@ -1,5 +1,6 @@
 import { GET_WINES, GET_TOP_RATED_WINES, GET_WINE_DETAIL } from "../actions";
 import { Dispatch } from "redux";
+import axios from "axios";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
