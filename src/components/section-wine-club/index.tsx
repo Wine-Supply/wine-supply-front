@@ -1,4 +1,3 @@
-import "./styles.css";
 import { WineClub } from "./WineClub";
 import styled from "styled-components";
 import img1 from "./wineclub2.png";
@@ -22,8 +21,8 @@ const Separator = styled.span`
 
 export default function WineClubp() {
   return (
-    <div className="App">
-      <h1>Wine Club</h1>
+    <div>
+      <h1 className="secondary-header">The Wine Club</h1>
       <h2>Join our Exclusive community</h2>
       <CardContainer>
         <WineClub title={"Regular Subsciption"} date={1} imgUrl={img1} />

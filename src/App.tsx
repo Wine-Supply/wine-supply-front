@@ -17,8 +17,8 @@ function App() {
       <Filter />
       <Routes>
         <Route path="/" element={< Home />} />
-        <Route path="/products/detail/:id" element={<Detail />} />
-        <Route path="/products" element={<CatalogueProducts />} />
+        <Route path="/home/products/detail/:id" element={<Detail />} />
+        <Route path="/home/products" element={<CatalogueProducts />} />
         <Route path="/wineClubp" element={<WineClubp />} />
         <Route path="/admin" element={<Form />} />
       </Routes>
