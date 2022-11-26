@@ -2,10 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { FilterStyled } from "./FilterStyled";
 import { State } from "../../redux/reducer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   filterByQuery,
   getWineNamesAndBrands,
+  getWines,
+  sortWinesByPrice,
+  sortWinesByRating,
 } from "../../redux/action-creators";
 
 export default function Filter() {
@@ -17,33 +20,83 @@ export default function Filter() {
   const ratings: number[] = [1, 2, 3, 4, 5];
   // const wineTypes: string[] = ["red", "white", "sparkling"];
 
-  if (!wineNames.length || !wineBrands.length)
-    dispatch(getWineNamesAndBrands());
+  useEffect(() => {
+    if (wineNames.length === 0 || wineBrands.length === 0)
+      dispatch(getWineNamesAndBrands());
+    // eslint-disable-next-line
+  }, []);
 
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target[0].innerHTML === "Name")
-      setUrl((url) =>
-        url.length
-          ? `${url}&name=${e.target.value}`
-          : `${url}name=${e.target.value}`
-      );
-    else if (e.target[0].innerHTML === "Brand")
-      setUrl((url) =>
-        url.length
-          ? `${url}&brand=${e.target.value}`
-          : `${url}brand=${e.target.value}`
-      );
-    else if (e.target[0].innerHTML === "Rating")
-      setUrl((url) =>
-        url.length
-          ? `${url}&rating=${e.target.value[0]}`
-          : `${url}rating=${e.target.value[0]}`
-      );
+    const targetValue = e.target.value;
+    const targetInnerHTML = e.target[0].innerHTML;
+    switch (targetInnerHTML) {
+      case "Name":
+        if (!url.includes(targetInnerHTML.toLowerCase())) {
+          setUrl((url) =>
+            url.length > 0
+              ? `${url}&name=${targetValue}`
+              : `${url}name=${targetValue}`
+          );
+        } else {
+          let urlToArray = url.slice().split("&");
+          const index = urlToArray.findIndex((el) => el.startsWith("name"));
+          urlToArray.splice(index, 1, `name=${targetValue}`);
+          const urlUpdated = urlToArray.join("&");
+          setUrl(urlUpdated);
+        }
+        break;
 
-    console.log(url);
+      case "Brand":
+        if (!url.includes(targetInnerHTML.toLowerCase())) {
+          setUrl((url) =>
+            url.length > 0
+              ? `${url}&brand=${targetValue}`
+              : `${url}brand=${targetValue}`
+          );
+        } else {
+          let urlToArray = url.slice().split("&");
+          const index = urlToArray.findIndex((el) => el.startsWith("brand"));
+          urlToArray.splice(index, 1, `brand=${targetValue}`);
+          const urlUpdated = urlToArray.join("&");
+          setUrl(urlUpdated);
+        }
+        break;
 
-    dispatch(filterByQuery(url));
+      case "Rating":
+        if (!url.includes(targetInnerHTML.toLowerCase())) {
+          setUrl((url) =>
+            url.length > 0
+              ? `${url}&rating=${targetValue[0]}`
+              : `${url}rating=${targetValue[0]}`
+          );
+        } else {
+          let urlToArray = url.slice().split("&");
+          const index = urlToArray.findIndex((el) => el.startsWith("brand"));
+          urlToArray.splice(index, 1, `rating=${targetValue[0]}`);
+          const urlUpdated = urlToArray.join("&");
+          setUrl(urlUpdated);
+        }
+        break;
+
+      default:
+        return;
+    }
   };
+
+  const handleSort = (e: React.BaseSyntheticEvent) => {
+    if (e.target.innerHTML === "Price") dispatch(sortWinesByPrice());
+    else if (e.target.innerHTML === "Rating") dispatch(sortWinesByRating());
+  };
+
+  const cleanFilters = () => {
+    dispatch(getWines());
+    setUrl("");
+  };
+
+  useEffect(() => {
+    dispatch(filterByQuery(url));
+    // eslint-disable-next-line
+  }, [url]);
 
   return (
     <FilterStyled>
@@ -95,10 +148,13 @@ export default function Filter() {
           <label className="options-label" htmlFor="price-sort">
             Sort by:
           </label>
-          <div className="options-container">
+          <div onClick={(e) => handleSort(e)} className="options-container">
             <button>Price</button>
             <button>Rating</button>
           </div>
+        </div>
+        <div className="filter-container">
+          <button onClick={cleanFilters}>Clean filters</button>
         </div>
       </form>
     </FilterStyled>
