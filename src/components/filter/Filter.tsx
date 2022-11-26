@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { FilterStyled } from "./FilterStyled";
 import { State } from "../../redux/reducer";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   filterByQuery,
   getWineNamesAndBrands,
@@ -17,9 +17,8 @@ export default function Filter() {
   const ratings: number[] = [1, 2, 3, 4, 5];
   // const wineTypes: string[] = ["red", "white", "sparkling"];
 
-  useEffect(() => {
+  if (!wineNames.length || !wineBrands.length)
     dispatch(getWineNamesAndBrands());
-  }, []);
 
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target[0].innerHTML === "Name")
@@ -37,8 +36,8 @@ export default function Filter() {
     else if (e.target[0].innerHTML === "Rating")
       setUrl((url) =>
         url.length
-          ? `${url}&rating=${e.target.value}`
-          : `${url}rating=${e.target.value}`
+          ? `${url}&rating=${e.target.value[0]}`
+          : `${url}rating=${e.target.value[0]}`
       );
 
     console.log(url);
