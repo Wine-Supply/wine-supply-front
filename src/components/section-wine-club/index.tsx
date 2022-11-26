@@ -3,9 +3,9 @@ import styled from "styled-components";
 import img1 from "./wineclub2.png";
 import img2 from "./wineclub1.png";
 
-
 const CardContainer = styled.div`
-  padding: 8rem;
+  padding-inline: 6rem;
+  padding: 1.8rem;
   display: flex;
   align-items: center;
   background: var(--color-light);
@@ -23,13 +23,14 @@ const Container = styled.div`
   background: var(--color-light);
   
   h1 {
+    margin-top: 1.6rem;
     font-size: 6rem;
     font-family: var(--font-title);
     font-weight: 600;
   }
   h2 {
-    font-size: 2.5rem;
-    margin-top: 2rem;
+    font-size: 2.1rem;
+    margin-top: 0.8rem;
   }
 
 `;

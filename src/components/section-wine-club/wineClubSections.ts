@@ -22,17 +22,16 @@ export const CardImage = styled.div<{ background: string }>`
 
 export const CardTextWrapper = styled.div`
   grid-area: text;
-  margin: 50px;
+  margin: 18px 15px;
 `;
 
 
 export const CardTextTitle = styled.h2`
-  margin-top: 0px;
+  margin: 0;
   font-size: 2rem;
   box-sizing: border-box;
   min-width: 0px;
-  line-height: 1.2;
-  margin: 0px;
+  line-height: 5rem;
   background: linear-gradient(
     90deg, rgba(0,0,0,1) 0%,
     rgba(20,20,20,1) 35%,
