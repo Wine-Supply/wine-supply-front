@@ -6,6 +6,7 @@ import {
   FILTER_BY_QUERY,
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
+  GET_WINE_NAME,
 } from "../actions";
 import axios from "axios";
 
@@ -55,3 +56,15 @@ export const postWine = (wine) => {
     return post;
   };
 };
+
+export const getWineName = (input) => {
+  return async function (dispatch) {
+    let resp = await axios.get(`http://localhost:3001/wines/search?input=${input}`)
+    const data = await resp.json()
+    return dispatch({
+      type: GET_WINE_NAME,
+      payload: data
+    })
+  }
+}
+

@@ -7,6 +7,7 @@ import {
   FILTER_BY_QUERY,
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
+  GET_WINE_NAME,
 } from "../actions/index";
 
 export interface Wine {
@@ -45,6 +46,7 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
+  searchName: [],
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -108,6 +110,12 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
       };
+
+    case GET_WINE_NAME:
+      return{
+        ...state,
+        searchName: action.payload
+      }
 
     default:
       return {
