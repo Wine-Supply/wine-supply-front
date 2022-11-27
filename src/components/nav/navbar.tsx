@@ -8,6 +8,9 @@ import {
   SearchOutlined, 
   UserOutlined
 } from "@ant-design/icons";
+import { Link } from "react-router-dom"
+
+//
 
 export default function Navbar() {
   const [clicked, setClicked] = useState(false)
@@ -23,27 +26,27 @@ export default function Navbar() {
       <nav className={`links ${clicked ? 'active' : ''}`}>
         <ul>
           <li>
-            <a href="#" className={'link'} onClick={handleClicked}>
+            <a href="http://localhost:3000/WineClubp" className={'link'} onClick={handleClicked}>
               The Club
             </a>
           </li>
           <li>
-            <a href="#" className={'link'} onClick={handleClicked}>
+            <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
               Shop
             </a>
           </li>
           <li>
-            <a href="#" className={'link'} onClick={handleClicked}>
+            <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
               <ShoppingCartOutlined />
             </a>
           </li>
           <li>
-            <a href="#" className={'link'} onClick={handleClicked}>
+            <a href="http://localhost:3000/admin" className={'link'} onClick={handleClicked}>
               <UserOutlined />
             </a>
           </li>
           <li>
-            <a href="#" className={'link'} onClick={handleClicked}>
+            <a href="http://localhost:3000/home" className={'link'} onClick={handleClicked}>
               <SearchOutlined />
             </a>
           </li>     

@@ -1,38 +1,38 @@
 import {CardContainer, CardInformation, ButtonAddCart} from './CardStyle'
 
-interface Props {
-  propsItem:{
+type CardProps ={
     name: string
     img: string
     descriptions: string
-    precio: number
-    ranking: number
-  }
+    price: number
+    rating: number
 }
 
-export default function Card({propsItem}: Props) {
+const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => {
   return (
     <CardContainer>
-      <div>
-        <img src={propsItem.img} alt={propsItem.name} />
+      <div className='imageMain' >
+        <img src={img} alt={name} />
       </div>
       <CardInformation>
         <div className='rankingStyle'>
-          <p>{propsItem.ranking}/5</p>
+          <p>{rating}/5</p>
         </div>
 
-        <h2>{propsItem.name}</h2>
+        <h2>{name}</h2>
         
         <div className='descriptionStyle'>
           <span>Description</span>
-          <p>{propsItem.descriptions}</p>
+          <p>{descriptions.substring(0,30)}...</p>
         </div>
 
         <div className='cardFooter'>
-          <p>${propsItem.precio}</p>
+          <p>${price}</p>
           <ButtonAddCart>add to cart</ButtonAddCart>
         </div>
       </CardInformation>      
     </CardContainer>
   )
 }
+
+export default Card;
