@@ -13,6 +13,7 @@ import {
 
 export default function Filter() {
   const dispatch: Dispatch<any> = useDispatch();
+  const Products = useSelector((state: State) => state.allWines);
   const wineNames = useSelector((state: State) => state.wineNames);
   const wineBrands = useSelector((state: State) => state.wineBrands);
   const [url, setUrl] = useState<string>("");
@@ -21,10 +22,11 @@ export default function Filter() {
   // const wineTypes: string[] = ["red", "white", "sparkling"];
 
   useEffect(() => {
-    if (wineNames.length === 0 || wineBrands.length === 0)
+    if (wineNames.length === 0 || wineBrands.length === 0) {
       dispatch(getWineNamesAndBrands());
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [Products]);
 
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const targetValue = e.target.value;
