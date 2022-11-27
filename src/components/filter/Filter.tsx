@@ -73,7 +73,7 @@ export default function Filter() {
           );
         } else {
           let urlToArray = url.slice().split("&");
-          const index = urlToArray.findIndex((el) => el.startsWith("brand"));
+          const index = urlToArray.findIndex((el) => el.startsWith("rating"));
           urlToArray.splice(index, 1, `rating=${targetValue[0]}`);
           const urlUpdated = urlToArray.join("&");
           setUrl(urlUpdated);
@@ -98,6 +98,7 @@ export default function Filter() {
   useEffect(() => {
     if (url.length > 0) dispatch(filterByQuery(url));
     // eslint-disable-next-line
+    console.log(url);
   }, [url]);
 
   return (
