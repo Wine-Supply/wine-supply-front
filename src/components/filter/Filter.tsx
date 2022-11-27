@@ -13,18 +13,21 @@ import {
 
 export default function Filter() {
   const dispatch: Dispatch<any> = useDispatch();
+  const Products = useSelector((state: State) => state.allWines);
   const wineNames = useSelector((state: State) => state.wineNames);
   const wineBrands = useSelector((state: State) => state.wineBrands);
   const [url, setUrl] = useState<string>("");
-
+  
   const ratings: number[] = [1, 2, 3, 4, 5];
   // const wineTypes: string[] = ["red", "white", "sparkling"];
-
+  
   useEffect(() => {
     if (wineNames.length === 0 || wineBrands.length === 0)
-      dispatch(getWineNamesAndBrands());
+    dispatch(getWineNamesAndBrands(Products))
+    console.log(wineNames)
     // eslint-disable-next-line
-  }, []);
+  }, [Products.length]);
+
 
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const targetValue = e.target.value;

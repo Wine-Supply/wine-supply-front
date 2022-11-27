@@ -50,7 +50,6 @@ const initialState = {
 const rootReducer = (state: State = initialState, action: Actions) => {
   switch (action.type) {
     case GET_WINES:
-      console.log("rex", action.payload);
       return {
         ...state,
         allWines: action.payload,
@@ -65,15 +64,25 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         topRatedWines: topRated,
       };
     case GET_WINE_NAMES_AND_BRANDS:
+      console.log('estoy aca')
       let names: string[] = [];
       let brands: string[] = [];
 
-      for (const wine of state.allWines) {
-        if (!names.includes(wine.name)) names.push(wine.name);
-        if (!brands.includes(wine.brand)) brands.push(wine.brand);
-      }
+action.payload.map(el=>{
+  if (!names.includes(el.name)) names.push(el.name)
+  if (!brands.includes(el.brand)) brands.push(el.brand)
+})
+
+      /* for (const wine of action.payload) {
+        /* console.log(wine)
+        names = [...names, wine.name]
+        brands = [...names, wine.brand] 
+        if (!names.includes(action.payload)) names.push(action.payload.name);
+        if (!brands.includes(action.payload.brand)) brands.push(action.payload.brand);
+      } */
 
       return {
+
         ...state,
         wineNames: names,
         wineBrands: brands,
