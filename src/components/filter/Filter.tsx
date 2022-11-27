@@ -96,7 +96,7 @@ export default function Filter() {
   };
 
   useEffect(() => {
-    dispatch(filterByQuery(url));
+    if (url.length > 0) dispatch(filterByQuery(url));
     // eslint-disable-next-line
   }, [url]);
 
