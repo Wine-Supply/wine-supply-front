@@ -54,6 +54,13 @@ const ButtonSaveChanges = styled.button`
     cursor: pointer;
     color: var(--color-dark);
   }
+
+  :disabled{
+    cursor: auto;
+    background-color: transparent;
+    color: #727272;
+    border-color: #727272;
+  }
 `
 const ButtonDeleteAccount = styled.button`
   background-color: var(--white);
