@@ -7,12 +7,13 @@ import { State } from "../../../redux/reducer";
 import { getTopRatedWines } from "../../../redux/action-creators";
 
 export default function TopRated() {
+  const Products = useSelector((state: State) => state.allWines);
   const topWines = useSelector((state: State) => state.topRatedWines);
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
-    if (topWines!.length === 0) dispatch(getTopRatedWines());
-  }, []);
+    if (topWines.length === 0) dispatch(getTopRatedWines());
+  }, [Products]);
 
   return (
     <Section>
