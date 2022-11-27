@@ -7,6 +7,7 @@ import {
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
   GET_WINE_NAME,
+  SEARCH_WINES,
 } from "../actions";
 import axios from "axios";
 
@@ -41,6 +42,16 @@ export const filterByQuery = (url) => {
   };
 };
 
+export const searchWines = (query) => {
+  return async function (dispatch) {
+    const resp = await fetch(
+      `http://localhost:3001/wines/search?input=${query}`
+    );
+    const data = await resp.json();
+    return dispatch({ type: SEARCH_WINES, payload: data });
+  };
+};
+
 export const getWineDetail = (id) => {
   console.log("ac", id);
   return async function (dispatch) {
@@ -59,12 +70,13 @@ export const postWine = (wine) => {
 
 export const getWineName = (input) => {
   return async function (dispatch) {
-    let resp = await axios.get(`http://localhost:3001/wines/search?input=${input}`)
-    const data = await resp.json()
+    let resp = await axios.get(
+      `http://localhost:3001/wines/search?input=${input}`
+    );
+    const data = await resp.json();
     return dispatch({
       type: GET_WINE_NAME,
-      payload: data
-    })
-  }
-}
-
+      payload: data,
+    });
+  };
+};
