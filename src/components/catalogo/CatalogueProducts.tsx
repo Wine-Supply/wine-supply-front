@@ -21,7 +21,7 @@ export default function CatalogueProducts() {
 
   return (
     <CatalogoContainer>
-    {/*   <Filter /> */}
+      <Filter />
       <div>
         <TitleCategory>Most Recommended</TitleCategory>
         <div className="productCointainer">

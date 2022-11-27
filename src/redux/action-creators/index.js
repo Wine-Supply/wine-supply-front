@@ -4,6 +4,8 @@ import {
   GET_WINE_DETAIL,
   GET_WINE_NAMES_AND_BRANDS,
   FILTER_BY_QUERY,
+  SORT_WINES_BY_PRICE,
+  SORT_WINES_BY_RATING,
 } from "../actions";
 import axios from "axios";
 
@@ -20,6 +22,14 @@ export const getTopRatedWines = () => ({ type: GET_TOP_RATED_WINES });
 
 export const getWineNamesAndBrands = () => ({
   type: GET_WINE_NAMES_AND_BRANDS,
+});
+
+export const sortWinesByPrice = () => ({
+  type: SORT_WINES_BY_PRICE,
+});
+
+export const sortWinesByRating = () => ({
+  type: SORT_WINES_BY_RATING,
 });
 
 export const filterByQuery = (url) => {

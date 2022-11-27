@@ -5,6 +5,8 @@ import {
   POST_WINE,
   GET_WINE_NAMES_AND_BRANDS,
   FILTER_BY_QUERY,
+  SORT_WINES_BY_PRICE,
+  SORT_WINES_BY_RATING,
 } from "../actions/index";
 
 export interface Wine {
@@ -81,6 +83,18 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         allWines: action.payload,
+      };
+
+    case SORT_WINES_BY_PRICE:
+      return {
+        ...state,
+        allWines: [...state.allWines].sort((a, b) => a.price - b.price),
+      };
+
+    case SORT_WINES_BY_RATING:
+      return {
+        ...state,
+        allWines: [...state.allWines].sort((a, b) => b.rating - a.rating),
       };
 
     case GET_WINE_DETAIL:

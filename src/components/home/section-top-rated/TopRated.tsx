@@ -11,8 +11,7 @@ export default function TopRated() {
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
-    dispatch(getTopRatedWines());
-    console.log("hola");
+    if (topWines!.length === 0) dispatch(getTopRatedWines());
   }, []);
 
   return (

@@ -8,6 +8,7 @@ export const FilterStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.6rem;
   }
 
@@ -42,6 +43,10 @@ export const FilterStyled = styled.div`
 
     .options-label {
       font-size: 1.6rem;
+    }
+
+    .mb {
+      margin-bottom: 0;
     }
   }
 `;
