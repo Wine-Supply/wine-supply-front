@@ -2,7 +2,7 @@ import React, {useState} from "react";
 // import validate from "./validateFormErrors";
 import axios from "axios";
 import { FormStyled } from "./FormStyled";
-import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils"
+import { ButtonSaveChanges } from "../utils/utils"
 
 function validate(formData) {
 	let errors = {};
@@ -177,76 +177,70 @@ export default function Form() {
 		<FormStyled>
 			<form onSubmit={handleSubmit}>
 				<h2>Add Wine</h2>
+				<hr></hr>				
+					<input
+						type="text"
+						placeholder="Name..."
+						onChange={handleChangeText}
+						name="name"
+						value={formData.name}
+					/>	
+					<input
+						type="text"
+						placeholder="Brand..."
+						onChange={handleChangeText}
+						name="brand"
+						value={formData.brand}
+					/>
+					<input
+						type="text"
+						placeholder="Origin..."
+						onChange={handleChangeText}
+						name="origin"
+						value={formData.origin}
+					/>
+					<input
+						type="text"
+						placeholder="Zone..."
+						onChange={handleChangeText}
+						name="zone"
+						value={formData.zone}
+					/>
+					<input
+						type="text"
+						placeholder="Body..."
+						onChange={handleChangeText}
+						name="body"
+						value={formData.body}
+					/>
+					<input
+						type="text"
+						placeholder="Grape Variety..."
+						onChange={handleChangeText}
+						name="strain"
+						value={formData.strain}
+					/>
+			
 				<select id="cropYear" name="cropYear" onChange={handleChangeText}>
-					<option>year...</option>
+					<option>Year</option>
 					{years.map((e) => (
 						<option key={e} value={e}>
 							{e}
 						</option>
 					))}
 				</select>
-				<hr></hr>
-				<input
-					type="text"
-					placeholder="name..."
-					onChange={handleChangeText}
-					name="name"
-					value={formData.name}
-				/>
-				{errors.name && <p className="error">{errors.name}</p>}
-				<input
-					type="text"
-					placeholder="brand..."
-					onChange={handleChangeText}
-					name="brand"
-					value={formData.brand}
-				/>
-				<input
-					type="text"
-					placeholder="origin..."
-					onChange={handleChangeText}
-					name="origin"
-					value={formData.origin}
-				/>
-				<input
-					type="text"
-					placeholder="zone..."
-					onChange={handleChangeText}
-					name="zone"
-					value={formData.zone}
-				/>
-				<input
-					type="text"
-					placeholder="body..."
-					onChange={handleChangeText}
-					name="body"
-					value={formData.body}
-				/>
-				<input
-					type="text"
-					placeholder="Grape Variety..."
-					onChange={handleChangeText}
-					name="strain"
-					value={formData.strain}
-				/>
+
 				<select
 					id="type"
 					value={formData.type}
 					onChange={handleChangeText}
 					name="type"
 				>
-					<option value={0}>Choose type ...</option>
+					<option value={0}>Choose type</option>
 					<option value={"red"}>Red</option>
 					<option value={"white"}>White</option>
 				</select>
-				<hr></hr>
-				<textarea
-					value={formData.description}
-					placeholder="Description..."
-					onChange={handleChangeText}
-					name="description"
-				/>
-				{errors.description && <p className="error">{errors.description}</p>}
+				
 				<input
 					type="number"
 					id="volume"
@@ -257,6 +251,7 @@ export default function Form() {
 					placeholder="Volume"
 					onChange={handleChangeText}
 				></input>
+
 				<input
 					type="number"
 					id="alcoholVolume"
@@ -267,8 +262,7 @@ export default function Form() {
 					placeholder="Alcohol Volume"
 					onChange={handleChangeText}
 				></input>
-				<label for="img">Select image:</label>
-				<input type="file" id="img" name="images" accept="image/*" onInput={handleChangeImages}></input>
+
 				
 				{/* <label htmlFor="images">Images:</label>
 				<br />
@@ -278,7 +272,9 @@ export default function Form() {
 					name="images"
 					onChange={handleChangeImages}
 				/> */}
-			<br />
+			 <div>
+
+			 
 				<label htmlFor="stock">Stock:</label>
 				
 				<input
@@ -287,7 +283,7 @@ export default function Form() {
 					name="stock"
 					value={formData.stock}
 				/>
-				<br />
+				
 				<label htmlFor="price">Price:</label>
 				
 				<input
@@ -296,21 +292,39 @@ export default function Form() {
 					name="price"
 					value={formData.price}
 				/>
+				<div className="div2">
+					<label for="img">Upload image:</label>
+					
+					<input className="img" type="file" id="img" name="images" accept="image/*" onInput={handleChangeImages}></input>
+					
+				</div>
+				</div>
+
+				<textarea
+					value={formData.description}
+					placeholder="Description..."
+					onChange={handleChangeText}
+					name="description"
+				/>
+				<div className="end">
+				<p className="error">{errors.description}{errors.name}</p>
 				{Object.keys(errors).length > 0 ? (
-					<button type="submit" disabled={true} key={Math.random()}>
-						Cannot Submit, complete fields as required
-					</button>
-				) : (
-					<ButtonSubscribe type="submit" key={Math.random()}>
+					<ButtonSaveChanges style={ {transform: "scale(1.3)"}} type="submit" disabled={true} key={Math.random()}>
 						Add Wine
-					</ButtonSubscribe>
+					</ButtonSaveChanges>
+				) : (
+					<ButtonSaveChanges style={ {transform: "scale(1.3)"}} type="submit" key={Math.random()}>
+						Add Wine
+					</ButtonSaveChanges>
 				)}
+				</div>
 			</form>
-			<br />
-			<ButtonSaveChanges type="button" onClick={handleErrorsCheck}>
-				Save Changes
-			</ButtonSaveChanges>
-			<button type="button" onClick={() => console.log(formData)}></button>
 		</FormStyled>
 	);
 }
+/*
+<ButtonSaveChanges type="button" onClick={handleErrorsCheck}>
+				Save Changes
+			</ButtonSaveChanges>
+			<button type="button" onClick={() => console.log(formData)}></button>
+			*/
