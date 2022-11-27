@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import Card from "../../card/Card";
 import { Section } from "./Section";
 import { State } from "../../../redux/reducer";
-import { getTopRatedWines } from "../../../redux/action-creators";
+import { getTopRatedWines, getWines } from "../../../redux/action-creators";
 
 export default function TopRated() {
   const Products = useSelector((state: State) => state.allWines);
@@ -12,7 +12,10 @@ export default function TopRated() {
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
-    if (topWines.length === 0) dispatch(getTopRatedWines());
+    if (topWines.length === 0) {
+      dispatch(getWines());
+      dispatch(getTopRatedWines());
+    }
   }, [Products]);
 
   return (
