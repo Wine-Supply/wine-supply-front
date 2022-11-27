@@ -8,7 +8,6 @@ import {
   SearchOutlined, 
   UserOutlined
 } from "@ant-design/icons";
-import { Link } from "react-router-dom"
 
 //
 
@@ -21,7 +20,9 @@ export default function Navbar() {
     <NavbarStyled>
       <div>
         <img className={'logo'} src={logo} alt="ws" />
-        <h2>WINES SUPPLY</h2>
+        <a href="http://localhost:3000/" className={'link'} onClick={handleClicked}>
+          <h2>WINES SUPPLY</h2>
+        </a>
       </div>
       <nav className={`links ${clicked ? 'active' : ''}`}>
         <ul>
@@ -46,7 +47,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="http://localhost:3000/home" className={'link'} onClick={handleClicked}>
+            <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
               <SearchOutlined />
             </a>
           </li>     
