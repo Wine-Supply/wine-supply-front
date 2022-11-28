@@ -53,6 +53,7 @@ export default function Detail(){
                 <h3>Type: {type}</h3>
                 <h3>Year: {cropYear}</h3>
                 <h3>Origin: {origin}</h3>
+                <h3>Strain: {strain}</h3>
               </div>
               <div>
                 <h3>Brand: {brand}</h3>

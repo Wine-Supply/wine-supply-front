@@ -8,15 +8,17 @@ function validate(formData) {
 	let errors = {};
 	const blanks = /^\s+$/;
 	const validateLetters = /^[0-9a-zA-Z ]+$/;
+	const noHtml = /<(“[^”]*”|'[^']*'|[^'”>])*>/;
+  const specialCharacters = /^[-@./#&+,':;!"\w\s]*$/
 
 	if (!formData.name || formData.name?.length === 0) {
-		errors.name = "Please enter the product name";
+		errors.name = "Please enter the product's name";
 	} else if (formData.name?.length > 20) {
 		errors.name = "The name cannot have more than 20 characters";
 	} else if (formData.name?.match(blanks)) {
 		errors.name = "The name cannot contain only blank spaces";
 	} else if (!formData.name?.match(validateLetters)) {
-		errors.name = "You can only use alphanumeric characters";
+		errors.name = "You can only use alphanumeric characters for the name field";
 	} else if (
 		!formData.description ||
 		formData.description?.length < 20 ||
@@ -24,11 +26,66 @@ function validate(formData) {
 	) {
 		errors.description =
 			"The description must have between 20 and 150 characters";
-	} else if (formData.description?.match(blanks)) {
-		errors.description = "The text cannot contain only blank spaces";
+	} else if (
+		formData.description?.match(blanks) ||
+		formData.description?.match(noHtml) || !formData.description?.match(specialCharacters)
+	) {
+		errors.description =
+			"The text cannot contain only blank spaces o any of these characters <\"\"''>";
 	} else if (formData.type?.length === 0) {
 		errors.type = "Please choose at least one type";
+	} else if (!formData.brand || formData.brand?.length === 0) {
+		errors.brand = "Please enter the product's brand";
+	} else if (
+		!formData.brand?.match(validateLetters) ||
+		formData.brand?.match(blanks)
+	) {
+		errors.brand =
+			"You can only use alphanumeric characters for the brand field";
+	} else if (!formData.origin || formData.origin?.length === 0) {
+		errors.origin = "Please enter the product's origin";
+	} else if (
+		!formData.origin?.match(validateLetters) ||
+		formData.origin?.match(blanks)
+	) {
+		errors.origin =
+			"You can only use alphanumeric characters for the origin field";
+	} else if (!formData.zone || formData.zone?.length === 0) {
+		errors.zone = "Please enter the product's zone";
+	} else if (
+		!formData.zone?.match(validateLetters) ||
+		formData.zone?.match(blanks)
+	) {
+		errors.zone = "You can only use alphanumeric characters for the zone field";
+	} else if (!formData.body || formData.body?.length === 0) {
+		errors.body = "Please enter the product's body";
+	} else if (
+		!formData.body?.match(validateLetters) ||
+		formData.body?.match(blanks)
+	) {
+		errors.body = "You can only use alphanumeric characters for the body field";
+	} else if (!formData.strain || formData.strain?.length === 0) {
+		errors.strain = "Please enter the product's grape variety";
+	} else if (
+		!formData.strain?.match(validateLetters) ||
+		formData.strain?.match(blanks)
+	) {
+		errors.strain =
+			"You can only use alphanumeric characters for the grape variety";
+	} else if (!formData.cropYear || formData.cropYear?.length === 0) {
+		errors.cropYear = "Please enter the product's year";
+	} else if (!formData.volume || formData.volume?.length === 0) {
+		errors.volume = "Please enter the product's volume";
+	} else if (!formData.alcoholVolume || formData.alcoholVolume?.length === 0) {
+		errors.alcoholVolume = "Please enter the product's alcohol volume";
+	} else if (!formData.stock || formData.stock?.length === 0) {
+		errors.stock = "Please enter the stock available";
+	} else if (!formData.price || formData.price?.length === 0) {
+		errors.price = "Please enter the product's price";
+	} else if (!formData.images || formData.images?.length === 0) {
+		errors.images = "Please upload an image";
 	}
+
 	return errors;
 }
 
@@ -307,7 +364,22 @@ export default function Form() {
 					name="description"
 				/>
 				<div className="end">
-				<p className="error">{errors.description}{errors.name}</p>
+				<p className="error">
+					{errors.name}
+					{errors.brand}
+					{errors.origin}
+					{errors.zone}
+					{errors.body}
+					{errors.strain}
+					{errors.cropYear}
+					{errors.type}
+					{errors.volume}
+					{errors.alcoholVolume}
+					{errors.stock}
+					{errors.price}
+					{errors.images}
+					{errors.description}
+				</p>
 				{Object.keys(errors).length > 0 ? (
 					<ButtonSaveChanges style={ {transform: "scale(1.3)"}} type="submit" disabled={true} key={Math.random()}>
 						Add Wine

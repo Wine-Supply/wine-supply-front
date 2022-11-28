@@ -12,7 +12,7 @@ import {
 } from "../actions/index";
 
 export interface Wine {
-  id: string;
+  _id: string;
   name: string;
   brand: string;
   description: string;
