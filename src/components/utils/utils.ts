@@ -125,6 +125,7 @@ const ButtonToScrollUp = styled.button`
   height: 4rem;
   font-weight: 600;
   text-align: center;
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.6);
   transition: all 0.2s;
 
   :hover {
