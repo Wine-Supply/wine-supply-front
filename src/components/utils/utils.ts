@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const ButtonBuyNow = styled.button`
   background-color: var(--black);
@@ -12,13 +12,13 @@ const ButtonBuyNow = styled.button`
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
-  
-  :hover{
+
+  :hover {
     cursor: pointer;
     background-color: var(--white);
     color: var(--black);
   }
-`
+`;
 
 const ButtonAddToCart = styled.button`
   background-color: var(--red);
@@ -32,14 +32,14 @@ const ButtonAddToCart = styled.button`
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
-  
-  :hover{
+
+  :hover {
     cursor: pointer;
     background-color: var(--white);
     color: var(--red);
     border-color: var(--color-light);
   }
-`
+`;
 const ButtonSaveChanges = styled.button`
   background-color: var(--black);
   color: var(--white);
@@ -49,19 +49,19 @@ const ButtonSaveChanges = styled.button`
   height: 4.5rem;
   margin: 0.2rem;
   text-align: center;
-  
-  :hover{
+
+  :hover {
     cursor: pointer;
     color: var(--color-dark);
   }
 
-  :disabled{
+  :disabled {
     cursor: auto;
     background-color: transparent;
     color: #727272;
     border-color: #727272;
   }
-`
+`;
 const ButtonDeleteAccount = styled.button`
   background-color: var(--white);
   color: var(--black);
@@ -72,46 +72,69 @@ const ButtonDeleteAccount = styled.button`
   width: 10rem;
   margin: 0.2rem;
   text-align: center;
-  
-  :hover{
+
+  :hover {
     cursor: pointer;
     background-color: var(--color-light);
   }
-`
+`;
 const ButtonSubscribe = styled.button`
   background-color: var(--white);
   color: var(--black);
   border: 0.1rem solid var(--black);
-  padding: .5rem;
+  padding: 0.5rem;
   width: 8rem;
   margin: 0.2rem;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
-  
-  :hover{
+
+  :hover {
     cursor: pointer;
     color: var(--white);
     background-color: var(--black);
   }
-`
+`;
 const ButtonSubscribeRed = styled.button`
   background-color: var(--red);
   color: var(--white);
   border: 0.1rem solid var(--red);
-  padding: .5rem;
+  padding: 0.5rem;
   width: 8rem;
   margin: 0.2rem;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
-  
-  :hover{
+
+  :hover {
     cursor: pointer;
     background-color: var(--white);
     color: var(--red);
   }
-`
+`;
+const ButtonToScrollUp = styled.button`
+  position: fixed;
+  bottom: 10rem;
+  right: 1rem;
+  background-color: var(--red);
+  color: var(--white);
+  border: 0.1rem solid var(--white);
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s;
+
+  :hover {
+    cursor: pointer;
+    color: var(--red);
+    background-color: var(--color-light);
+    border-color: var(--red);
+  }
+`;
+
 //style={ {transform: "scale(0.5)"}}
 
 export {
@@ -121,4 +144,5 @@ export {
   ButtonDeleteAccount,
   ButtonSubscribe,
   ButtonSubscribeRed,
-}
+  ButtonToScrollUp,
+};
