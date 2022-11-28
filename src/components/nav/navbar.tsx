@@ -21,9 +21,7 @@ export default function Navbar() {
     <NavbarStyled>
       <div>
         <img className={'logo'} src={logo} alt="ws" />
-        <a href="http://localhost:3000/" className={'link'} onClick={handleClicked}>
-          <h2>WINES SUPPLY</h2>
-        </a>
+        <Link className={'link'} to="/"><h2>WINES SUPPLY</h2></Link>
       </div>
       <nav className={`links ${clicked ? 'active' : ''}`}>
         <ul>
