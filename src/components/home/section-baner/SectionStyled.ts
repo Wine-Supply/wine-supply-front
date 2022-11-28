@@ -87,6 +87,13 @@ export const SectionStyled = styled.section`
     transition: all 0.3s;
   }
 
+  .no-style{
+    color: var(--black);
+    :hover {
+      color: var(--white);
+    }
+  }
+
   @media (min-width: 600px) {
     padding-bottom: 3rem;
     .explore-baner-info {

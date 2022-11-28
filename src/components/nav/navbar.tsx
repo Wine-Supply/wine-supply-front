@@ -8,6 +8,7 @@ import {
   SearchOutlined, 
   UserOutlined
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 //
 
@@ -27,29 +28,19 @@ export default function Navbar() {
       <nav className={`links ${clicked ? 'active' : ''}`}>
         <ul>
           <li>
-            <a href="http://localhost:3000/WineClubp" className={'link'} onClick={handleClicked}>
-              The Club
-            </a>
+            <Link className={'link'} to="/WineClubp">The Club</Link>
           </li>
           <li>
-            <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
-              Shop
-            </a>
+            <Link className={'link'} to="/home/products">Shop</Link>
           </li>
           <li>
-            <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
-              <ShoppingCartOutlined />
-            </a>
+            <Link className={'link'} to="/home/products"><ShoppingCartOutlined /></Link>
           </li>
           <li>
-            <a href="http://localhost:3000/admin" className={'link'} onClick={handleClicked}>
-              <UserOutlined />
-            </a>
+            <Link className={'link'} to="/admin"><UserOutlined /></Link>
           </li>
           <li>
-            <a href="http://localhost:3000/home/products" className={'link'} onClick={handleClicked}>
-              <SearchOutlined />
-            </a>
+            <Link className={'link'} to="/home/products"><SearchOutlined /></Link>
           </li>     
         </ul>
       </nav>
