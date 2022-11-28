@@ -1,6 +1,6 @@
 import Home from "./components/home/Home";
 import Navbar from "./components/nav/navbar";
-import Footer from "./components/footer/Footer";
+import Footer from "./components/footer/footer";
 import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 import Form from "./components/form/Form";
 import "./App.css";
