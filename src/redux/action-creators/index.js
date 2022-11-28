@@ -52,10 +52,10 @@ export const searchWines = (query) => {
   };
 };
 
-export const getWineDetail = (id) => {
-  console.log("ac", id);
+export const getWineDetail = (_id) => {
+  console.log("ac", _id);
   return async function (dispatch) {
-    const resp = await fetch(`http://localhost:3001/wine/${id}`);
+    const resp = await fetch(`http://localhost:3001/wine/${_id}`);
     const data = await resp.json();
     return dispatch({ type: GET_WINE_DETAIL, payload: data });
   };

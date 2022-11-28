@@ -5,6 +5,8 @@ const DetailStyled = styled.div`
   flex-direction: row;
   background-color: var(--color-light);
   transition: all 0.3s;
+  padding-top: 6rem;
+  padding-bottom: 10rem;
 
   span{
     font-size: 2.5rem;
@@ -29,6 +31,7 @@ const DetailStyled = styled.div`
     position: absolute;
     top: 1rem;
     left: 1rem;
+    margin-bottom: 5rem;
     margin-left: 3rem;
     object-fit: cover;
     width: 10rem;
@@ -64,9 +67,12 @@ const DetailStyled = styled.div`
   .btns {
     margin-left: 1rem;
     margin-top: -1.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   @media(max-width: 768px){
+    padding-top: 0;
     flex-direction: column;
     text-align: center;
     align-items: center;
@@ -78,8 +84,9 @@ const DetailStyled = styled.div`
       opacity: 0%;
     }
     .img {
+      top: 6.5rem;
       left: 0;
-      width: 8rem;
+      width: 9rem;
       transform: none;
     }
     .body {
@@ -90,6 +97,13 @@ const DetailStyled = styled.div`
       min-width: 20rem;
       margin: 0;
     }
+
+    .btns {
+      margin-left: 3.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
   }
 `
 const WineData = styled.div`

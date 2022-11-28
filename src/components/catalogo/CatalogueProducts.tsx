@@ -29,7 +29,7 @@ export default function CatalogueProducts() {
         <div className="productCointainer">
           {Products?.map((el) => {
             return (
-              <Link to={`detail/${el.id}`} key={el.id}>
+              <Link to={`detail/${el._id}`} key={el._id}>
                 <Card
                   name={el.name}
                   descriptions={el.description}
