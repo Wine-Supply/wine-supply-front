@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
+import Navbar from "../nav/navbar";
+import Footer from "../footer/Footer";
 
 export default function CatalogueProducts() {
   const Products = useSelector((state: State) => state.allWines);
@@ -21,27 +23,31 @@ export default function CatalogueProducts() {
   }, []);
 
   return (
-    <CatalogoContainer>
-      <Filter />
-      <SearchBar />
-      <div>
-        <TitleCategory>Most Recommended</TitleCategory>
-        <div className="productCointainer">
-          {Products?.map((el) => {
-            return (
-              <Link to={`detail/${el._id}`} key={el._id}>
-                <Card
-                  name={el.name}
-                  descriptions={el.description}
-                  img={el.images[0]}
-                  price={el.price}
-                  rating={el.rating}
-                />
-              </Link>
-            );
-          })}
+    <>
+      <Navbar />
+      <CatalogoContainer>
+        <Filter />
+        <SearchBar />
+        <div>
+          <TitleCategory>Most Recommended</TitleCategory>
+          <div className="productCointainer">
+            {Products?.map((el) => {
+              return (
+                <Link to={`detail/${el._id}`} key={el._id}>
+                  <Card
+                    name={el.name}
+                    descriptions={el.description}
+                    img={el.images[0]}
+                    price={el.price}
+                    rating={el.rating}
+                  />
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </CatalogoContainer>
+      </CatalogoContainer>
+      <Footer />
+    </>
   );
 }
