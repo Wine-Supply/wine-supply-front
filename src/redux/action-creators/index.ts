@@ -7,9 +7,6 @@ import {
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
   SEARCH_WINES,
-  LOGIN_USER_WITH_GOOGLE,
-  LOGIN_USER_WITH_FACEBOOK,
-  LOGIN_USER,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -73,37 +70,24 @@ export const postWine = (wine: Wine) => {
   };
 };
 
-export const loginUserWithGoogle = (userInfo: AdditionalUserInfo | null) => {
-  return async function (dispatch: Dispatch) {
-    let resp = await axios.post(`http://localhost:3001/login`, userInfo);
-    return dispatch({
-      type: LOGIN_USER_WITH_GOOGLE,
-      payload: resp.data.token,
-    });
-  };
+export const loginUserWithGoogle = async (
+  userInfo: AdditionalUserInfo | null
+) => {
+  const resp = await axios.post(`http://localhost:3001/login`, userInfo);
+  localStorage.setItem("token", JSON.stringify(resp.data.token));
 };
 
-export const loginUserWithFacebook = (user: User) => {
-  return async function (dispatch: Dispatch) {
-    let resp = await axios.post(`http://localhost:3001/login`, user);
-    return dispatch({
-      type: LOGIN_USER_WITH_FACEBOOK,
-      payload: resp.data.token,
-    });
-  };
+export const loginUserWithFacebook = async (user: User) => {
+  const resp = await axios.post(`http://localhost:3001/login`, user);
+  localStorage.setItem("token", JSON.stringify(resp.data.token));
 };
 
-export const loginUser = (email: string, password: string) => {
-  return async function (dispatch: Dispatch) {
-    let resp = await axios.post(`http://localhost:3001/login`, {
-      email,
-      password,
-    });
-    return dispatch({
-      type: LOGIN_USER,
-      payload: resp.data.token,
-    });
-  };
+export const loginUser = async (email: string, password: string) => {
+  const resp = await axios.post(`http://localhost:3001/login`, {
+    email,
+    password,
+  });
+  localStorage.setItem("token", JSON.stringify(resp.data.token));
 };
 
 export const signUpUser = async (

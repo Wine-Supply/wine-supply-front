@@ -8,9 +8,6 @@ import {
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
   SEARCH_WINES,
-  LOGIN_USER_WITH_GOOGLE,
-  LOGIN_USER_WITH_FACEBOOK,
-  LOGIN_USER,
 } from "../actions/index";
 
 export interface Wine {
@@ -41,7 +38,6 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
-  userToken: string;
 }
 
 const initialState = {
@@ -50,7 +46,6 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
-  userToken: "",
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -119,27 +114,6 @@ const rootReducer = (state: State = initialState, action: Actions) => {
     case POST_WINE:
       return {
         ...state,
-      };
-
-    case LOGIN_USER_WITH_GOOGLE:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      return {
-        ...state,
-        userToken: action.payload,
-      };
-
-    case LOGIN_USER:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      return {
-        ...state,
-        userToken: action.payload,
-      };
-
-    case LOGIN_USER_WITH_FACEBOOK:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      return {
-        ...state,
-        userToken: action.payload,
       };
 
     default:
