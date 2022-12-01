@@ -7,8 +7,10 @@ import {
   FILTER_BY_QUERY,
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
-  GET_WINE_NAME,
   SEARCH_WINES,
+  LOGIN_USER_WITH_GOOGLE,
+  LOGIN_USER_WITH_FACEBOOK,
+  LOGIN_USER,
 } from "../actions/index";
 
 export interface Wine {
@@ -30,7 +32,7 @@ export interface Wine {
 
 interface Actions {
   type: string;
-  payload: Wine[];
+  payload: Wine[] | any;
 }
 
 export interface State {
@@ -39,6 +41,7 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
+  userToken: string;
 }
 
 const initialState = {
@@ -47,7 +50,7 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
-  searchName: [],
+  userToken: "",
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -118,10 +121,25 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
       };
 
-    case GET_WINE_NAME:
+    case LOGIN_USER_WITH_GOOGLE:
+      localStorage.setItem("token", JSON.stringify(action.payload));
       return {
         ...state,
-        searchName: action.payload,
+        userToken: action.payload,
+      };
+
+    case LOGIN_USER:
+      localStorage.setItem("token", JSON.stringify(action.payload));
+      return {
+        ...state,
+        userToken: action.payload,
+      };
+
+    case LOGIN_USER_WITH_FACEBOOK:
+      localStorage.setItem("token", JSON.stringify(action.payload));
+      return {
+        ...state,
+        userToken: action.payload,
       };
 
     default:
