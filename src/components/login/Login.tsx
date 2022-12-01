@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -9,14 +9,15 @@ import {
 import { FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
 import { auth } from "./FirebaseConfig";
 import DivStyled from "./DivStyled";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   loginUser,
   loginUserWithGoogle,
   loginUserWithFacebook,
 } from "../../redux/action-creators";
 import { Dispatch } from "redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { State } from "../../redux/reducer";
 
 export type Input = {
   email: string;
@@ -28,6 +29,8 @@ export type Input = {
 
 export default function Login() {
   const dispatch: Dispatch<any> = useDispatch();
+  const userToken = useSelector((state: State) => state.userToken);
+  const navigate = useNavigate();
   const [input, setInput] = useState<Input>({
     email: "",
     password: "",
@@ -37,6 +40,10 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (userToken.length > 0) navigate("/");
+  }, [userToken]);
 
   //Existing user signing in
   const handleSignIn = () => {

@@ -10,6 +10,7 @@ const DivStyled = styled.div`
     ),
     url(${loginImg});
   background-size: cover;
+  z-index: 1;
 
   .error-text {
     color: red;
@@ -220,6 +221,50 @@ const DivStyled = styled.div`
     color: var(--red);
   }
 
+  .message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    font-size: 2.6rem;
+    text-align: center;
+    padding: 1rem 5rem;
+    /* z-index: 1; */
+    transition: all 0.3s;
+  }
+
+  .ok-btn {
+    color: var(--white);
+    background-color: var(--black);
+    font-size: 2.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0.6rem 4rem;
+  }
+
+  .ok-btn:hover {
+    background-color: rgb(30, 30, 30);
+  }
+
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: all 0.3s;
+  }
+
   @media (min-width: 600px) {
     .login-container,
     .signup-container {
@@ -228,11 +273,11 @@ const DivStyled = styled.div`
     }
 
     .inputs-container {
-      gap: 3.2rem;
+      gap: 2rem;
     }
 
     .social-btn-container {
-      gap: 3.4rem;
+      gap: 2.8rem;
     }
   }
 
@@ -240,16 +285,16 @@ const DivStyled = styled.div`
     .login-container,
     .signup-container {
       width: 50rem;
-      padding: 3rem 4.6rem;
+      padding: 2rem 4.6rem;
     }
 
     .inputs-container {
-      gap: 3.6rem;
+      gap: 2.4rem;
       padding: 0 4rem;
     }
 
     .social-btn-container {
-      gap: 3.6rem;
+      gap: 3rem;
     }
   }
 `;
