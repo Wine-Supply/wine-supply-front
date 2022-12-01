@@ -1,63 +1,49 @@
 import React, { useState } from "react";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   GoogleAuthProvider,
   FacebookAuthProvider,
   signInWithPopup,
-  signOut,
+  // signOut,
+  getAdditionalUserInfo,
 } from "firebase/auth";
 import { FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
 import { auth } from "./FirebaseConfig";
 import DivStyled from "./DivStyled";
+import { useDispatch } from "react-redux";
+import {
+  loginUser,
+  loginUserWithGoogle,
+  loginUserWithFacebook,
+} from "../../redux/action-creators";
+import { Dispatch } from "redux";
+import { Link } from "react-router-dom";
 
-type Input = {
+export type Input = {
   email: string;
   password: string;
+  name?: string;
+  lastName?: string;
+  userName?: string;
 };
 
 export default function Login() {
+  const dispatch: Dispatch<any> = useDispatch();
   const [input, setInput] = useState<Input>({
     email: "",
     password: "",
   });
+
   const [errors, setErrors] = useState<Input>({
     email: "",
     password: "",
   });
 
-  //Register new users
-  const handleSignUp = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        input.email,
-        input.password
-      );
-      const user = userCredential.user;
-      console.log(user);
-    } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
-    }
-  };
-
   //Existing user signing in
-  const handleSignIn = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        input.email,
-        input.password
-      );
-      const user = userCredential.user;
-      console.log(user);
-    } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
+  const handleSignIn = () => {
+    for (const value of Object.values(errors)) {
+      if (value) return;
     }
+    dispatch(loginUser(input.email, input.password));
   };
 
   //Sign in with google
@@ -65,24 +51,12 @@ export default function Login() {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      console.log(user);
-
-      // ...
+      const userInfo = getAdditionalUserInfo(result);
+      dispatch(loginUserWithGoogle(userInfo));
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode, errorMessage);
-
-      // The email of the user's account used.
-      // const email = error.customData.email;
-      // The AuthCredential type that was used.
-      // const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
     }
   };
 
@@ -90,38 +64,25 @@ export default function Login() {
     try {
       const provider = new FacebookAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      // The signed-in user info.
       const user = result.user;
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const accessToken = credential?.accessToken;
-      console.log(user);
+      dispatch(loginUserWithFacebook(user));
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      // const email = error.customData.email;
-      // The AuthCredential type that was used.
-      // const credential = FacebookAuthProvider.credentialFromError(error);
       console.error(errorCode, errorMessage);
     }
   };
 
   //Sign out
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (error: any) {
-      console.error(error);
-    }
-  };
+  // const handleSignOut = async () => {
+  //   try {
+  //     await signOut(auth);
+  //   } catch (error: any) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-    setErrors(validateForm({ ...input, [e.target.name]: e.target.value }));
-  };
-
-  const validateForm = (input: Input) => {
+  const validateLogin = (input: Input) => {
     let errors: Input = { email: "", password: "" };
 
     if (input.email.length === 0) errors.email = "Email is required";
@@ -135,7 +96,13 @@ export default function Login() {
       errors.password = "At least two numbers required";
     else if (!/(?=.{8})/.test(input.password))
       errors.password = "At least 8 characters required";
+
     return errors;
+  };
+
+  const handleChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+    setErrors(validateLogin({ ...input, [e.target.name]: e.target.value }));
   };
 
   return (
@@ -168,39 +135,39 @@ export default function Login() {
         <div className="inputs-container">
           <div className="inputs">
             <div className="input-container">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="log-email" className="form-label">
                 Email
               </label>
               <input
-                onChange={handleChange}
+                onChange={handleChangeLogin}
                 name="email"
                 value={input.email}
                 autoComplete="off"
                 type="email"
-                id="email"
-                className={`form-input ${errors.email && "error-input"}`}
+                id="log-email"
+                className={`form-input ${errors?.email && "error-input"}`}
                 placeholder="Enter your email"
               />
-              <p className={`error-text ${errors.email && "show-error"}`}>
-                {errors.email || "something"}
+              <p className={`error-text ${errors?.email && "show-error"}`}>
+                {errors?.email || "something"}
               </p>
             </div>
             <div className="input-container">
-              <label htmlFor="password" className="form-label">
+              <label htmlFor="log-password" className="form-label">
                 Password
               </label>
               <input
-                onChange={handleChange}
+                onChange={handleChangeLogin}
                 name="password"
                 value={input.password}
                 autoComplete="current-password"
                 type="password"
-                id="password"
+                id="log-password"
                 className="form-input"
                 placeholder="Enter your password"
               />
-              <p className={`error-text ${errors.password && "show-error"}`}>
-                {errors.password || "something"}
+              <p className={`error-text ${errors?.password && "show-error"}`}>
+                {errors?.password || "something"}
               </p>
             </div>
           </div>
@@ -208,9 +175,9 @@ export default function Login() {
             <button onClick={handleSignIn} className="action-btn login-btn">
               Login
             </button>
-            <button onClick={handleSignUp} className="action-btn sign-up-btn">
-              Sign up
-            </button>
+            <Link to="/signup">
+              <button className="action-btn sign-up-btn">Sign up</button>
+            </Link>
           </div>
           <div className="form-span">
             <span>or</span>

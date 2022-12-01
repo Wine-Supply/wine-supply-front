@@ -27,7 +27,8 @@ const DivStyled = styled.div`
     gap: 1.6rem;
   }
 
-  .login-container {
+  .login-container,
+  .signup-container {
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -36,9 +37,17 @@ const DivStyled = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
-    height: 80%;
     padding: 1.6rem 1.6rem;
     background-color: rgba(100, 100, 100, 0.5);
+  }
+
+  .login-container {
+    height: 80%;
+  }
+
+  .signup-container {
+    position: relative;
+    height: 90%;
   }
 
   .login-header {
@@ -86,6 +95,38 @@ const DivStyled = styled.div`
     font-size: 1.6rem;
     letter-spacing: 0.5px;
     color: var(--white);
+  }
+
+  .go-back-btn {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 2.6rem;
+    padding: 0.6rem;
+    border-radius: 50%;
+    transition: all 0.3s;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .signup-container:hover .go-back-btn {
+    opacity: 1;
+  }
+
+  .create-label {
+    display: inline-block;
+    text-align: center;
+    padding-bottom: 2px;
+  }
+
+  .create-label:hover {
+    border-bottom: 1px solid currentColor;
+    cursor: pointer;
   }
 
   .form-span {
@@ -180,7 +221,8 @@ const DivStyled = styled.div`
   }
 
   @media (min-width: 600px) {
-    .login-container {
+    .login-container,
+    .signup-container {
       width: 40rem;
       padding: 2rem 2rem;
     }
@@ -195,7 +237,8 @@ const DivStyled = styled.div`
   }
 
   @media (min-width: 1024px) {
-    .login-container {
+    .login-container,
+    .signup-container {
       width: 50rem;
       padding: 3rem 4.6rem;
     }
