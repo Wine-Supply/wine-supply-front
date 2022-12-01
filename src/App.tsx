@@ -7,6 +7,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Detail from "./components/detail/Detail";
 import WineClubp from "./components/section-wine-club";
+import User from "./components/user-profile/User";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/home/products" element={<CatalogueProducts />} />
         <Route path="/wineClubp" element={<WineClubp />} />
         <Route path="/admin" element={<Form />} />
+        <Route path="/user" element={<User />} />
       </Routes>
       <Footer />
     </div>
