@@ -11,7 +11,6 @@ import {
   LOGIN_USER_WITH_GOOGLE,
   LOGIN_USER_WITH_FACEBOOK,
   LOGIN_USER,
-  SIGN_UP_USER,
 } from "../actions/index";
 
 export interface Wine {
@@ -33,7 +32,7 @@ export interface Wine {
 
 interface Actions {
   type: string;
-  payload: Wine[];
+  payload: Wine[] | any;
 }
 
 export interface State {
@@ -42,7 +41,7 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
-  isUserLoggedIn: boolean;
+  userToken: string;
 }
 
 const initialState = {
@@ -51,7 +50,7 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
-  isUserLoggedIn: false,
+  userToken: "",
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -126,30 +125,21 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       localStorage.setItem("token", JSON.stringify(action.payload));
       return {
         ...state,
-        isUserLoggedIn: true,
+        userToken: action.payload,
       };
 
     case LOGIN_USER:
       localStorage.setItem("token", JSON.stringify(action.payload));
       return {
         ...state,
-        isUserLoggedIn: true,
-      };
-
-    case SIGN_UP_USER:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      console.log("signup, reducer");
-
-      return {
-        ...state,
-        isUserLoggedIn: true,
+        userToken: action.payload,
       };
 
     case LOGIN_USER_WITH_FACEBOOK:
       localStorage.setItem("token", JSON.stringify(action.payload));
       return {
         ...state,
-        isUserLoggedIn: true,
+        userToken: action.payload,
       };
 
     default:

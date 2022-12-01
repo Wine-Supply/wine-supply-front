@@ -10,7 +10,6 @@ import {
   LOGIN_USER_WITH_GOOGLE,
   LOGIN_USER_WITH_FACEBOOK,
   LOGIN_USER,
-  SIGN_UP_USER,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -107,25 +106,19 @@ export const loginUser = (email: string, password: string) => {
   };
 };
 
-export const signUpUser = (
+export const signUpUser = async (
   name: string | undefined,
-  lastName: string | undefined,
-  userName: string | undefined,
+  // lastName: string | undefined,
+  // userName: string | undefined,
   email: string,
   password: string
 ) => {
-  console.log("signup, action");
-  return async function (dispatch: Dispatch) {
-    let resp = await axios.post(`http://localhost:3001/signup`, {
-      name,
-      lastName,
-      userName,
-      email,
-      password,
-    });
-    return dispatch({
-      type: SIGN_UP_USER,
-      payload: resp.data.token,
-    });
-  };
+  const resp = await axios.post(`http://localhost:3001/signup`, {
+    name,
+    // lastName,
+    // userName,
+    email,
+    password,
+  });
+  return resp.data;
 };

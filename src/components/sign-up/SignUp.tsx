@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "@reduxjs/toolkit";
 import { signUpUser } from "../../redux/action-creators";
 import { LeftOutlined } from "@ant-design/icons";
 import DivStyled from "../login/DivStyled";
@@ -8,7 +6,6 @@ import { Input } from "../login/Login";
 import { Link } from "react-router-dom";
 
 export default function SignUp() {
-  const dispatch: Dispatch<any> = useDispatch();
   const [signUp, setSignUp] = useState<Input>({
     name: "",
     lastName: "",
@@ -23,20 +20,29 @@ export default function SignUp() {
     email: "",
     password: "",
   });
+  const [result, setResult] = useState<string>("");
+  const [showMessage, setShowMessage] = useState<boolean>(false);
   //Register new users
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     for (const value of Object.values(errors)) {
       if (value) return;
     }
-    dispatch(
-      signUpUser(
-        signUp.name,
-        signUp.lastName,
-        signUp.userName,
-        signUp.email,
-        signUp.password
-      )
+    const message = await signUpUser(
+      signUp.name,
+      // signUp.lastName,
+      // signUp.userName,
+      signUp.email,
+      signUp.password
     );
+    setSignUp({
+      name: "",
+      lastName: "",
+      userName: "",
+      email: "",
+      password: "",
+    });
+    setResult(message);
+    setShowMessage(true);
   };
   const validateSignUp = (input: Input) => {
     let errors: Input = { email: "", password: "" };
@@ -171,6 +177,17 @@ export default function SignUp() {
           </div>
         </div>
       </form>
+      {showMessage && (
+        <div>
+          <div className="overlay"></div>
+          <div className="message">
+            <p>{result}</p>
+            <button onClick={() => setShowMessage(false)} className="ok-btn">
+              ok
+            </button>
+          </div>
+        </div>
+      )}
     </DivStyled>
   );
 }
