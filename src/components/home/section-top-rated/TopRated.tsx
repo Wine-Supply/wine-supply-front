@@ -25,6 +25,7 @@ export default function TopRated() {
         {topWines &&
           topWines.map((item) => (
             <Card
+              _id={item._id}
               key={item.description}
               name={item.name}
               descriptions={item.description}

@@ -1,18 +1,25 @@
+
+import { Link } from 'react-router-dom'
 import {CardContainer, CardInformation, ButtonAddCart} from './CardStyle'
 
-type CardProps ={
+interface CardProps {
+    _id: string
     name: string
     img: string
     descriptions: string
     price: number
     rating: number
+    addStorageItem?:any
 }
 
-const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => {
+const Card: React.FC<CardProps> = ({_id, name, img, descriptions, price, rating, addStorageItem}) => {
+
   return (
     <CardContainer>
       <div className='imageMain' >
-        <img src={img} alt={name} />
+        <Link to={`detail/${_id}`}>
+          <img src={img} alt={name} />
+        </Link>
       </div>
       <CardInformation>
         <div className='rankingStyle'>
@@ -28,7 +35,7 @@ const Card: React.FC<CardProps> = ({name, img, descriptions, price, rating}) => 
 
         <div className='cardFooter'>
           <p>${price}</p>
-          <ButtonAddCart>add to cart</ButtonAddCart>
+          <ButtonAddCart onClick={()=>addStorageItem(_id, name, img, descriptions, price, rating)} >add to cart</ButtonAddCart>
         </div>
       </CardInformation>      
     </CardContainer>

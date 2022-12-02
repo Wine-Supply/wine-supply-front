@@ -1,3 +1,4 @@
+
 import {
   GET_TOP_RATED_WINES,
   GET_WINES,
@@ -8,6 +9,9 @@ import {
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
   SEARCH_WINES,
+  ADD_ITEMS_STORAGE,
+  GET_ITEMS_STORAGE,
+  OPEN_CART
 } from "../actions/index";
 
 export interface Wine {
@@ -38,6 +42,8 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
+  itemsStorage: Object[];
+  openCart: boolean;
 }
 
 const initialState = {
@@ -46,12 +52,13 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
+  itemsStorage: [],
+  openCart: false
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
   switch (action.type) {
     case GET_WINES:
-      console.log("rex", action.payload);
       return {
         ...state,
         allWines: action.payload,
@@ -105,7 +112,6 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_WINE_DETAIL:
-      console.log("act", action.payload);
       return {
         ...state,
         wineDetail: action.payload,
@@ -115,6 +121,26 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
       };
+
+      case GET_ITEMS_STORAGE:
+        console.log(action.payload)
+        return {
+          ...state,
+          itemsStorage: action.payload === null || action.payload === '' ? state.itemsStorage : action.payload,
+        };
+
+      case ADD_ITEMS_STORAGE:
+        return {
+          ...state,
+          itemsStorage:[...state.itemsStorage, action.payload],
+        };
+
+        case OPEN_CART:
+          console.log('llega')
+          return {
+            ...state,
+            openCart: state.openCart === false ? state.openCart = true : state.openCart = false
+          };
 
     default:
       return {

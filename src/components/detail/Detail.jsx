@@ -5,7 +5,8 @@ import { getWineDetail } from "../../redux/action-creators";
 import { DetailStyled, WineData } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
+import CarritoFull from "../carritoFull/CarritoFull";
 
 export default function Detail() {
   let { id } = useParams();
@@ -34,6 +35,7 @@ export default function Detail() {
   return (
     <>
       <Navbar />
+      <CarritoFull/>
       <DetailStyled>
         <div className={"bg-container"}>
           <img className={"bg"} src={images} alt="bg" />

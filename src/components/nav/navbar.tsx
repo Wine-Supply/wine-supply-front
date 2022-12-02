@@ -9,10 +9,14 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { openCart } from "../../redux/action-creators";
 
-//
+ const Navbar= () =>{
 
-export default function Navbar() {
+let dispatch:Dispatch<any> = useDispatch()
+
   const [clicked, setClicked] = useState(false);
   const handleClicked = () => {
     setClicked(!clicked);
@@ -38,9 +42,9 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className={"link"} to="/home/products">
+            <div className={"link"} onClick={()=>{dispatch(openCart())}}>
               <ShoppingCartOutlined />
-            </Link>
+            </div>
           </li>
           <li>
             <Link className={"link"} to="/admin">
@@ -64,3 +68,5 @@ export default function Navbar() {
     </NavbarStyled>
   );
 }
+
+export default Navbar
