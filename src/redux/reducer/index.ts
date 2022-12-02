@@ -1,4 +1,4 @@
-import { genActionStyle } from "antd/es/alert/style";
+
 import {
   GET_TOP_RATED_WINES,
   GET_WINES,
@@ -8,10 +8,10 @@ import {
   FILTER_BY_QUERY,
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
-  GET_WINE_NAME,
   SEARCH_WINES,
   ADD_ITEMS_STORAGE,
-  GET_ITEMS_STORAGE
+  GET_ITEMS_STORAGE,
+  OPEN_CART
 } from "../actions/index";
 
 export interface Wine {
@@ -33,7 +33,7 @@ export interface Wine {
 
 interface Actions {
   type: string;
-  payload: Wine[];
+  payload: Wine[] | any;
 }
 
 export interface State {
@@ -42,7 +42,8 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
-  itemsStorage: Object[]
+  itemsStorage: Object[];
+  openCart: boolean;
 }
 
 const initialState = {
@@ -51,8 +52,8 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
-  searchName: [],
-  itemsStorage: []
+  itemsStorage: [],
+  openCart: false
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -121,16 +122,11 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
       };
 
-    case GET_WINE_NAME:
-      return {
-        ...state,
-        searchName: action.payload,
-      };
-
       case GET_ITEMS_STORAGE:
+        console.log(action.payload)
         return {
           ...state,
-          itemsStorage: action.payload === null ? state.itemsStorage : action.payload,
+          itemsStorage: action.payload === null || action.payload === '' ? state.itemsStorage : action.payload,
         };
 
       case ADD_ITEMS_STORAGE:
@@ -138,6 +134,13 @@ const rootReducer = (state: State = initialState, action: Actions) => {
           ...state,
           itemsStorage:[...state.itemsStorage, action.payload],
         };
+
+        case OPEN_CART:
+          console.log('llega')
+          return {
+            ...state,
+            openCart: state.openCart === false ? state.openCart = true : state.openCart = false
+          };
 
     default:
       return {

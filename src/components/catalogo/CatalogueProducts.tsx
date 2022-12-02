@@ -7,6 +7,9 @@ import SearchBar from "../searchbar/SearchBar";
 import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
+import Navbar from "../nav/navbar";
+import Footer from "../Footer/Footer";
+import CarritoFull from "../carritoFull/CarritoFull";
 
 export default function CatalogueProducts() {
 
@@ -35,7 +38,10 @@ export default function CatalogueProducts() {
 }
 
   return (
-    <CatalogoContainer>
+<>
+<Navbar />
+<CarritoFull/>
+<CatalogoContainer>
       <Filter />
       <SearchBar />
       <div>
@@ -43,7 +49,7 @@ export default function CatalogueProducts() {
         <div className="productCointainer">
           {Products?.map((el) => {
             return (
-             <div key={el._id}>
+              <div key={el._id}>
                 <Card
                   _id={el._id}
                   name={el.name}
@@ -57,7 +63,9 @@ export default function CatalogueProducts() {
             );
           })}
         </div>
-      </div>
-    </CatalogoContainer>
+        </div>
+      </CatalogoContainer>
+      <Footer />
+    </>
   );
 }

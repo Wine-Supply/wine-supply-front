@@ -21,41 +21,18 @@ const CartProducts = () => {
     {Items.length === 0 ? <p>No items in cart.</p> : null}
     {Items.map(item => (
       <div key={item._id}>
-
-    <CartItem
-        
-        item={item}
-        _id={item._id}
-        name={item.name}
-        img={item.img}
-        price={item.price}
-        clearItem={clearItem}
-        //  addToCart={addToCart}
-        //  removeFromCart={removeFromCart}
-        />
-        </div>
-    ))}
+        <CartItem
+            item={item}
+            _id={item._id}
+            name={item.name}
+            img={item.img}
+            price={item.price}
+            clearItem={clearItem}
+            />
+            </div>
+        ))}
 
 </Wrapper>
-   /*  <div>
-   <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
-      {
-        Items.map(item=>{
-          return (
-            <div key={item._id}>
-              <CartItem
-               _id={item._id}
-               name={item.name}
-               img={item.img}
-               price={item.price}
-               clearItem={clearItem}
-              />
-            </div>
-            
-          )
-        })
-      }
-    </div> */
   )
 }
 
