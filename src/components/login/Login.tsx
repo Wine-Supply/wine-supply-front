@@ -39,18 +39,16 @@ export default function Login() {
   const [token, setToken] = useState<string | null>("");
 
   useEffect(() => {
-    if (token?.length === 0) {
-      setToken(localStorage.getItem("token"));
-      navigate("/");
-    }
+    if (token && token?.length > 0) navigate("/");
   }, [token]);
 
   //Existing user signing in
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     for (const value of Object.values(errors)) {
       if (value) return;
     }
-    loginUser(input.email, input.password);
+    await loginUser(input.email, input.password);
+    setToken(localStorage.getItem("token"));
   };
 
   //Sign in with google
@@ -59,7 +57,8 @@ export default function Login() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const userInfo = getAdditionalUserInfo(result);
-      loginUserWithGoogle(userInfo);
+      await loginUserWithGoogle(userInfo);
+      setToken(localStorage.getItem("token"));
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -72,7 +71,8 @@ export default function Login() {
       const provider = new FacebookAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      loginUserWithFacebook(user);
+      await loginUserWithFacebook(user);
+      setToken(localStorage.getItem("token"));
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
