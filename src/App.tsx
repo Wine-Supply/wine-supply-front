@@ -10,6 +10,7 @@ import SignUp from "./components/sign-up/SignUp";
 import User from "./components/user-profile/User";
 
 function App() {
+
   return (
     <div className="App">
       <Routes>

@@ -1,3 +1,4 @@
+
 import {
   GET_TOP_RATED_WINES,
   GET_WINES,
@@ -8,9 +9,9 @@ import {
   SORT_WINES_BY_PRICE,
   SORT_WINES_BY_RATING,
   SEARCH_WINES,
-  LOGIN_USER_WITH_GOOGLE,
-  LOGIN_USER_WITH_FACEBOOK,
-  LOGIN_USER,
+  ADD_ITEMS_STORAGE,
+  GET_ITEMS_STORAGE,
+  OPEN_CART
 } from "../actions/index";
 
 export interface Wine {
@@ -41,7 +42,8 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
-  userToken: string;
+  itemsStorage: Object[];
+  openCart: boolean;
 }
 
 const initialState = {
@@ -50,7 +52,8 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
-  userToken: "",
+  itemsStorage: [],
+  openCart: false
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -121,26 +124,25 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
       };
 
-    case LOGIN_USER_WITH_GOOGLE:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      return {
-        ...state,
-        userToken: action.payload,
-      };
+      case GET_ITEMS_STORAGE:
+        //console.log(action.payload)
+        return {
+          ...state,
+          itemsStorage: action.payload === null || action.payload === '' ? state.itemsStorage : action.payload,
+        };
 
-    case LOGIN_USER:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      return {
-        ...state,
-        userToken: action.payload,
-      };
+      case ADD_ITEMS_STORAGE:
+        return {
+          ...state,
+          itemsStorage:[...state.itemsStorage, action.payload],
+        };
 
-    case LOGIN_USER_WITH_FACEBOOK:
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      return {
-        ...state,
-        userToken: action.payload,
-      };
+        case OPEN_CART:
+          //console.log('llega')
+          return {
+            ...state,
+            openCart: state.openCart === false ? state.openCart = true : state.openCart = false
+          };
 
     default:
       return {

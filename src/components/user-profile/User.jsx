@@ -65,7 +65,7 @@ function validate(input) {
 export default function User() {
 
   const currentUser = useAuth();
-  console.log("currentUser", currentUser)
+  //console.log("currentUser", currentUser)
   
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);

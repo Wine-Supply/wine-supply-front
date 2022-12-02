@@ -9,15 +9,12 @@ import {
 import { FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
 import { auth } from "./FirebaseConfig";
 import DivStyled from "./DivStyled";
-import { useDispatch, useSelector } from "react-redux";
 import {
   loginUser,
   loginUserWithGoogle,
   loginUserWithFacebook,
 } from "../../redux/action-creators";
-import { Dispatch } from "redux";
 import { Link, useNavigate } from "react-router-dom";
-import { State } from "../../redux/reducer";
 
 export type Input = {
   email: string;
@@ -28,8 +25,7 @@ export type Input = {
 };
 
 export default function Login() {
-  const dispatch: Dispatch<any> = useDispatch();
-  const userToken = useSelector((state: State) => state.userToken);
+  // const userToken = useSelector((state: State) => state.userToken);
   const navigate = useNavigate();
   const [input, setInput] = useState<Input>({
     email: "",
@@ -40,17 +36,19 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [token, setToken] = useState<string | null>("");
 
   useEffect(() => {
-    if (userToken.length > 0) navigate("/");
-  }, [userToken]);
+    if (token && token?.length > 0) navigate("/");
+  }, [token]);
 
   //Existing user signing in
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     for (const value of Object.values(errors)) {
       if (value) return;
     }
-    dispatch(loginUser(input.email, input.password));
+    await loginUser(input.email, input.password);
+    setToken(localStorage.getItem("token"));
   };
 
   //Sign in with google
@@ -59,7 +57,8 @@ export default function Login() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const userInfo = getAdditionalUserInfo(result);
-      dispatch(loginUserWithGoogle(userInfo));
+      await loginUserWithGoogle(userInfo);
+      setToken(localStorage.getItem("token"));
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -72,7 +71,8 @@ export default function Login() {
       const provider = new FacebookAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      dispatch(loginUserWithFacebook(user));
+      await loginUserWithFacebook(user);
+      setToken(localStorage.getItem("token"));
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
