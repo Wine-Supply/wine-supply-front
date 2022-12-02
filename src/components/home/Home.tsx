@@ -6,22 +6,22 @@ import { getItemsStorage } from "../../redux/action-creators";
 import { State } from "../../redux/reducer";
 import AboutUs from "./section-about-us/AboutUs";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import BanerSection from "./section-baner/BanerSection";
 import Newsletter from "./section-newsletter/Newsletter";
 import TopRated from "./section-top-rated/TopRated";
-import CartProducts from "../CartProducts/CartProducts";
-import { Drawer } from '@mui/material'
 import CarritoFull from "../carritoFull/CarritoFull";
 
 export default function Home() {
   const [showButton, setShowButton] = useState<boolean>(false);
-//  const [cartOpen, setCartOpen] = useState<boolean>(true);
+  //  const [cartOpen, setCartOpen] = useState<boolean>(true);
   const Items = useSelector((state: State) => state.itemsStorage);
-  const dispatch: Dispatch<any> = useDispatch()
-  
+  const dispatch: Dispatch<any> = useDispatch();
+
   useEffect(() => {
-    if(Items.length === 0){dispatch(getItemsStorage())}
+    if (Items.length === 0) {
+      dispatch(getItemsStorage());
+    }
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);
     });
@@ -29,16 +29,8 @@ export default function Home() {
 
   return (
     <main>
-
-      {/* <Drawer
-        anchor='right' 
-        open={cartOpen} 
-        onClose= {() => setCartOpen(false)}>
-          <CartProducts/>
-     </Drawer> */}
-      <Navbar/>
-<CarritoFull/>
-
+      <Navbar />
+      <CarritoFull />
       <BanerSection />
       <TopRated />
       <Newsletter />
