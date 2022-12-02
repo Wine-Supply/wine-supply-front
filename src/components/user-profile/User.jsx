@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UserStyled } from "./UserStyled";
 import { ButtonSaveChanges } from "../utils/utils"
-import { useDispatch } from "react-redux";
+import { useAuth, upload } from "../login/FirebaseConfig";
+
+
 
 function validate(input) {
 	let errors = {};
@@ -61,46 +63,33 @@ function validate(input) {
 }
 
 export default function User() {
-  //user = await User.findById(user._id, "-hashedPass")
-  //req.headers.authorization.startsWith("Bearer")
+
+  const currentUser = useAuth();
+  console.log("currentUser", currentUser)
   
-  const user = {
-		name: "Cosme",
-	  lastName: "Fulanito",
-	  userName: "User1",
-    email: "user@gmail.com",
-	  isAdmin: false,
-    isActive: true,
-	  hashedPass: "Password123!",
-    date_of_birth: 19-10-1990,
-    phone: "+54(11)2599-4325",
-    avatar: "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg",
-	  membership_id: [],
-    isAdmin: "no",
-	  address: [],
-    whishList:[],
-  }
+  const [photo, setPhoto] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [photoURL, setPhotoURL] = useState("https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg");
 
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
+  
   const [input, setInput] = useState({
 		name: "",
 	  lastName: "",
 	  userName: "",
-    email: user?.email,
+    email: currentUser?.email,
 	  isAdmin: false,
     isActive: true,
-	  hashedPass: user?.hashedPass,
+	  hashedPass: currentUser?.hashedPass,
     date_of_birth: new Date,
     phone: "",
-    avatar: "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg",
+    avatar: "",
 	  membership_id: [],
-    isAdmin: "",
 	  address: [], //* array limit = 3
     whishList:[],
 	});
 
-  function handleInput(e) {
+  function handleChange(e) {
 		const { name, value } = e.target;
 
 		setInput({ 
@@ -118,25 +107,42 @@ export default function User() {
 		}, 1000);
 	}
 
-  const handleSubmit =  (e) => {
-    console.log(input)
-  };
+  function handleChangeImage(e) {
+    if (e.target.files[0]) {
+      setPhoto(e.target.files[0])
+    }
+  }
 
+  function handleClick() {
+    upload(photo, currentUser, setLoading);
+  }
+
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser])
+
+  const handleSubmit =  (e) => {
+    
+  };
+/*<img src={input.avatar} alt="Avatar"/>  */
   return (
     <UserStyled>
-      <form>
+      <form>   
         <div>
-          <img src={input.avatar} alt="Avatar"/> 
+          <input type="file" onChange={handleChangeImage} />
+          <button disabled={loading || !photo} onClick={handleClick}>Upload</button>
+          <img src={photoURL} alt="Avatar" className="avatar" />
+          <label>Currently logged in as: { currentUser?.email } </label>
         </div> 
         <div>
-          <label>UserName</label>
           <input
 						type="text"
             defaultValue={input.userName}
 						placeholder= {input.userName}
 						name="userName"
-            required={true}
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Name</label>
           <input
@@ -145,25 +151,24 @@ export default function User() {
 						placeholder= {input.name}
 						name="name"
             required={true}
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Lastname</label>
           <input
 						type="text"
             defaultValue={input.lastName}
 						placeholder= {input.lastName}
-						name="lastName"
             required={true}
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Mail</label>
           <input
 						type="text"
-            defaultValue={input.email}
-						placeholder= {input.email}
+            defaultValue= {currentUser?.email}
+						placeholder=  {currentUser?.email}
 						name="email"
             required={true}
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Password</label>
           <input
@@ -172,7 +177,7 @@ export default function User() {
 						placeholder= {input.hashedPass}
 						name="hashedPass"
             required={true}
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Birthday</label>
           <input
@@ -180,8 +185,7 @@ export default function User() {
             defaultValue={input.date_of_birth}
 						placeholder= {input.date_of_birth}
 						name="date_of_birth"
-            required={true}
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Phone</label>
           <input
@@ -189,7 +193,7 @@ export default function User() {
             defaultValue={input.phone}
 						placeholder= {input.phone}
 						name="phone"
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
           <label>Address</label>
           <input
@@ -197,7 +201,7 @@ export default function User() {
             defaultValue={input.address}
 						placeholder= {input.address}
 						name="address"
-            onChange={(e) => handleInput(e)}
+            onChange={(e) => handleChange(e)}
 					/>
         </div>
         <span className="error">
@@ -214,7 +218,7 @@ export default function User() {
         </ButtonSaveChanges>
       </form>
       <h2>+ WishList</h2>
-      <textarea name="" id="" cols="30" rows="10"></textarea>
+      <h2>Historial de compra</h2>
     </UserStyled>
   );
 }

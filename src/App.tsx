@@ -4,10 +4,10 @@ import CatalogueProducts from "./components/catalogo/CatalogueProducts";
 import Form from "./components/form/Form";
 import Detail from "./components/detail/Detail";
 import WineClubp from "./components/section-wine-club";
-import User from "./components/user-profile/User";
 import Login from "./components/login/Login";
 import "./App.css";
 import SignUp from "./components/sign-up/SignUp";
+import User from "./components/user-profile/User";
 
 function App() {
   return (
