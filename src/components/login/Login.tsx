@@ -37,9 +37,10 @@ export default function Login() {
     password: "",
   });
   const [token, setToken] = useState<string | null>("");
+  const history = window.history;
 
   useEffect(() => {
-    if (token && token?.length > 0) navigate("/");
+    if (token && token?.length > 0) history.back();
   }, [token]);
 
   //Existing user signing in
