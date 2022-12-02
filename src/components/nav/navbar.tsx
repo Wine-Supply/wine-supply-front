@@ -32,7 +32,7 @@ export default function Navbar() {
             <Link className={'link'} to="/home/products">Shop</Link>
           </li>
           <li>
-            <Link className={'link'} to="/home/products"><ShoppingCartOutlined /></Link>
+            <Link className={'link'} to="/home/cart-products"><ShoppingCartOutlined /></Link>
           </li>
           <li>
             <Link className={'link'} to="/admin"><UserOutlined /></Link>

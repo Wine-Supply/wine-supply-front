@@ -8,6 +8,8 @@ import {
   SORT_WINES_BY_RATING,
   GET_WINE_NAME,
   SEARCH_WINES,
+  ADD_ITEMS_STORAGE,
+  GET_ITEMS_STORAGE
 } from "../actions";
 import axios from "axios";
 
@@ -15,7 +17,6 @@ export const getWines = () => {
   return async function (dispatch) {
     const resp = await fetch("http://localhost:3001/wines");
     const data = await resp.json();
-    console.log("ac", data);
     return dispatch({ type: GET_WINES, payload: data });
   };
 };
@@ -53,7 +54,6 @@ export const searchWines = (query) => {
 };
 
 export const getWineDetail = (_id) => {
-  console.log("ac", _id);
   return async function (dispatch) {
     const resp = await fetch(`http://localhost:3001/wine/${_id}`);
     const data = await resp.json();
@@ -80,3 +80,17 @@ export const getWineName = (input) => {
     });
   };
 };
+
+export const getItemsStorage = () =>{
+  return ({
+    type: GET_ITEMS_STORAGE,
+    payload: JSON.parse(localStorage.getItem('item')),
+  });
+}
+
+export const addItemsStorage = (object) =>{
+    return ({
+      type: ADD_ITEMS_STORAGE,
+      payload: object,
+    })
+}

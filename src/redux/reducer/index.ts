@@ -1,3 +1,4 @@
+import { genActionStyle } from "antd/es/alert/style";
 import {
   GET_TOP_RATED_WINES,
   GET_WINES,
@@ -9,6 +10,8 @@ import {
   SORT_WINES_BY_RATING,
   GET_WINE_NAME,
   SEARCH_WINES,
+  ADD_ITEMS_STORAGE,
+  GET_ITEMS_STORAGE
 } from "../actions/index";
 
 export interface Wine {
@@ -39,6 +42,7 @@ export interface State {
   wineDetail: Array<Wine>;
   wineNames: string[];
   wineBrands: string[];
+  itemsStorage: Object[]
 }
 
 const initialState = {
@@ -48,12 +52,12 @@ const initialState = {
   wineBrands: [],
   wineDetail: [],
   searchName: [],
+  itemsStorage: []
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
   switch (action.type) {
     case GET_WINES:
-      console.log("rex", action.payload);
       return {
         ...state,
         allWines: action.payload,
@@ -107,7 +111,6 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_WINE_DETAIL:
-      console.log("act", action.payload);
       return {
         ...state,
         wineDetail: action.payload,
@@ -123,6 +126,18 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
         searchName: action.payload,
       };
+
+      case GET_ITEMS_STORAGE:
+        return {
+          ...state,
+          itemsStorage: action.payload === null ? state.itemsStorage : action.payload,
+        };
+
+      case ADD_ITEMS_STORAGE:
+        return {
+          ...state,
+          itemsStorage:[...state.itemsStorage, action.payload],
+        };
 
     default:
       return {

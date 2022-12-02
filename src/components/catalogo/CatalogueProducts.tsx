@@ -1,24 +1,38 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { getWines } from "../../redux/action-creators";
+import { addItemsStorage, getWines } from "../../redux/action-creators";
 import Filter from "../filter/Filter";
 import SearchBar from "../searchbar/SearchBar";
-import { Link } from "react-router-dom";
 import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
 
 export default function CatalogueProducts() {
+
+ // const [cartOpen, setCartOpen] = useState(false);
   const Products = useSelector((state: State) => state.allWines);
-
   let dispatch: Dispatch<any> = useDispatch();
-
+  
   useEffect(() => {
     if (Products!.length === 0) {
       dispatch(getWines());
     }
   }, []);
+  
+  const addStorageItem = (_id:string, name:string, img:string, descriptions:string, price:number, rating:number) =>{
+  dispatch(addItemsStorage({_id, name, img, descriptions, price, rating}))
+  let getStorage: any = localStorage.getItem('item')
+  if(getStorage === null){
+    let addItem = JSON.stringify([{_id, name, img, descriptions, price, rating}])
+    return localStorage.setItem('item', addItem)
+  }else{
+    let localItems = JSON.parse(getStorage)
+    localItems.push({_id, name, img, descriptions, price, rating})
+    let addItemStorage = JSON.stringify(localItems)
+    return localStorage.setItem('item', addItemStorage)
+  }
+}
 
   return (
     <CatalogoContainer>
@@ -29,15 +43,17 @@ export default function CatalogueProducts() {
         <div className="productCointainer">
           {Products?.map((el) => {
             return (
-              <Link to={`detail/${el._id}`} key={el._id}>
+             <div key={el._id}>
                 <Card
+                  _id={el._id}
                   name={el.name}
                   descriptions={el.description}
                   img={el.images[0]}
                   price={el.price}
                   rating={el.rating}
-                />
-              </Link>
+                  addStorageItem={addStorageItem}
+                  />
+              </div>
             );
           })}
         </div>
