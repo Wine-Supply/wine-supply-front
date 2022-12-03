@@ -10,6 +10,10 @@ export const NavbarStyled = styled.nav`
   align-items: center;
   justify-content: space-between;
 
+  .mui {
+    size: 30;
+  }
+
   ul {
     list-style-type: none;
   }

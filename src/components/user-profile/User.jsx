@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { UserStyled } from "./UserStyled";
-import { ButtonSaveChanges } from "../utils/utils"
-import { useAuth, upload } from "../login/FirebaseConfig";
+import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils"
+//import { useAuth, upload } from "../login/FirebaseConfig";
+import axios from "axios";
+import Navbar from "../nav/navbar";
+import Footer from "../footer/Footer";
 
 function validate(input) {
 	let errors = {};
@@ -61,26 +64,12 @@ function validate(input) {
 }
 
 export default function User() {
-  /*
-  const [token, setToken] = useState("");
-  useEffect(() => {
-    if (localStorage.getItem("token"))
-      setToken(localStorage.getItem("token"));
-  }, [token]);*/
-  //console.log("token", token)
-  //const [user, setUser] = useState("");
 
-  let prueba = JSON.parse(localStorage.getItem("user"))
-  console.log("prueba", prueba)
-  
-  
-  //console.log("prueba", typeof(prueba))
-  //prueba = string
+  let userData = JSON.parse(localStorage.getItem("user"))
+  //console.log("userData", userData)
 
-  //console.log("name", prueba.name)
-
-  /*
-  ej = {
+  /*nt. El user llega sin 'phone'
+  user = {
     _id: '63890f3a136a8273a37354d0', 
     name: 'Sol', 
     lastName: 'Diessler', 
@@ -105,34 +94,44 @@ export default function User() {
     _id: "63890f3a136a8273a37354d0",
   }*/
 
-  const currentUser = useAuth();
-  //console.log("currentUser", currentUser)
+  /*const currentUser = useAuth();
   
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState("https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg");
 
+  */
+  let defaultimg = "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
   const [errors, setErrors] = useState({});
   
   const [input, setInput] = useState({
-		name: prueba.name,
-	  lastName: prueba.lastName,
-	  userName: prueba.userName,
-    email: prueba.email,
-	  isAdmin: prueba.isAdmin,
-    isActive: prueba.isActive,
-	  hashedPass: currentUser?.hashedPass,
-    date_of_birth: new Date,
+		name: "",
+	  lastName: "",
+	  userName: "",
+    email: "",
+	  isAdmin: "",
+    isActive: "",
+	  hashedPass: "",
+    date_of_birth: "",
     phone: "",
-    avatar: "",
+    avatar: defaultimg,
 	  membership_id: [],
 	  address: [], //* array limit = 3
     whishList:[],
 	});
 
+  function showButton() {
+    var div = document.getElementById('newData');
+    if (div.style.display === 'none') {
+      div.style.display = 'block';
+    }
+    else {
+      div.style.display = 'none';
+    }
+  }
+
   function handleChange(e) {
 		const { name, value } = e.target;
-
 		setInput({ 
       ...input, 
       [name]: value 
@@ -146,8 +145,9 @@ export default function User() {
 				})
 			);
 		}, 1000);
+    console.log('form:', input)
 	}
-
+/*
   function handleChangeImage(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0])
@@ -163,21 +163,86 @@ export default function User() {
       setPhotoURL(currentUser.photoURL);
     }
   }, [currentUser])
+*/
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrors(validate(input));
 
-  const handleSubmit =  (e) => {
-    
-  };
-/*<img src={input.avatar} alt="Avatar"/>  */
+  try {
+    const data = new FormData();
+    data.append("name", input.name);
+    data.append("lastName", input.lastName);
+    data.append("userName", input.userName);
+    data.append("email", input.email);
+    data.append("isAdmin", input.isAdmin);
+    data.append("isActive", input.isActive);
+    data.append("hashedPass", input.hashedPass);
+    data.append("date_of_birth", input.date_of_birth);
+    data.append("avatar", input.avatar);
+    data.append("membership_id", input.membership_id);
+    data.append("address", input.address);
+    data.append("whishList", input.whishList);
+
+    const resp = await axios.put(
+      "http://localhost:3001/user/update",
+      data
+    );
+
+    if (resp.status >= 200 && resp.status <= 205) {
+      alert("Data changed");
+      setInput({
+        name: "",
+        lastName: "",
+        userName: "",
+        email: "",
+        isAdmin: "",
+        isActive: "",
+        hashedPass: "",
+        date_of_birth: "",
+        phone: "",
+        avatar: defaultimg,
+        membership_id: [],
+        address: [], //* array limit = 3
+        whishList:[],
+      });
+    } else {
+      alert("Something went wrong, please try again");
+    }
+  } catch (error) {
+    alert(`Something went wrong. ${error.message}`);
+  }
+};
+  
+/*<button disabled={loading || !photo} onClick={handleClick}>Upload</button>*/
+
   return (
+    <>
+    <Navbar/>
     <UserStyled>
-      <form>   
-        <div>
-          <input type="file" onChange={handleChangeImage} />
-          <button disabled={loading || !photo} onClick={handleClick}>Upload</button>
-          <img src={photoURL} alt="Avatar" className="avatar" />
-          <label>Currently logged in as: { currentUser?.email } </label>
+      <h2>ACCOUNT DATA</h2>
+      <div className="row">
+        <img src={input.avatar} alt="Avatar" className="avatar" />
+        <div className="column">
+          <label>Currently logged in as: { userData.email } </label>
+          <span>Username: {userData.userName}</span>
+          <span>Name: {userData.name}</span>
+          <span>Lastname: {userData.lastName}</span>
+          <span>Email: {userData.email}</span>
+          <span>Birthday: {userData.date_of_birth}</span>
+          <span>Phone: {userData.phone}</span>
+          
+        </div>
+        <ButtonSubscribe className="btn" onClick={() => showButton()}>Change my Info</ButtonSubscribe>
+      </div>
+      <div id="newData" >
+      <h2>NEW DATA</h2>
+      <form onSubmit={handleSubmit}>   
+        <div className="upload_img">
+          <label>Profile Image:</label>
+          <input type="file" onChange={handleChange} />
         </div> 
-        <div>
+        <div className="fields">
+          <label>Username</label>
           <input
 						type="text"
             defaultValue={input.userName}
@@ -202,11 +267,11 @@ export default function User() {
             required={true}
             onChange={(e) => handleChange(e)}
 					/>
-          <label>Mail</label>
+          <label>Email</label>
           <input
 						type="text"
-            defaultValue= {currentUser?.email}
-						placeholder=  {currentUser?.email}
+            defaultValue= {input.email}
+						placeholder=  {input.email}
 						name="email"
             required={true}
             onChange={(e) => handleChange(e)}
@@ -254,12 +319,18 @@ export default function User() {
 					{errors.phone}
 					
 				</span>
-        <ButtonSaveChanges type="submit" key={Math.random()}>
-          Save Changes
+        <ButtonSaveChanges 
+          className="btn"
+          type="submit" 
+          key={Math.random()}
+        > Save Changes
         </ButtonSaveChanges>
       </form>
+      </div>
       <h2>+ WishList</h2>
       <h2>Historial de compra</h2>
     </UserStyled>
+    <Footer/>
+    </>
   );
 }
