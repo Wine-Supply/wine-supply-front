@@ -14,7 +14,7 @@ import {
   loginUserWithGoogle,
   loginUserWithFacebook,
 } from "../../redux/action-creators";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export type Input = {
   email: string;
@@ -25,8 +25,6 @@ export type Input = {
 };
 
 export default function Login() {
-  // const userToken = useSelector((state: State) => state.userToken);
-  const navigate = useNavigate();
   const [input, setInput] = useState<Input>({
     email: "",
     password: "",
