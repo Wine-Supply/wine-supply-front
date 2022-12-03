@@ -1,4 +1,3 @@
-
 import {
   GET_TOP_RATED_WINES,
   GET_WINES,
@@ -11,7 +10,9 @@ import {
   SEARCH_WINES,
   ADD_ITEMS_STORAGE,
   GET_ITEMS_STORAGE,
-  OPEN_CART
+  GET_TOTAL_ITEMS,
+  GET_TOTAL_PRICE,
+  OPEN_CART,
 } from "../actions/index";
 
 export interface Wine {
@@ -44,6 +45,8 @@ export interface State {
   wineBrands: string[];
   itemsStorage: Object[];
   openCart: boolean;
+  totalItems: number;
+  totalPrice: number;
 }
 
 const initialState = {
@@ -53,7 +56,9 @@ const initialState = {
   wineBrands: [],
   wineDetail: [],
   itemsStorage: [],
-  openCart: false
+  openCart: false,
+  totalItems: 0,
+  totalPrice: 0,
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -122,25 +127,40 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
       };
 
-      case GET_ITEMS_STORAGE:
-        console.log(action.payload)
-        return {
-          ...state,
-          itemsStorage: action.payload === null || action.payload === '' ? state.itemsStorage : action.payload,
-        };
+    case GET_ITEMS_STORAGE:
+      console.log(action.payload);
+      return {
+        ...state,
+        itemsStorage:
+          action.payload === null || action.payload === ""
+            ? state.itemsStorage
+            : action.payload,
+      };
 
-      case ADD_ITEMS_STORAGE:
-        return {
-          ...state,
-          itemsStorage:[...state.itemsStorage, action.payload],
-        };
+    case ADD_ITEMS_STORAGE:
+      return {
+        ...state,
+        itemsStorage: [...state.itemsStorage, action.payload],
+      };
 
-        case OPEN_CART:
-          console.log('llega')
-          return {
-            ...state,
-            openCart: state.openCart === false ? state.openCart = true : state.openCart = false
-          };
+    case GET_TOTAL_ITEMS:
+      return {
+        ...state,
+        totalItems: action.payload,
+      };
+
+    case GET_TOTAL_PRICE:
+      return {
+        ...state,
+        totalPrice: action.payload,
+      };
+
+    case OPEN_CART:
+      console.log("llega");
+      return {
+        ...state,
+        openCart: !state.openCart,
+      };
 
     default:
       return {

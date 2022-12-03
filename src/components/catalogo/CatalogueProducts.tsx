@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { addItemsStorage, getWines } from "../../redux/action-creators";
+import {
+  addItemsStorage,
+  getItemsStorage,
+  getWines,
+} from "../../redux/action-creators";
 import Filter from "../filter/Filter";
 import SearchBar from "../searchbar/SearchBar";
 import Card from "../card/Card";
@@ -17,12 +21,16 @@ export default function CatalogueProducts() {
   const [token, setToken] = useState<string | null>("");
   const [showModal, setShowModal] = useState<boolean>(false);
   const Products = useSelector((state: State) => state.allWines);
+  const Items = useSelector((state: State) => state.itemsStorage);
   let dispatch: Dispatch<any> = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (Products!.length === 0) {
       dispatch(getWines());
+    }
+    if (Items.length === 0) {
+      dispatch(getItemsStorage());
     }
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));

@@ -29,8 +29,8 @@ export default function SignUp() {
     }
     const message = await signUpUser(
       signUp.name,
-      // signUp.lastName,
-      // signUp.userName,
+      signUp.lastName,
+      signUp.userName,
       signUp.email,
       signUp.password
     );
