@@ -4,11 +4,15 @@ import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
 import { useSelector } from "react-redux";
 import { State } from "../../redux/reducer";
+import { buyItems } from "../../redux/action-creators";
 
 export default function Checkout() {
+  const items = useSelector((state: State) => state.itemsStorage);
   const totalItems = useSelector((state: State) => state.totalItems);
   const price = useSelector((state: State) => state.totalPrice);
   const shippingFee = 10;
+  const token = localStorage.getItem("token");
+  console.log(items);
 
   return (
     <>
@@ -72,7 +76,9 @@ export default function Checkout() {
               <span>{`$${price + shippingFee} USD`}</span>
             </div>
           </div>
-          <button className="pay-btn">Proceed to payment</button>
+          <button onClick={() => buyItems(items, token)} className="pay-btn">
+            Proceed to payment
+          </button>
         </aside>
       </DivStyled>
       <Footer />

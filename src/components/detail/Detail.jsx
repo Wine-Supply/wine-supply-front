@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getWineDetail } from "../../redux/action-creators";
+import { getWineDetail, buyItem } from "../../redux/action-creators";
 import { DetailStyled, WineData } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
+import { addStorageItem } from "../catalogo/CatalogueProducts";
 
 export default function Detail() {
-  let { id } = useParams();
-  let dispatch = useDispatch();
+  const { id } = useParams();
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   const {
     name,
@@ -69,11 +71,25 @@ export default function Detail() {
           <p className={"add"}>Add to WishList +</p>
           <div className="btns">
             <ButtonAddToCart
+              onClick={() =>
+                addStorageItem(
+                  id,
+                  name,
+                  images,
+                  description,
+                  price,
+                  rating,
+                  dispatch
+                )
+              }
               style={{ transform: "scale(1.5)", margin: "1.2rem" }}
             >
               Add to Cart
             </ButtonAddToCart>
-            <ButtonBuyNow style={{ transform: "scale(1.5)", margin: "1.2rem" }}>
+            <ButtonBuyNow
+              onClick={() => buyItem(id, token)}
+              style={{ transform: "scale(1.5)", margin: "1.2rem" }}
+            >
               Buy now
             </ButtonBuyNow>
           </div>
