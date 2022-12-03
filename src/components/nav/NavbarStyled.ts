@@ -10,6 +10,10 @@ export const NavbarStyled = styled.nav`
   align-items: center;
   justify-content: space-between;
 
+  .mui {
+    size: 30;
+  }
+
   ul {
     list-style-type: none;
   }
@@ -61,6 +65,7 @@ export const NavbarStyled = styled.nav`
   }
 
   .link:hover {
+    cursor: pointer;
     color: var(--white);
     text-decoration: underline;
   }

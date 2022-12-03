@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 import BurguerButton from "./BurguerButton";
 import {
   ShoppingCartOutlined,
-  SearchOutlined,
+  IdcardOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -47,14 +47,14 @@ let dispatch:Dispatch<any> = useDispatch()
             </div>
           </li>
           <li>
-            <Link className={"link"} to="/admin">
+            <Link className={"link"} to="/user">
               <UserOutlined />
             </Link>
           </li>
 
           <li>
-            <Link className={"link"} to="/home/products">
-              <SearchOutlined />
+            <Link className={"link"} to="/admin">
+            <IdcardOutlined />
             </Link>
           </li>
         </ul>
