@@ -3,8 +3,6 @@ import { UserStyled } from "./UserStyled";
 import { ButtonSaveChanges } from "../utils/utils"
 import { useAuth, upload } from "../login/FirebaseConfig";
 
-
-
 function validate(input) {
 	let errors = {};
 	const blanks = /^\s+$/;
@@ -63,6 +61,49 @@ function validate(input) {
 }
 
 export default function User() {
+  /*
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    if (localStorage.getItem("token"))
+      setToken(localStorage.getItem("token"));
+  }, [token]);*/
+  //console.log("token", token)
+  //const [user, setUser] = useState("");
+
+  let prueba = JSON.parse(localStorage.getItem("user"))
+  console.log("prueba", prueba)
+  
+  
+  //console.log("prueba", typeof(prueba))
+  //prueba = string
+
+  //console.log("name", prueba.name)
+
+  /*
+  ej = {
+    _id: '63890f3a136a8273a37354d0', 
+    name: 'Sol', 
+    lastName: 'Diessler', 
+    userName: 'sol.diessler@',
+    address: [],
+    avatar: [],
+    createdAt: "2022-12-01T20:31:54.475Z",
+    email: "sol.diessler@gmail.com",
+    hashedPass: "firebase",
+    isActive: true,
+    isAdmin: "no",
+    lastName: "Diessler",
+    membership_id: [],
+    name: "Sol",
+    order: [],
+    review_id: [],
+    shopping_cart: [],
+    updatedAt: "2022-12-01T20:31:54.475Z",
+    userName: "sol.diessler@",
+    whishList: [],
+    __v: 0,
+    _id: "63890f3a136a8273a37354d0",
+  }*/
 
   const currentUser = useAuth();
   //console.log("currentUser", currentUser)
@@ -74,12 +115,12 @@ export default function User() {
   const [errors, setErrors] = useState({});
   
   const [input, setInput] = useState({
-		name: "",
-	  lastName: "",
-	  userName: "",
-    email: currentUser?.email,
-	  isAdmin: false,
-    isActive: true,
+		name: prueba.name,
+	  lastName: prueba.lastName,
+	  userName: prueba.userName,
+    email: prueba.email,
+	  isAdmin: prueba.isAdmin,
+    isActive: prueba.isActive,
 	  hashedPass: currentUser?.hashedPass,
     date_of_birth: new Date,
     phone: "",
