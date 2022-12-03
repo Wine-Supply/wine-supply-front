@@ -8,6 +8,7 @@ import WineClubp from "./components/section-wine-club";
 import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import "./App.css";
+import User from "./components/user-profile/User";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/cart/checkout" element={<Checkout />} />
         <Route path="/wineClubp" element={<WineClubp />} />
         <Route path="/admin" element={<Form />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </div>
   );

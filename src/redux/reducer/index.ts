@@ -64,6 +64,7 @@ const initialState = {
 const rootReducer = (state: State = initialState, action: Actions) => {
   switch (action.type) {
     case GET_WINES:
+      //console.log("rex", action.payload);
       return {
         ...state,
         allWines: action.payload,
@@ -117,6 +118,7 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_WINE_DETAIL:
+      //console.log("act", action.payload);
       return {
         ...state,
         wineDetail: action.payload,
