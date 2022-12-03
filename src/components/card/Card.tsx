@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { Dispatch } from "@reduxjs/toolkit";
+import { addStorageItem } from "../catalogo/CatalogueProducts";
 import { CardContainer, CardInformation, ButtonAddCart } from "./CardStyle";
 
 interface CardProps {
@@ -11,6 +13,7 @@ interface CardProps {
   addStorageItem?: any;
   token?: string | null;
   setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch?: Dispatch<any>;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -20,14 +23,15 @@ const Card: React.FC<CardProps> = ({
   descriptions,
   price,
   rating,
-  addStorageItem,
+  dispatch,
   token,
   setShowModal,
 }) => {
   const handleAddItemToCart = () => {
     if (token?.length === 0 && setShowModal) {
       setShowModal(true);
-    } else addStorageItem(_id, name, img, descriptions, price, rating);
+    } else
+      addStorageItem(_id, name, img, descriptions, price, rating, dispatch!);
   };
 
   return (

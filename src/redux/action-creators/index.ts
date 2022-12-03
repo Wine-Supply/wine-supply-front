@@ -9,7 +9,9 @@ import {
   SEARCH_WINES,
   GET_ITEMS_STORAGE,
   ADD_ITEMS_STORAGE,
-  OPEN_CART
+  GET_TOTAL_ITEMS,
+  GET_TOTAL_PRICE,
+  OPEN_CART,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -95,37 +97,73 @@ export const loginUser = async (email: string, password: string) => {
 
 export const signUpUser = async (
   name: string | undefined,
-  // lastName: string | undefined,
-  // userName: string | undefined,
+  lastName: string | undefined,
+  userName: string | undefined,
   email: string,
   password: string
 ) => {
   const resp = await axios.post(`http://localhost:3001/signup`, {
     name,
-    // lastName,
-    // userName,
+    lastName,
+    userName,
     email,
     password,
   });
   return resp.data;
 };
 
-export const getItemsStorage = () =>{
-  return ({
+export const getItemsStorage = () => {
+  return {
     type: GET_ITEMS_STORAGE,
-    payload: JSON.parse(localStorage.getItem('item') || ''),
+    payload: JSON.parse(localStorage.getItem("item") || ""),
+  };
+};
+
+export const addItemsStorage = (object: Object) => {
+  return {
+    type: ADD_ITEMS_STORAGE,
+    payload: object,
+  };
+};
+
+export const getTotalItems = (total: number) => {
+  return {
+    type: GET_TOTAL_ITEMS,
+    payload: total,
+  };
+};
+
+export const getTotalPrice = (price: number) => {
+  return {
+    type: GET_TOTAL_PRICE,
+    payload: price,
+  };
+};
+
+export const buyItems = async (cart: any, token: any) => {
+  const res = await axios.post("http://localhost:3001/payment", cart, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`,
+      items: JSON.stringify(cart),
+    },
   });
-}
+  window.location.replace(res.data);
+};
 
-export const addItemsStorage = (object:Object) =>{
-    return ({
-      type: ADD_ITEMS_STORAGE,
-      payload: object,
-    })
-}
+export const buyItem = async (id: any, token: any) => {
+  console.log(id);
+  const res = await axios.post("http://localhost:3001/payment", id, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`,
+      item: id,
+    },
+  });
 
-export const openCart = () =>{
-  return ({
+  window.location.replace(res.data);
+};
+
+export const openCart = () => {
+  return {
     type: OPEN_CART,
-  })
-}
+  };
+};
