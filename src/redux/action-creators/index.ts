@@ -139,14 +139,26 @@ export const getTotalPrice = (price: number) => {
   };
 };
 
-export const paymentInformation = async (cart: Object[]) => {
-  await fetch("http://localhost:3001/payment", {
-    method: "POST",
+export const buyItems = async (cart: any, token: any) => {
+  const res = await axios.post("http://localhost:3001/payment", cart, {
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${JSON.parse(token)}`,
+      items: JSON.stringify(cart),
     },
-    body: JSON.stringify(cart),
   });
+  window.location.replace(res.data);
+};
+
+export const buyItem = async (id: any, token: any) => {
+  console.log(id);
+  const res = await axios.post("http://localhost:3001/payment", id, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`,
+      item: id,
+    },
+  });
+
+  window.location.replace(res.data);
 };
 
 export const openCart = () => {

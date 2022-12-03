@@ -15,6 +15,31 @@ import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "../login-modal/LoginModal";
+
+export const addStorageItem = (
+  _id: string,
+  name: string,
+  img: string,
+  descriptions: string,
+  price: number,
+  rating: number,
+  dispatch: Dispatch<any>
+) => {
+  dispatch(addItemsStorage({ _id, name, img, descriptions, price, rating }));
+  let getStorage: any = localStorage.getItem("item");
+  if (getStorage === null) {
+    let addItem = JSON.stringify([
+      { _id, name, img, descriptions, price, rating },
+    ]);
+    return localStorage.setItem("item", addItem);
+  } else {
+    let localItems = JSON.parse(getStorage);
+    localItems.push({ _id, name, img, descriptions, price, rating });
+    let addItemStorage = JSON.stringify(localItems);
+    return localStorage.setItem("item", addItemStorage);
+  }
+};
 
 export default function CatalogueProducts() {
   // const [cartOpen, setCartOpen] = useState(false);
@@ -26,39 +51,13 @@ export default function CatalogueProducts() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Products!.length === 0) {
-      dispatch(getWines());
-    }
-    if (Items.length === 0) {
-      dispatch(getItemsStorage());
-    }
+    if (Products!.length === 0) dispatch(getWines());
+
+    if (Items.length === 0) dispatch(getItemsStorage());
+
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
-    console.log(token);
   }, [token]);
-
-  const addStorageItem = (
-    _id: string,
-    name: string,
-    img: string,
-    descriptions: string,
-    price: number,
-    rating: number
-  ) => {
-    dispatch(addItemsStorage({ _id, name, img, descriptions, price, rating }));
-    let getStorage: any = localStorage.getItem("item");
-    if (getStorage === null) {
-      let addItem = JSON.stringify([
-        { _id, name, img, descriptions, price, rating },
-      ]);
-      return localStorage.setItem("item", addItem);
-    } else {
-      let localItems = JSON.parse(getStorage);
-      localItems.push({ _id, name, img, descriptions, price, rating });
-      let addItemStorage = JSON.stringify(localItems);
-      return localStorage.setItem("item", addItemStorage);
-    }
-  };
 
   const handleLogin = () => {
     navigate("/login");
@@ -85,7 +84,7 @@ export default function CatalogueProducts() {
                     img={el.images[0]}
                     price={el.price}
                     rating={el.rating}
-                    addStorageItem={addStorageItem}
+                    dispatch={dispatch}
                     token={token}
                     setShowModal={setShowModal}
                   />
@@ -95,23 +94,7 @@ export default function CatalogueProducts() {
           </div>
         </div>
         {showModal && (
-          <>
-            <div className="overlay"></div>
-            <div className="login-modal">
-              <p>Login to purchase products</p>
-              <div className="btn-container">
-                <button onClick={handleLogin} className="modal-btn">
-                  Login
-                </button>
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="modal-btn"
-                >
-                  Keep looking
-                </button>
-              </div>
-            </div>
-          </>
+          <LoginModal handleLogin={handleLogin} setShowModal={setShowModal} />
         )}
       </CatalogoContainer>
       <Footer />
