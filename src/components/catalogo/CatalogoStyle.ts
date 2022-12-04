@@ -5,6 +5,7 @@ const CatalogoContainer = styled.div`
   padding: 5px 0;
 
   .productCointainer {
+    margin-inline: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -12,9 +13,10 @@ const CatalogoContainer = styled.div`
   }
 `;
 const TitleCategory = styled.h2`
+  margin-left: 6rem;
   font-family: var(--font-title);
   color: var(--white);
-  font-size: 20px;
+  font-size: 3rem;
   margin-bottom: 10px;
 `;
 

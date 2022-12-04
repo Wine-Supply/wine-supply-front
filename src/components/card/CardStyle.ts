@@ -1,54 +1,67 @@
 import styled from "styled-components"
 
 const CardContainer = styled.div`
-  border-radius: 10px ;
-  background-color: #dedede;
-  display: flex;
-  padding: 10px;
+  transform: scale(1.35);
+  border-radius: 1rem;
+  background-color: var(--color-light);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
+  margin: 4rem 8rem;
   color: var(--black);
   font-weight: 600;
   margin-bottom: 20px;
+  min-width: 30rem;
+  max-width: 30rem;
+  min-height: 12rem;
+  max-height: 12rem;
   
   .imageMain{
     text-align: center;
-    max-height: 110px;
-    min-height: 110px;
-    min-width: 100px;
-    max-width: 300px;
+    max-height: 10rem;
+    min-height: 10rem;
+    min-width: 12rem;
+    max-width: 12rem;    
+    background-color: var(--white);
+    border-radius: 1rem;
   }
 
   img{
-    max-height: 110px;
+    margin-top: 0.5rem;
+    max-width: 12rem;
+    max-height: 9rem;
   }
   `
 const CardInformation = styled.div`
-display: flex ;
-flex-direction: column;
-justify-content: space-around;
-margin-right: 10px;
-width: 90px;
-height:120px;
-min-width: 120px;
-min-height: 100px;
+display: grid;
+grid-template-columns: 1fr;
 font-family: var(--font-title);
+min-width: 13.5rem;
+max-width: 13.5rem;
+min-height: 10rem;
+max-height: 10rem;
 
 .descriptionStyle{
   min-width: 100px;
 }
 
 .descriptionStyle p{
-  font-size: 10px;
+  font-size: 0.5rem;
+  font-weight: 400;
   text-overflow: ellipsis;
+  font-family: var(--font-body);
 } 
 .rankingStyle{
+  font-size: 1.5rem;
   display: flex;
   justify-content:flex-end;
   padding-right: 5px;
 }
 
 h2{
-  margin-top: 1px;
-  font-size: 12px;
+  margin-top: -1rem;
+  font-size: 1.5rem;
+  text-transform: capitalize;
 }
 
 .cardFooter{
@@ -58,6 +71,8 @@ h2{
 }
 
 .cardFooter p{
+  min-width: 3.5rem;
+  max-width: 3.5rem;
   font-size: 15px;
 }
 ` 
