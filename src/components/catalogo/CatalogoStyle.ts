@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CatalogoContainer = styled.div`
-  background-color: var(--black);
+  background-color: var(--background-color);
   padding: 5px 0;
 
   .productCointainer {
@@ -15,7 +15,7 @@ const CatalogoContainer = styled.div`
 const TitleCategory = styled.h2`
   margin-left: 6rem;
   font-family: var(--font-title);
-  color: var(--white);
+  color: var(--font-color);
   font-size: 3rem;
   margin-bottom: 10px;
 `;

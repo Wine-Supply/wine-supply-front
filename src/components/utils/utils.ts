@@ -21,9 +21,9 @@ const ButtonBuyNow = styled.button`
 `;
 
 const ButtonAddToCart = styled.button`
-  background-color: var(--red);
-  color: var(--white);
-  border: 0.1rem solid var(--red);
+  background-color: var(--btn-color);
+  color: var(--font-color);
+  border: 0.1rem solid var(--btn-color);
   border-radius: 5rem;
   padding: 0.7rem 1rem;
   width: 10rem;
@@ -35,9 +35,8 @@ const ButtonAddToCart = styled.button`
 
   :hover {
     cursor: pointer;
-    background-color: var(--white);
-    color: var(--red);
-    border-color: var(--color-light);
+    background-color: var(--btn-color-hover);
+    border-color: var(--btn-color-hover);
   }
 `;
 const ButtonSaveChanges = styled.button`
@@ -79,11 +78,11 @@ const ButtonDeleteAccount = styled.button`
   }
 `;
 const ButtonSubscribe = styled.button`
-  background-color: var(--white);
-  color: var(--black);
-  border: 0.1rem solid var(--black);
-  padding: 0.5rem;
-  width: 8rem;
+  background-color: var(--btn-color2);
+  color: var(--font-color);
+  border: 0.1rem solid var(--btn-color2);
+  padding: 0.6rem;
+  width: 9.5rem;
   margin: 0.2rem;
   font-weight: 600;
   text-align: center;
@@ -91,8 +90,8 @@ const ButtonSubscribe = styled.button`
 
   :hover {
     cursor: pointer;
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--background);
+    background-color: var(--btn-color-hover2);
   }
 `;
 const ButtonSubscribeRed = styled.button`

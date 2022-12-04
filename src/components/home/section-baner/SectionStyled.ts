@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const SectionStyled = styled.section`
-  color: var(--white);
-  background-color: var(--color-light);
+  color: var(--font-color);
+  background-color: var(--background-color);
 
   .section-img {
     max-width: 100%;
   }
 
-  .explore-img {
+  /* .explore-img {
     filter: brightness(0.7);
-  }
+  } */
 
   .main-heading {
     font-family: var(--font-title);
@@ -43,7 +43,7 @@ export const SectionStyled = styled.section`
 
   .wine-type {
     padding: 0 1rem 0 0;
-    border-right: 2px solid var(--white);
+    border-right: 2px solid var(--font-color);
     font-size: 1.4rem;
     font-weight: 600;
   }
@@ -59,8 +59,7 @@ export const SectionStyled = styled.section`
 
   .wine-link {
     display: inline-block;
-
-    color: var(--white);
+    color: var(--font-color);
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: all 0.3s;
@@ -88,9 +87,9 @@ export const SectionStyled = styled.section`
   }
 
   .no-style{
-    color: var(--black);
+    color: var(--font-color);
     :hover {
-      color: var(--white);
+      color: var(--background-color);
     }
   }
 

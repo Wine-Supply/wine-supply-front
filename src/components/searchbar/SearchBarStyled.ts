@@ -5,7 +5,8 @@ export const SearchBarStyled = styled.nav`
   background-color: var(--white);
   width: fit-content;
   padding-inline: 1rem;
-  margin: 1.5rem;
+  margin: 2rem;
+  margin-left: 5rem;
 
   input{
     font-size: 1.4rem;

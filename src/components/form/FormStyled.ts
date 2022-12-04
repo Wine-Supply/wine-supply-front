@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const FormStyled = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: var(--color-light);
+  background-color: var(--background-color);
+  color: var(--font-color);
   padding-inline: 5rem;
  
   h2, input, select, textarea, label {

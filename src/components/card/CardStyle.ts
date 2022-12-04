@@ -3,12 +3,12 @@ import styled from "styled-components"
 const CardContainer = styled.div`
   transform: scale(1.35);
   border-radius: 1rem;
-  background-color: var(--color-light);
+  background-color: var(--primary-color);
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 1rem;
   margin: 4rem 8rem;
-  color: var(--black);
+  color: var(--font-color);
   font-weight: 600;
   margin-bottom: 20px;
   min-width: 30rem;
@@ -22,13 +22,13 @@ const CardContainer = styled.div`
     min-height: 10rem;
     min-width: 12rem;
     max-width: 12rem;    
-    background-color: var(--white);
+    background-color: var(--secondary-color);
     border-radius: 1rem;
   }
 
   img{
     margin-top: 0.5rem;
-    max-width: 12rem;
+    max-width: 11.4rem;
     max-height: 9rem;
   }
   `

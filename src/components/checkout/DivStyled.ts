@@ -4,8 +4,9 @@ export const DivStyled = styled.div`
   display: grid;
   gap: 2rem;
   padding: 2rem 2rem;
-  background-color: var(--color-light);
-  height: 60rem;
+  background-color: var(--background-color);
+  min-height: 73.7rem;
+  color: var(--font-color);
 
   .secondary-header {
     font-family: var(--font-title);
@@ -22,7 +23,7 @@ export const DivStyled = styled.div`
   }
 
   .form-input {
-    color: var(--color-dark);
+    color: var(--font-color);
     font-size: 1.4rem;
     padding: 1.2rem 1.6rem;
     border: none;
@@ -63,8 +64,8 @@ export const DivStyled = styled.div`
   }
 
   .pay-btn {
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--btn-color);
+    color: var(--font-color);
     border: none;
     border-radius: 8px;
     font-size: 1.6rem;
@@ -74,7 +75,7 @@ export const DivStyled = styled.div`
   }
 
   .pay-btn:hover {
-    background-color: rgb(30, 30, 30);
+    background-color: var(--btn-color-hover);
   }
 
   @media (min-width: 600px) {

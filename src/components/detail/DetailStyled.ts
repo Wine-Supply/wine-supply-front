@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
 const DetailStyled = styled.div`
+  color: var(--font-color);
   display: flex;
   flex-direction: row;
-  background-color: var(--color-light);
+  background-color: var(--background-color);
   transition: all 0.3s;
   padding-top: 6rem;
   padding-bottom: 10rem;
@@ -26,7 +27,7 @@ const DetailStyled = styled.div`
     max-height: 30rem;
     max-width: 25rem;
     border-radius: 2rem;
-    background-color: var(--white);
+    background-color: var(--secondary-color);
     text-align: center;
     /* position: relative;
     opacity: 0.4;
@@ -154,7 +155,7 @@ const WineData = styled.div`
     justify-content: space-between;
     margin: 2rem 7rem 2rem 0;
     padding: 1rem 2rem;
-    border: 0.1rem solid var(--black);
+    border: 0.1rem solid var(--font-color);
   }
 
   .description{
