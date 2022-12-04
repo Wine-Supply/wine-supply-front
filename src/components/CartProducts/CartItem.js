@@ -60,7 +60,7 @@ const CartItem = ({
     if (totalItem === stock) return;
     setTotalItem(totalItem + 1);
     setTotal(total + 1);
-    setTotalMoney(Number(totalMoney) + Number(price));
+    setTotalMoney((Number(totalMoney) + Number(price)).toFixed(2));
   };
   const subsItem = () => {
     if (totalItem < 2) {
@@ -69,7 +69,7 @@ const CartItem = ({
     } else {
       setTotalItem(totalItem - 1);
       setTotal(total - 1);
-      setTotalMoney(Number(totalMoney) - Number(price));
+      setTotalMoney((Number(totalMoney) - Number(price)).toFixed(2));
     }
   };
 
