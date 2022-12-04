@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FilterStyled = styled.div`
-  background-color: var(--color-light);
+  background-color: var(--secondary-color);
   padding: 1.6rem 0;
 
   .filter-container {
@@ -17,7 +17,7 @@ export const FilterStyled = styled.div`
   }
 
   .options-label {
-    color: var(--black);
+    color: var(--font-color);
     font-size: 1.4rem;
   }
 

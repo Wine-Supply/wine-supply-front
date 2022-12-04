@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Section = styled.section`
-  background-color: var(--color-light);
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -11,7 +11,7 @@ export const Section = styled.section`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background-color: var(--white);
+    background-color: var(--background-color);
     padding: 2rem 6rem;
   }
 
@@ -19,6 +19,7 @@ export const Section = styled.section`
     text-transform: uppercase;
     text-align: center;
     font-family: var(--font-title);
+    color: var(--font-color);
     font-size: 3rem;
   }
 

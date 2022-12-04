@@ -10,6 +10,7 @@ import {
   sortWinesByPrice,
   sortWinesByRating,
 } from "../../redux/action-creators";
+import SearchBar from "../searchbar/SearchBar";
 
 export default function Filter() {
   const dispatch: Dispatch<any> = useDispatch();
