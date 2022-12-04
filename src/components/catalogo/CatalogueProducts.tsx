@@ -12,7 +12,7 @@ import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../login-modal/LoginModal";
@@ -35,8 +35,8 @@ export const addStorageItem = (
     return localStorage.setItem("item", addItem);
   } else {
     let localItems = JSON.parse(getStorage);
-    let searchItem = localItems.some((el:any) => el._id == _id)
-    if(searchItem) return
+    let searchItem = localItems.some((el: any) => el._id == _id);
+    if (searchItem) return;
     localItems.push({ _id, name, img, descriptions, price, rating });
     let addItemStorage = JSON.stringify(localItems);
     return localStorage.setItem("item", addItemStorage);
@@ -74,7 +74,7 @@ export default function CatalogueProducts() {
         <SearchBar />
         <div>
           <TitleCategory>Most Recommended</TitleCategory>
-          <div className="productCointainer" >
+          <div className="productCointainer">
             {Products?.map((el) => {
               return (
                 <div key={el._id}>

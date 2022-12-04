@@ -18,7 +18,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
-const URL = "http://localhost:3001";
+const URL = "https://wine-supply-back-production.up.railway.app";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
@@ -43,9 +43,9 @@ export const sortWinesByRating = () => ({
   type: SORT_WINES_BY_RATING,
 });
 
-export const filterByQuery = (url: string) => {
+export const filterByQuery = (query: string) => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`${URL}/wines/filters?${url}`);
+    const resp = await fetch(`${URL}/wines/filters?${query}`);
     const data = await resp.json();
     return dispatch({ type: FILTER_BY_QUERY, payload: data });
   };

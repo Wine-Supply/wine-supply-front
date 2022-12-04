@@ -2,7 +2,7 @@ import { WineClub } from "./WineClub";
 import styled from "styled-components";
 import img1 from "./wineclub2.png";
 import img2 from "./wineclub1.png";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import Navbar from "../nav/navbar";
 
 const CardContainer = styled.div`
