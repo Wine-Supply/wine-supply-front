@@ -64,7 +64,6 @@ const initialState = {
 const rootReducer = (state: State = initialState, action: Actions) => {
   switch (action.type) {
     case GET_WINES:
-      //console.log("rex", action.payload);
       return {
         ...state,
         allWines: action.payload,
@@ -118,7 +117,6 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_WINE_DETAIL:
-      //console.log("act", action.payload);
       return {
         ...state,
         wineDetail: action.payload,
@@ -130,19 +128,19 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_ITEMS_STORAGE:
-      console.log(action.payload);
       return {
         ...state,
         itemsStorage:
           action.payload === null || action.payload === ""
             ? state.itemsStorage
-            : action.payload,
+            : JSON.parse(action.payload),
       };
 
     case ADD_ITEMS_STORAGE:
+      let searchItem = state.itemsStorage.some((el:any) => el._id == action.payload._id)
       return {
         ...state,
-        itemsStorage: [...state.itemsStorage, action.payload],
+        itemsStorage: searchItem ? state.itemsStorage : [...state.itemsStorage, action.payload],
       };
 
     case GET_TOTAL_ITEMS:
@@ -158,7 +156,6 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case OPEN_CART:
-      console.log("llega");
       return {
         ...state,
         openCart: !state.openCart,

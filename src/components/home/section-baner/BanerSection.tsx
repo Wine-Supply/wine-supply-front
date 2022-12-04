@@ -6,6 +6,8 @@ import baner1 from "../../../images/banner1.png";
 import baner2 from "../../../images/banner2.png";
 import baner1b from "../../../images/banner1-light.png";
 import baner2b from "../../../images/banner2-light.png";
+import baner1c from "../../../images/banner1-neutro.png";
+import baner2c from "../../../images/banner2-neutro.png";
 
 const BanerSection = () => {
   return (
@@ -13,7 +15,7 @@ const BanerSection = () => {
       <div className="baner-container explore-baner">
         <img
           className="section-img explore-img"
-          src={baner1}
+          src={baner1c}
           //src={baner1b}
           alt="Wine bottle pouring into a glass"
         />
@@ -41,7 +43,7 @@ const BanerSection = () => {
       <div className="baner-container club-baner">
         <img 
           className="section-img" 
-          src={baner2}
+          src={baner2c}
           //src={baner2b}
           alt="Bottles of wine" 
         />
