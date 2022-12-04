@@ -105,6 +105,9 @@ export default function Filter() {
   return (
     <FilterStyled>
       <form onSubmit={(e) => e.preventDefault()} className="container">
+        <div className="filter-container">
+          <SearchBar />
+        </div>
         <div className="filter-container mb">
           <label className="options-label" htmlFor="name-filter">
             Filter by:

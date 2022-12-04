@@ -7,7 +7,6 @@ import {
   getWines,
 } from "../../redux/action-creators";
 import Filter from "../filter/Filter";
-import SearchBar from "../searchbar/SearchBar";
 import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
@@ -71,7 +70,6 @@ export default function CatalogueProducts() {
       <CarritoFull />
       <CatalogoContainer>
         <Filter />
-        <SearchBar />
         <div>
           <TitleCategory>Most Recommended</TitleCategory>
           <div className="productCointainer" >

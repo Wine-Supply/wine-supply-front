@@ -6,24 +6,37 @@ export const FormStyled = styled.div`
   background-color: var(--background-color);
   color: var(--font-color);
   padding-inline: 5rem;
+  min-height: 73.7rem;
  
   h2, input, select, textarea, label {
-    margin: 2.5rem 1rem;
+    margin: 1.5rem 1rem;
   }
 
   input, select {
     width: 25rem;
     font-size: 1.8rem;
-    line-height: 2.5rem;
+    line-height: 1.5rem;
+    min-height: 4rem;
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
   }
+
 
   select {
     height: 3rem;
   }
 
   textarea {
+    padding: 1.2rem 1.6rem;
+    font-size: 1.5rem;
     width: 90%;
     height: 10rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
   }
 
   label {
@@ -35,7 +48,7 @@ export const FormStyled = styled.div`
     font-family: var(--font-title);
     font-size: 2.5rem;
     font-weight: 600;
-    margin-top: 3.5rem;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
   }
 
@@ -68,6 +81,8 @@ export const FormStyled = styled.div`
   }
 
   @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
     text-align: center;
 
     input, select {
@@ -82,6 +97,9 @@ export const FormStyled = styled.div`
 
     textarea {
       height: 11rem;
+      font-size: 2.5rem;
+      max-width: 40rem;
+      min-height: 30rem;
     }
 
     label {
