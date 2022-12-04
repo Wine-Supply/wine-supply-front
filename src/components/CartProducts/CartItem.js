@@ -38,6 +38,7 @@ const CartItem = ({
 
   useEffect(() => {
     setTotalPrice(price * totalItem);
+
   }, [totalItem]);
 
   const handleOpen = () => {
@@ -48,6 +49,14 @@ const CartItem = ({
   };
 
   const addItem = () => {
+/*     let getStorage = localStorage.getItem("item");
+    let localItem = JSON.parse(getStorage)
+    console.log(localItem)
+    let itemSearch = localItem.find(e => e._id == _id)
+    itemSearch.cuantity = totalItem + 1
+    let addItemStorage = JSON.stringify(itemSearch);
+    localStorage.setItem("item", addItemStorage);
+    //////////////////////////// */
     if (totalItem === stock) return;
     setTotalItem(totalItem + 1);
     setTotal(total + 1);

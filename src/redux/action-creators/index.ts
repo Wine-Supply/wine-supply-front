@@ -115,7 +115,7 @@ export const signUpUser = async (
 export const getItemsStorage = () => {
   return {
     type: GET_ITEMS_STORAGE,
-    payload: JSON.parse(localStorage.getItem("item") || ""),
+    payload: localStorage.getItem("item"),
   };
 };
 
