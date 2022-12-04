@@ -5,7 +5,7 @@ import { getWineDetail, buyItem } from "../../redux/action-creators";
 import { DetailStyled, WineData } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 
@@ -34,15 +34,15 @@ export default function Detail() {
     dispatch(getWineDetail(id));
   }, [dispatch, id]);
 
-//<div className={"bg-container"}><img className={"bg"} src={images} alt="bg" /></div>
+  //<div className={"bg-container"}><img className={"bg"} src={images} alt="bg" /></div>
   return (
     <>
       <Navbar />
       <CarritoFull />
       <DetailStyled>
-      <div className={"bg"}>
-        <img className={"img"} src={images} alt="img" />
-      </div>
+        <div className={"bg"}>
+          <img className={"img"} src={images} alt="img" />
+        </div>
         <WineData>
           <div>
             <div className={"wine"}>

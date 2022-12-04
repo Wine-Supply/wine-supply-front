@@ -1,7 +1,7 @@
 // import { useState, useEffect } from "react";
 import { DivStyled } from "./DivStyled";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import { useSelector } from "react-redux";
 import { State } from "../../redux/reducer";
 import { buyItems } from "../../redux/action-creators";
