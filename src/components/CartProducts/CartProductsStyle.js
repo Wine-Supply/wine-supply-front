@@ -7,6 +7,8 @@ export const Wrapper = styled.aside`
   gap: 3rem;
   width: 500px;
   padding: 20px;
+  background-color: var(--primary-color);
+  color: var(--font-color);
 
   .checkout {
     align-self: center;
@@ -14,8 +16,8 @@ export const Wrapper = styled.aside`
     width: 50%;
     border: none;
     border-radius: 8px;
-    background-color: var(--red);
-    color: var(--white);
+    background-color: var(--btn-color);
+    color: var(--font-color);
     font-size: 1.8rem;
     padding: 0.6rem 0;
     cursor: pointer;
@@ -23,6 +25,6 @@ export const Wrapper = styled.aside`
   }
 
   .checkout:hover {
-    background-color: #793a3a;
+    background-color: var(--btn-color-hover);
   }
 `;

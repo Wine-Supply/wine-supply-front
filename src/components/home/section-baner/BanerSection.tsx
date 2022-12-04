@@ -4,6 +4,8 @@ import { SectionStyled } from "./SectionStyled";
 import { ButtonSubscribe } from "../../utils/utils";
 import baner1 from "../../../images/banner1.png";
 import baner2 from "../../../images/banner2.png";
+import baner1b from "../../../images/banner1-light.png";
+import baner2b from "../../../images/banner2-light.png";
 
 const BanerSection = () => {
   return (
@@ -12,6 +14,7 @@ const BanerSection = () => {
         <img
           className="section-img explore-img"
           src={baner1}
+          //src={baner1b}
           alt="Wine bottle pouring into a glass"
         />
         <div className="explore-baner-info">
@@ -36,7 +39,12 @@ const BanerSection = () => {
         </div>
       </div>
       <div className="baner-container club-baner">
-        <img className="section-img" src={baner2} alt="Bottles of wine" />
+        <img 
+          className="section-img" 
+          src={baner2}
+          //src={baner2b}
+          alt="Bottles of wine" 
+        />
         <ButtonSubscribe className="sub-btn"><Link className="no-style" to="/WineClubp">SUBSCRIBE</Link></ButtonSubscribe>
       </div>
     </SectionStyled>

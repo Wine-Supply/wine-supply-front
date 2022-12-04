@@ -55,7 +55,10 @@ export const CardStatWrapper = styled.div`
   grid-template-rows: 1fr;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background: var(--red);
+  background: var(--btn-color);
+  :hover{
+    background: var(--btn-color-hover);
+  }
 `;
 
 export const CardStats = styled.div`
@@ -63,13 +66,13 @@ export const CardStats = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: var(--white);
+  color: var(--font-color);
   padding: 10px;
   
 `;
 
 export const LinkText = styled.a`
-  color: var(--white);
+  color: var(--font-color);
   text-decoration: none;
   font-size: 2rem;
   

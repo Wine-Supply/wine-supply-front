@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Section = styled.section`
-  background-color: var(--color-light);
-  color: var(--black);
+  background-color: var(--background-color);
+  color: var(--font-color);
   padding: 2rem 0;
   transition: all 0.3s;
 
@@ -22,7 +22,7 @@ export const Section = styled.section`
   .secondary-header {
     font-family: var(--font-title);
     font-size: 2.6rem;
-    color: var(--black);
+    color: var(--font-color);
   }
 
   .section-text {

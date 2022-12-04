@@ -1,20 +1,21 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+    color: var(--font-color);
     display: flex;
     justify-content: space-between;
     font-family: var(--font-title);
     font-weight: 900;
     font-size: 15px;
-    border-bottom: 1px solid lightblue;
+    border-bottom: 1px solid var(--btn-color-hover);
     border-radius: 20px;
     padding: 20px;
     padding-right: 2px;
     margin-top: 20px;
-    background: var(--color-light) ;
+    background: var(--background-color) ;
     
     div {
-        flex: 1;    
+      flex: 1;    
     }
     .main{
       max-width: 250px;
@@ -22,14 +23,14 @@ export const Wrapper = styled.div`
 
     .information,
     .buttons {
-        display: flex;
-        justify-content: space-between;
-        margin: 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 20px;
     }
 
     Button{
-      background:var(--red) ;
-      color: var(--white);
+      background:var(--btn-color) ;
+      color: var(--font-color);
     }
 
     Button .buttons{
@@ -37,15 +38,15 @@ export const Wrapper = styled.div`
     }
 
     Button:hover{
-      background: rgb(116, 61, 61);
+      background: var(--btn-color-hover)
     }
 
     img {
-        max-height: 100px;
-        max-width: 80px;
-        object-fit: cover;
+      max-height: 100px;
+      max-width: 80px;
+      object-fit: cover;
        // margin-left: 40px;
-      }  
+    }  
 
 `;
 

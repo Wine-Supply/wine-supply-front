@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 const CatalogoContainer = styled.div`
-  background-color: var(--black);
+  background-color: var(--background-color);
   padding: 5px 0;
 
   .productCointainer {
+    margin-inline: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -12,9 +13,10 @@ const CatalogoContainer = styled.div`
   }
 `;
 const TitleCategory = styled.h2`
+  margin-left: 6rem;
   font-family: var(--font-title);
-  color: var(--white);
-  font-size: 20px;
+  color: var(--font-color);
+  font-size: 3rem;
   margin-bottom: 10px;
 `;
 

@@ -12,10 +12,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { openCart } from "../../redux/action-creators";
+import DarkMode from "../dark-mode/darkmode";
 
- const Navbar= () =>{
-
-let dispatch:Dispatch<any> = useDispatch()
+const Navbar= () =>{
+  let dispatch:Dispatch<any> = useDispatch()
 
   const [clicked, setClicked] = useState(false);
   const handleClicked = () => {
@@ -32,33 +32,33 @@ let dispatch:Dispatch<any> = useDispatch()
       <nav className={`links ${clicked ? "active" : ""}`}>
         <ul>
           <li>
-            <Link className={"link"} to="/WineClubp">
+            <Link className={"link line"} to="/WineClubp">
               The Club
             </Link>
           </li>
           <li>
-            <Link className={"link"} to="/home/products">
+            <Link className={"link line"} to="/home/products">
               Shop
             </Link>
           </li>
           <li>
-            <div className={"link"} onClick={()=>{dispatch(openCart())}}>
+            <div className={"link line"} onClick={()=>{dispatch(openCart())}}>
               <ShoppingCartOutlined />
             </div>
           </li>
           <li>
-            <Link className={"link"} to="/user">
+            <Link className={"link line"} to="/user">
               <UserOutlined />
             </Link>
           </li>
-
           <li>
-            <Link className={"link"} to="/admin">
+            <Link className={"link line"} to="/admin">
             <IdcardOutlined />
             </Link>
           </li>
         </ul>
       </nav>
+      <DarkMode/>
       <div className="burguer">
         <BurguerButton clicked={clicked} handleClick={handleClicked} />
       </div>

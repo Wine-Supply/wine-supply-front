@@ -1,41 +1,54 @@
 import styled from "styled-components"
 
 const DetailStyled = styled.div`
+  color: var(--font-color);
   display: flex;
   flex-direction: row;
-  background-color: var(--color-light);
+  background-color: var(--background-color);
   transition: all 0.3s;
   padding-top: 6rem;
   padding-bottom: 10rem;
-
+  min-height: 73.7rem;
   span{
     font-size: 2.5rem;
   }
 
-  .bg-container {
+  /* .bg-container {
     position: relative;
     top: 0;
     left: 0;
-  }
+  } */
 
   .bg {
-    position: relative;
+    margin-left: 2rem;
+    margin-top: 5rem;
+    min-width: 25rem;
+    min-height: 30rem;
+    max-height: 30rem;
+    max-width: 25rem;
+    border-radius: 2rem;
+    background-color: var(--secondary-color);
+    text-align: center;
+    /* position: relative;
     opacity: 0.4;
     left: -3rem;
     max-width: auto;
     max-height: 40rem;
-    object-fit: none;
+    object-fit: none; */
   }
 
   .img {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    margin-bottom: 5rem;
-    margin-left: 3rem;
+    //position: absolute;
+    //top: 1rem;
+    //left: 1rem;
+    //margin-bottom: 5rem;
+    //margin-left: 3rem;
+    padding: 2rem;
+    max-width: 25rem;
+    min-height: 30rem;
+    max-height: 30rem;
     object-fit: cover;
-    width: 10rem;
-    transform: rotate(-10deg)
+    //transform: rotate(-10deg)
   }
 
   .body {
@@ -77,21 +90,27 @@ const DetailStyled = styled.div`
     text-align: center;
     align-items: center;
 
-    .bg-container {
+    /* .bg-container {
       height: 32rem;
     }
     .bg {
       opacity: 0%;
-    }
-    .img {
+    } */
+    /* .img {
       top: 6.5rem;
       left: 0;
       width: 9rem;
       transform: none;
+    } */
+
+    .bg {
+      margin-left: 0rem;
     }
+
     .body {
       margin-right: 4rem;
     }
+
     .column {
       margin-top: 2rem;
       min-width: 20rem;
@@ -136,7 +155,7 @@ const WineData = styled.div`
     justify-content: space-between;
     margin: 2rem 7rem 2rem 0;
     padding: 1rem 2rem;
-    border: 0.1rem solid var(--black);
+    border: 0.1rem solid var(--font-color);
   }
 
   .description{

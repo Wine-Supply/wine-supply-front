@@ -1,6 +1,50 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@400;600&display=swap");
 
-:root {
+html {
+  /*colors*/
+  --black: #744237; 
+  --white: #fdfdfd;
+  --red: #997754;
+  --color-dark: #997754;
+  --color-light: #FDF1E0;
+
+  --background-color: #FDF1E0;
+  --font-color: #141414;
+  --font-color-hover: #CF8800;
+  --primary-color: #FDFDFD;
+  --secondary-color: #FFEECD;
+  --btn-color: #FFDE59;
+  --btn-color-hover: #edb545;
+  --btn-color2: #FFFFFF;
+  --btn-color-hover2: #141414;
+}
+
+/*--colors light
+--background-color: #FDFDFD;
+--font-color: #141414;
+--font-color-hover: #CF8800;
+--primary-color: #FDF1E0;
+--secondary-color: #FFEECD;
+--btn-color: #E6B75C;
+--btn-color-hover: ##FFDE59;
+--btn-color2: #FFFFFF;
+--btn-color-hover2: #141414;
+--image-banner: "";
+*/
+
+/*--colors dark
+--background-color: #474540#;
+--font-color: #FDFDFD;
+--primary-color: #141414;
+--secondary-color: #8D8D8D;
+--btn-color: #A21524;
+--btn-color-hover: #64030D;
+--btn-color2: #141414;
+--btn-color-hover2: #FFFFFF;
+--image-banner: "";
+*/
+
+html[data-theme="dark"] {
   /*colors*/
   --black: #141414;
   --white: #fdfdfd;
@@ -8,12 +52,22 @@
   --color-dark: #474540;
   --color-light: #dedede;
 
-  /*fonts*/
-  --font-title: "Cormorant Garamond", serif;
-  --font-body: "Montserrat", sans-serif;
+  --background-color: #474540;
+  --font-color: #FDFDFD;
+  --font-color-hover: #D4505E;
+  --primary-color: #141414;
+  --secondary-color: #8D8D8D;
+  --btn-color: #A21524;
+  --btn-color-hover: #64030D;
+  --btn-color2: #141414;
+  --btn-color-hover2: #FFFFFF;
 }
 
 * {
+  /*fonts*/
+  --font-title: "Cormorant Garamond", serif;
+  --font-body: "Montserrat", sans-serif;
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Dispatch } from "@reduxjs/toolkit";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import { CardContainer, CardInformation, ButtonAddCart } from "./CardStyle";
+import { ButtonAddToCart } from "../utils/utils";
 
 interface CardProps {
   _id: string;
@@ -36,11 +37,11 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <CardContainer>
-      <div className="imageMain">
-        <Link to={`detail/${_id}`}>
+      <Link to={`detail/${_id}`}>
+        <div className="imageMain">
           <img src={img} alt={name} />
-        </Link>
-      </div>
+        </div> 
+      </Link>
       <CardInformation>
         <div className="rankingStyle">
           <p>{rating}/5</p>
@@ -50,14 +51,14 @@ const Card: React.FC<CardProps> = ({
 
         <div className="descriptionStyle">
           <span>Description</span>
-          <p>{descriptions.substring(0, 30)}...</p>
+          <p>{descriptions.substring(0, 45)}...</p>
         </div>
 
         <div className="cardFooter">
           <p>${price}</p>
-          <ButtonAddCart onClick={handleAddItemToCart}>
+          <ButtonAddToCart style={ {transform: "scale(0.8)"}} onClick={handleAddItemToCart}>
             add to cart
-          </ButtonAddCart>
+          </ButtonAddToCart >
         </div>
       </CardInformation>
     </CardContainer>
