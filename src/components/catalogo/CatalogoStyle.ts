@@ -3,6 +3,7 @@ import styled from "styled-components";
 const CatalogoContainer = styled.div`
   background-color: var(--background-color);
   padding: 5px 0;
+  min-height: 73.7rem;
 
   .productCointainer {
     margin-inline: 2rem;
