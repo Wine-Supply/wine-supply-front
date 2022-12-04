@@ -10,7 +10,7 @@ const CardContainer = styled.div`
   padding: 1.8rem;
   display: flex;
   align-items: center;
-  background: var(--color-light);
+  background: var(--background-color);
   overflow: hidden;
   justify-content: space-evenly;
 
@@ -22,7 +22,8 @@ const CardContainer = styled.div`
 const Container = styled.div`
   text-align: center;
   padding: 1rem;
-  background: var(--color-light);
+  background: var(--background-color);
+  color: var(--font-color);
 
   h1 {
     margin-top: 1.6rem;

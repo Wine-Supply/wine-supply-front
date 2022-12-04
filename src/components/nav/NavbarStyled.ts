@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const NavbarStyled = styled.nav`
   z-index: 90;
-  background-color: var(--black);
-  color: var(--color-light);
+  background-color: var(--primary-color);
+  color: var(--font-color);
   font-size: 3rem;
   padding: 2rem;
   display: flex;
@@ -43,7 +43,7 @@ export const NavbarStyled = styled.nav`
 
   .link {
     text-decoration: none;
-    color: var(--color-light);
+    color: var(--font-color);
     font-size: 1.8rem;
     margin-inline-end: 2.5rem;
     line-height: 5rem;
@@ -66,8 +66,11 @@ export const NavbarStyled = styled.nav`
 
   .link:hover {
     cursor: pointer;
-    color: var(--white);
-    text-decoration: underline;
+    color: var(--font-color-hover);
+  }
+
+  .line:hover {
+    border-bottom: 2px solid currentColor;
   }
 
   @media (min-width: 768px) {

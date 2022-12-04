@@ -74,7 +74,7 @@ export default function CatalogueProducts() {
         <SearchBar />
         <div>
           <TitleCategory>Most Recommended</TitleCategory>
-          <div className="productCointainer">
+          <div className="productCointainer" >
             {Products?.map((el) => {
               return (
                 <div key={el._id}>

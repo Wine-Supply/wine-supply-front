@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const UserStyled = styled.div`
-  background-color: var(--color-light);
+  color: var(--font-color);
+  background-color: var(--background-color);
   padding: 2.5rem;
   min-height: 73.7rem;
   form{
@@ -60,7 +61,7 @@ export const UserStyled = styled.div`
 
   #newData {
     display: none;
-    background-color: var(--color-light);
+    background-color: var(--secondary-color);
     padding: 2rem 0;
   }
 
