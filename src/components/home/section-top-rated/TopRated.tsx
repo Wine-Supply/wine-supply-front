@@ -7,6 +7,8 @@ import { State } from "../../../redux/reducer";
 import { getTopRatedWines, getWines } from "../../../redux/action-creators";
 import LoginModal from "../../login-modal/LoginModal";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../loading/Loading";
+// import loading from "../../images/wine-loading.gif";
 
 export default function TopRated() {
   const Products = useSelector((state: State) => state.allWines);
@@ -34,7 +36,9 @@ export default function TopRated() {
     <Section>
       <h2 className="secondary-heading">Top rated</h2>
       <div className="cards-container">
-        {topWines &&
+        {topWines.length === 0 ? (
+          <Loading />
+        ) : (
           topWines.map((item) => (
             <Card
               _id={item._id}
@@ -47,7 +51,8 @@ export default function TopRated() {
               token={token}
               setShowModal={setShowModal}
             />
-          ))}
+          ))
+        )}
         {showModal && (
           <LoginModal handleLogin={handleLogin} setShowModal={setShowModal} />
         )}

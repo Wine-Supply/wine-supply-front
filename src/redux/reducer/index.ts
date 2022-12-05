@@ -137,10 +137,14 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case ADD_ITEMS_STORAGE:
-      let searchItem = state.itemsStorage.some((el:any) => el._id == action.payload._id)
+      let searchItem = state.itemsStorage.some(
+        (el: any) => el._id === action.payload._id
+      );
       return {
         ...state,
-        itemsStorage: searchItem ? state.itemsStorage : [...state.itemsStorage, action.payload],
+        itemsStorage: searchItem
+          ? state.itemsStorage
+          : [...state.itemsStorage, action.payload],
       };
 
     case GET_TOTAL_ITEMS:

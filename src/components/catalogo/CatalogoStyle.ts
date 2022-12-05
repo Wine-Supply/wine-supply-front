@@ -3,14 +3,15 @@ import styled from "styled-components";
 const CatalogoContainer = styled.div`
   background-color: var(--background-color);
   padding: 5px 0;
-  min-height: 73.7rem;
 
   .productCointainer {
+    position: relative;
     margin-inline: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 40px;
+    min-height: 60rem;
   }
 `;
 const TitleCategory = styled.h2`
