@@ -18,9 +18,11 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
+const URL = "https://wine-supply-back-production.up.railway.app";
+
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch("http://localhost:3001/wines");
+    const resp = await fetch(`${URL}/wines`);
     const data = await resp.json();
     //console.log("ac", data);
     return dispatch({ type: GET_WINES, payload: data });
@@ -41,9 +43,9 @@ export const sortWinesByRating = () => ({
   type: SORT_WINES_BY_RATING,
 });
 
-export const filterByQuery = (url: string) => {
+export const filterByQuery = (query: string) => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`http://localhost:3001/wines/filters?${url}`);
+    const resp = await fetch(`${URL}/wines/filters?${query}`);
     const data = await resp.json();
     return dispatch({ type: FILTER_BY_QUERY, payload: data });
   };
@@ -51,9 +53,7 @@ export const filterByQuery = (url: string) => {
 
 export const searchWines = (query: string) => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(
-      `http://localhost:3001/wines/search?input=${query}`
-    );
+    const resp = await fetch(`${URL}/wines/search?input=${query}`);
     const data = await resp.json();
     return dispatch({ type: SEARCH_WINES, payload: data });
   };
@@ -62,7 +62,7 @@ export const searchWines = (query: string) => {
 export const getWineDetail = (_id: string) => {
   //console.log("ac", _id);
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`http://localhost:3001/wine/${_id}`);
+    const resp = await fetch(`${URL}/wine/${_id}`);
     const data = await resp.json();
     return dispatch({ type: GET_WINE_DETAIL, payload: data });
   };
@@ -70,7 +70,7 @@ export const getWineDetail = (_id: string) => {
 
 export const postWine = (wine: Wine) => {
   return async function () {
-    let post = await axios.post(`http://localhost:3001/admin`, wine);
+    let post = await axios.post(`${URL}/admin`, wine);
     return post;
   };
 };
@@ -78,17 +78,17 @@ export const postWine = (wine: Wine) => {
 export const loginUserWithGoogle = async (
   userInfo: AdditionalUserInfo | null
 ) => {
-  const resp = await axios.post(`http://localhost:3001/login`, userInfo);
+  const resp = await axios.post(`${URL}/login`, userInfo);
   localStorage.setItem("token", JSON.stringify(resp.data.token));
 };
 
 export const loginUserWithFacebook = async (user: User) => {
-  const resp = await axios.post(`http://localhost:3001/login`, user);
+  const resp = await axios.post(`${URL}/login`, user);
   localStorage.setItem("token", JSON.stringify(resp.data.token));
 };
 
 export const loginUser = async (email: string, password: string) => {
-  const resp = await axios.post(`http://localhost:3001/login`, {
+  const resp = await axios.post(`${URL}/login`, {
     email,
     password,
   });
@@ -102,7 +102,7 @@ export const signUpUser = async (
   email: string,
   password: string
 ) => {
-  const resp = await axios.post(`http://localhost:3001/signup`, {
+  const resp = await axios.post(`${URL}/signup`, {
     name,
     lastName,
     userName,
@@ -115,7 +115,7 @@ export const signUpUser = async (
 export const getItemsStorage = () => {
   return {
     type: GET_ITEMS_STORAGE,
-    payload: JSON.parse(localStorage.getItem("item") || ""),
+    payload: localStorage.getItem("item"),
   };
 };
 
@@ -141,7 +141,7 @@ export const getTotalPrice = (price: number) => {
 };
 
 export const buyItems = async (cart: any, token: any) => {
-  const res = await axios.post("http://localhost:3001/payment", cart, {
+  const res = await axios.post(`${URL}/payment`, cart, {
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`,
       items: JSON.stringify(cart),
@@ -152,7 +152,7 @@ export const buyItems = async (cart: any, token: any) => {
 
 export const buyItem = async (id: any, token: any) => {
   console.log(id);
-  const res = await axios.post("http://localhost:3001/payment", id, {
+  const res = await axios.post(`${URL}/payment`, id, {
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`,
       item: id,

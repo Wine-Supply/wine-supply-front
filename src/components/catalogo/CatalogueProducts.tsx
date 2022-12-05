@@ -34,6 +34,8 @@ export const addStorageItem = (
     return localStorage.setItem("item", addItem);
   } else {
     let localItems = JSON.parse(getStorage);
+    let searchItem = localItems.some((el: any) => el._id == _id);
+    if (searchItem) return;
     localItems.push({ _id, name, img, descriptions, price, rating });
     let addItemStorage = JSON.stringify(localItems);
     return localStorage.setItem("item", addItemStorage);
@@ -41,7 +43,6 @@ export const addStorageItem = (
 };
 
 export default function CatalogueProducts() {
-  // const [cartOpen, setCartOpen] = useState(false);
   const [token, setToken] = useState<string | null>("");
   const [showModal, setShowModal] = useState<boolean>(false);
   const Products = useSelector((state: State) => state.allWines);
@@ -71,7 +72,7 @@ export default function CatalogueProducts() {
         <Filter />
         <div>
           <TitleCategory>Most Recommended</TitleCategory>
-          <div className="productCointainer" >
+          <div className="productCointainer">
             {Products?.map((el) => {
               return (
                 <div key={el._id}>

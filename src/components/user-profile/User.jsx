@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { UserStyled } from "./UserStyled";
+
 import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils"
 import { useAuth, upload } from "../login/FirebaseConfig";
 import axios from "axios";
@@ -7,21 +8,20 @@ import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
 
 function validate(input) {
-	let errors = {};
-	const blanks = /^\s+$/;
-	const validateLetters = /^[0-9a-zA-Z ]+$/;
+  let errors = {};
+  const blanks = /^\s+$/;
+  const validateLetters = /^[0-9a-zA-Z ]+$/;
   const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const phoneformat = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
 
-	if (!input.name || input.name?.length === 0) {
-		errors.name = "Please enter a name";
-	} else if (input.name?.length < 2) {
-		errors.name = "The name cannot have less than 2 characters";
-	} else if (input.name?.match(blanks)) {
-		errors.name = "The name cannot contain only blank spaces";
-	} else if (!input.name?.match(validateLetters)) {
-		errors.name = "You can only use alphanumeric characters for the name field";
-
+  if (!input.name || input.name?.length === 0) {
+    errors.name = "Please enter a name";
+  } else if (input.name?.length < 2) {
+    errors.name = "The name cannot have less than 2 characters";
+  } else if (input.name?.match(blanks)) {
+    errors.name = "The name cannot contain only blank spaces";
+  } else if (!input.name?.match(validateLetters)) {
+    errors.name = "You can only use alphanumeric characters for the name field";
   } else if (!input.lastName || input.lastName?.length === 0) {
     errors.lastName = "Please enter a lastname";
   } else if (input.lastName?.length < 3) {
@@ -29,43 +29,33 @@ function validate(input) {
   } else if (input.lastName?.match(blanks)) {
     errors.lastName = "The lastname cannot contain only blank spaces";
   } else if (!input.lastName?.match(validateLetters)) {
-    errors.lastName = "You can only use alphanumeric characters for the lastname field";
-	
+    errors.lastName =
+      "You can only use alphanumeric characters for the lastname field";
   } else if (
-		!input.userName ||
-		input.userName?.length < 3 ||
-		input.userName?.length > 14
-	) {
-		errors.userName = "The User Name must have between 3 and 14 characters";
-	} else if (
-		input.userName?.match(blanks) || 
+    !input.userName ||
+    input.userName?.length < 3 ||
+    input.userName?.length > 14
+  ) {
+    errors.userName = "The User Name must have between 3 and 14 characters";
+  } else if (
+    input.userName?.match(blanks) ||
     !input.userName?.match(validateLetters)
-	) {
-		errors.userName = "The User Name cannot contain only blank spaces and only use alphanumeric character";
-
-  } else if (
-    !input.email || 
-    !input.email?.match(mailformat)
   ) {
-    errors.email = "Please, enter a valid email address"
-
-  } else if (
-    !input.date_of_birth
-  ) {
-    errors.date_of_birth = "Please, enter your birthday date"
-  
-  } else if (
-    !input.phone?.match(phoneformat)
-  ) {
-    errors.phone = "Please, enter a valid phone number"
+    errors.userName =
+      "The User Name cannot contain only blank spaces and only use alphanumeric character";
+  } else if (!input.email || !input.email?.match(mailformat)) {
+    errors.email = "Please, enter a valid email address";
+  } else if (!input.date_of_birth) {
+    errors.date_of_birth = "Please, enter your birthday date";
+  } else if (!input.phone?.match(phoneformat)) {
+    errors.phone = "Please, enter a valid phone number";
   }
 
-	return errors;
+  return errors;
 }
 
 export default function User() {
-
-  let userData = JSON.parse(localStorage.getItem("user"))
+  let userData = JSON.parse(localStorage.getItem("user"));
   //console.log("userData", userData)
 
   /*nt. El user llega sin 'phone'
@@ -99,42 +89,45 @@ export default function User() {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState("https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg");
+
   
   let defaultimg = "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
+
   const [errors, setErrors] = useState({});
-  
+
   const [input, setInput] = useState({
+
 		name: "",
 	  lastName: "",
 	  userName: "",
     email: currentUser?.email,
 	  isAdmin: "",
     isActive: "",
-	  hashedPass: "",
+    hashedPass: "",
     date_of_birth: "",
     phone: "",
     avatar: defaultimg,
-	  membership_id: [],
-	  address: [], //* array limit = 3
-    whishList:[],
-	});
+    membership_id: [],
+    address: [], //* array limit = 3
+    whishList: [],
+  });
 
   function showButton() {
-    var div = document.getElementById('newData');
-    if (div.style.display === 'none') {
-      div.style.display = 'block';
-    }
-    else {
-      div.style.display = 'none';
+    var div = document.getElementById("newData");
+    if (div.style.display === "none") {
+      div.style.display = "block";
+    } else {
+      div.style.display = "none";
     }
   }
 
   function handleChange(e) {
-		const { name, value } = e.target;
-		setInput({ 
-      ...input, 
-      [name]: value 
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
     });
+
 
 		setTimeout(() => {
 			setErrors(
@@ -163,29 +156,29 @@ export default function User() {
     }
   }, [currentUser])
 
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   setErrors(validate(input));
 
-  try {
-    const data = new FormData();
-    data.append("name", input.name);
-    data.append("lastName", input.lastName);
-    data.append("userName", input.userName);
-    data.append("email", input.email);
-    data.append("isAdmin", input.isAdmin);
-    data.append("isActive", input.isActive);
-    data.append("hashedPass", input.hashedPass);
-    data.append("date_of_birth", input.date_of_birth);
-    data.append("avatar", input.avatar);
-    data.append("membership_id", input.membership_id);
-    data.append("address", input.address);
-    data.append("whishList", input.whishList);
 
-    const resp = await axios.put(
-      "http://localhost:3001/user/update",
-      data
-    );
+    try {
+      const data = new FormData();
+      data.append("name", input.name);
+      data.append("lastName", input.lastName);
+      data.append("userName", input.userName);
+      data.append("email", input.email);
+      data.append("isAdmin", input.isAdmin);
+      data.append("isActive", input.isActive);
+      data.append("hashedPass", input.hashedPass);
+      data.append("date_of_birth", input.date_of_birth);
+      data.append("avatar", input.avatar);
+      data.append("membership_id", input.membership_id);
+      data.append("address", input.address);
+      data.append("whishList", input.whishList);
+
+      const resp = await axios.put("http://localhost:3001/user/update", data);
+
 
     if (resp.status >= 200 && resp.status <= 205) {
       alert("Data changed");
@@ -207,15 +200,13 @@ const handleSubmit = async (e) => {
     } else {
       alert("Something went wrong, please try again");
     }
-  } catch (error) {
-    alert(`Something went wrong. ${error.message}`);
-  }
-};
-  
-/*<button disabled={loading || !photo} onClick={handleClick}>Upload</button>*/
+  };
+
+  /*<button disabled={loading || !photo} onClick={handleClick}>Upload</button>*/
 
   return (
     <>
+
     <Navbar/>
     <UserStyled>
       <h2>Account Data</h2>
@@ -310,28 +301,12 @@ const handleSubmit = async (e) => {
 						name="address"
             onChange={(e) => handleChange(e)}
 					/>
+          </form>
         </div>
-        <span className="error">
-					{errors.userName}
-          {errors.name}
-					{errors.lastName}
-          {errors.email}
-					{errors.date_of_birth}
-					{errors.phone}
-					
-				</span>
-        <ButtonSaveChanges 
-          className="btn"
-          type="submit" 
-          key={Math.random()}
-        > Save Changes
-        </ButtonSaveChanges>
-      </form>
-      </div>
-      <h2>+ WishList</h2>
-      <h2>Historial de compra</h2>
-    </UserStyled>
-    <Footer/>
+        <h2>+ WishList</h2>
+        <h2>Historial de compra</h2>
+      </UserStyled>
+      <Footer />
     </>
   );
 }
