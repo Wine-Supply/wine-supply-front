@@ -47,7 +47,7 @@ const BanerSection = () => {
           //src={baner2b}
           alt="Bottles of wine" 
         />
-        <ButtonSubscribe className="sub-btn"><Link className="no-style" to="/WineClubp">SUBSCRIBE</Link></ButtonSubscribe>
+        <Link className="no-style" to="/WineClubp"><ButtonSubscribe className="sub-btn">SUBSCRIBE</ButtonSubscribe></Link>
       </div>
     </SectionStyled>
   );

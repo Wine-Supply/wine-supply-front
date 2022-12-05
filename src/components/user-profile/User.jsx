@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { UserStyled } from "./UserStyled";
-import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils";
-//import { useAuth, upload } from "../login/FirebaseConfig";
+
+import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils"
+import { useAuth, upload } from "../login/FirebaseConfig";
 import axios from "axios";
 import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
@@ -83,23 +84,24 @@ export default function User() {
     _id: "63890f3a136a8273a37354d0",
   }*/
 
-  /*const currentUser = useAuth();
+  const currentUser = useAuth();
   
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState("https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg");
 
-  */
-  let defaultimg =
-    "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg";
+  
+  let defaultimg = "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
+
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
-    name: "",
-    lastName: "",
-    userName: "",
-    email: "",
-    isAdmin: "",
+
+		name: "",
+	  lastName: "",
+	  userName: "",
+    email: currentUser?.email,
+	  isAdmin: "",
     isActive: "",
     hashedPass: "",
     date_of_birth: "",
@@ -126,17 +128,18 @@ export default function User() {
       [name]: value,
     });
 
-    setTimeout(() => {
-      setErrors(
-        validate({
-          ...input,
-          [name]: value,
-        })
-      );
-    }, 1000);
-    console.log("form:", input);
-  }
-  /*
+
+		setTimeout(() => {
+			setErrors(
+				validate({
+					...input,
+					[name]: value
+				})
+			);
+		}, 1000);
+    console.log('form:', input)
+	}
+
   function handleChangeImage(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0])
@@ -152,10 +155,12 @@ export default function User() {
       setPhotoURL(currentUser.photoURL);
     }
   }, [currentUser])
-*/
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors(validate(input));
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrors(validate(input));
+
 
     try {
       const data = new FormData();
@@ -174,28 +179,26 @@ export default function User() {
 
       const resp = await axios.put("http://localhost:3001/user/update", data);
 
-      if (resp.status >= 200 && resp.status <= 205) {
-        alert("Data changed");
-        setInput({
-          name: "",
-          lastName: "",
-          userName: "",
-          email: "",
-          isAdmin: "",
-          isActive: "",
-          hashedPass: "",
-          date_of_birth: "",
-          phone: "",
-          avatar: defaultimg,
-          membership_id: [],
-          address: [], //* array limit = 3
-          whishList: [],
-        });
-      } else {
-        alert("Something went wrong, please try again");
-      }
-    } catch (error) {
-      alert(`Something went wrong. ${error.message}`);
+
+    if (resp.status >= 200 && resp.status <= 205) {
+      alert("Data changed");
+      setInput({
+        name: "",
+        lastName: "",
+        userName: "",
+        email: currentUser?.email,
+        isAdmin: "",
+        isActive: "",
+        hashedPass: "",
+        date_of_birth: "",
+        phone: "",
+        avatar: defaultimg,
+        membership_id: [],
+        address: [], //* array limit = 3
+        whishList:[],
+      });
+    } else {
+      alert("Something went wrong, please try again");
     }
   };
 
@@ -203,116 +206,101 @@ export default function User() {
 
   return (
     <>
-      <Navbar />
-      <UserStyled>
-        <h2>ACCOUNT DATA</h2>
-        <div className="row">
-          <img src={input.avatar} alt="Avatar" className="avatar" />
-          <div className="column">
-            <label>Currently logged in as: {userData.email} </label>
-            <span>Username: {userData.userName}</span>
-            <span>Name: {userData.name}</span>
-            <span>Lastname: {userData.lastName}</span>
-            <span>Email: {userData.email}</span>
-            <span>Birthday: {userData.date_of_birth}</span>
-            <span>Phone: {userData.phone}</span>
-          </div>
-          <ButtonSubscribe className="btn" onClick={() => showButton()}>
-            Change my Info
-          </ButtonSubscribe>
+
+    <Navbar/>
+    <UserStyled>
+      <h2>Account Data</h2>
+      <hr></hr>
+      <label className="margin">Currently logged in as: { currentUser?.email } </label>
+      <div className="row">
+        <img src={input.avatar} alt="Avatar" className="avatar" />
+        <div className="column">
+          
+          <span>Username: {currentUser?.displayName}</span>
+          <span>Email: {currentUser?.email}</span>
+          <span>Name: {input.name}</span>
+          <span>Lastname: {input.lastName}</span>
+          <span>Birthday: {input.date_of_birth}</span>
+          <span>Phone: {input.phone}</span>
+          
         </div>
-        <div id="newData">
-          <h2>NEW DATA</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="upload_img">
-              <label>Profile Image:</label>
-              <input type="file" onChange={handleChange} />
-            </div>
-            <div className="fields">
-              <label>Username</label>
-              <input
-                type="text"
-                defaultValue={input.userName}
-                placeholder={input.userName}
-                name="userName"
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Name</label>
-              <input
-                type="text"
-                defaultValue={input.name}
-                placeholder={input.name}
-                name="name"
-                required={true}
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Lastname</label>
-              <input
-                type="text"
-                defaultValue={input.lastName}
-                placeholder={input.lastName}
-                required={true}
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Email</label>
-              <input
-                type="text"
-                defaultValue={input.email}
-                placeholder={input.email}
-                name="email"
-                required={true}
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Password</label>
-              <input
-                type="password"
-                defaultValue={input.hashedPass}
-                placeholder={input.hashedPass}
-                name="hashedPass"
-                required={true}
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Birthday</label>
-              <input
-                type="date"
-                defaultValue={input.date_of_birth}
-                placeholder={input.date_of_birth}
-                name="date_of_birth"
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Phone</label>
-              <input
-                type="text"
-                defaultValue={input.phone}
-                placeholder={input.phone}
-                name="phone"
-                onChange={(e) => handleChange(e)}
-              />
-              <label>Address</label>
-              <input
-                type="text"
-                defaultValue={input.address}
-                placeholder={input.address}
-                name="address"
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <span className="error">
-              {errors.userName}
-              {errors.name}
-              {errors.lastName}
-              {errors.email}
-              {errors.date_of_birth}
-              {errors.phone}
-            </span>
-            <ButtonSaveChanges
-              className="btn"
-              type="submit"
-              key={Math.random()}
-            >
-              {" "}
-              Save Changes
-            </ButtonSaveChanges>
+        <ButtonSubscribe className="btn" onClick={() => showButton()}>Change my Info</ButtonSubscribe>
+      </div>
+      <div id="newData" >
+      <h2>New Data</h2>
+      <form onSubmit={handleSubmit}>   
+        <div className="upload_img">
+          <label>Profile Image:</label>
+          <input type="file" onChange={handleChange} />
+        </div> 
+        <div className="fields">
+          <label>Username</label>
+          <input
+						type="text"
+            defaultValue={input.userName}
+						placeholder= {input.userName}
+						name="userName"
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Name</label>
+          <input
+						type="text"
+            defaultValue={input.name}
+						placeholder= {input.name}
+						name="name"
+            required={true}
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Lastname</label>
+          <input
+						type="text"
+            defaultValue={input.lastName}
+						placeholder= {input.lastName}
+            required={true}
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Email</label>
+          <input
+						type="text"
+            defaultValue= {input.email}
+						placeholder=  {input.email}
+						name="email"
+            required={true}
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Password</label>
+          <input
+						type="password"
+            defaultValue={input.hashedPass}
+						placeholder= {input.hashedPass}
+						name="hashedPass"
+            required={true}
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Birthday</label>
+          <input
+						type="date"
+            defaultValue={input.date_of_birth}
+						placeholder= {input.date_of_birth}
+						name="date_of_birth"
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Phone</label>
+          <input
+						type="text"
+            defaultValue={input.phone}
+						placeholder= {input.phone}
+						name="phone"
+            onChange={(e) => handleChange(e)}
+					/>
+          <label>Address</label>
+          <input
+						type="text"
+            defaultValue={input.address}
+						placeholder= {input.address}
+						name="address"
+            onChange={(e) => handleChange(e)}
+					/>
           </form>
         </div>
         <h2>+ WishList</h2>
