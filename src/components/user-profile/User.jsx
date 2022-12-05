@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { UserStyled } from "./UserStyled";
 import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils"
-//import { useAuth, upload } from "../login/FirebaseConfig";
+import { useAuth, upload } from "../login/FirebaseConfig";
 import axios from "axios";
 import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
@@ -94,13 +94,12 @@ export default function User() {
     _id: "63890f3a136a8273a37354d0",
   }*/
 
-  /*const currentUser = useAuth();
+  const currentUser = useAuth();
   
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState("https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg");
-
-  */
+  
   let defaultimg = "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
   const [errors, setErrors] = useState({});
   
@@ -108,7 +107,7 @@ export default function User() {
 		name: "",
 	  lastName: "",
 	  userName: "",
-    email: "",
+    email: currentUser?.email,
 	  isAdmin: "",
     isActive: "",
 	  hashedPass: "",
@@ -147,7 +146,7 @@ export default function User() {
 		}, 1000);
     console.log('form:', input)
 	}
-/*
+
   function handleChangeImage(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0])
@@ -163,7 +162,7 @@ export default function User() {
       setPhotoURL(currentUser.photoURL);
     }
   }, [currentUser])
-*/
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   setErrors(validate(input));
@@ -194,7 +193,7 @@ const handleSubmit = async (e) => {
         name: "",
         lastName: "",
         userName: "",
-        email: "",
+        email: currentUser?.email,
         isAdmin: "",
         isActive: "",
         hashedPass: "",
@@ -219,23 +218,25 @@ const handleSubmit = async (e) => {
     <>
     <Navbar/>
     <UserStyled>
-      <h2>ACCOUNT DATA</h2>
+      <h2>Account Data</h2>
+      <hr></hr>
+      <label className="margin">Currently logged in as: { currentUser?.email } </label>
       <div className="row">
         <img src={input.avatar} alt="Avatar" className="avatar" />
         <div className="column">
-          <label>Currently logged in as: { userData.email } </label>
-          <span>Username: {userData.userName}</span>
-          <span>Name: {userData.name}</span>
-          <span>Lastname: {userData.lastName}</span>
-          <span>Email: {userData.email}</span>
-          <span>Birthday: {userData.date_of_birth}</span>
-          <span>Phone: {userData.phone}</span>
+          
+          <span>Username: {currentUser?.displayName}</span>
+          <span>Email: {currentUser?.email}</span>
+          <span>Name: {input.name}</span>
+          <span>Lastname: {input.lastName}</span>
+          <span>Birthday: {input.date_of_birth}</span>
+          <span>Phone: {input.phone}</span>
           
         </div>
         <ButtonSubscribe className="btn" onClick={() => showButton()}>Change my Info</ButtonSubscribe>
       </div>
       <div id="newData" >
-      <h2>NEW DATA</h2>
+      <h2>New Data</h2>
       <form onSubmit={handleSubmit}>   
         <div className="upload_img">
           <label>Profile Image:</label>
