@@ -5,6 +5,7 @@ import {
   addItemsStorage,
   getItemsStorage,
   getWines,
+  showLoginModal,
 } from "../../redux/action-creators";
 import Filter from "../filter/Filter";
 import Card from "../card/Card";
@@ -45,7 +46,8 @@ export const addStorageItem = (
 
 export default function CatalogueProducts() {
   const [token, setToken] = useState<string | null>("");
-  const [showModal, setShowModal] = useState<boolean>(false);
+  // const [showModal, setShowModal] = useState<boolean>(false);
+  const loginModal = useSelector((state: State) => state.loginModal);
   const Products = useSelector((state: State) => state.allWines);
   const Items = useSelector((state: State) => state.itemsStorage);
   let dispatch: Dispatch<any> = useDispatch();
@@ -62,7 +64,7 @@ export default function CatalogueProducts() {
 
   const handleLogin = () => {
     navigate("/login");
-    setShowModal(false);
+    dispatch(showLoginModal());
   };
 
   return (
@@ -88,15 +90,13 @@ export default function CatalogueProducts() {
                   rating={el.rating}
                   dispatch={dispatch}
                   token={token}
-                  setShowModal={setShowModal}
+                  // setShowModal={setShowModal}
                 />
               );
             })
           )}
         </div>
-        {showModal && (
-          <LoginModal handleLogin={handleLogin} setShowModal={setShowModal} />
-        )}
+        {loginModal && <LoginModal handleLogin={handleLogin} />}
       </CatalogoContainer>
       <Footer />
     </>

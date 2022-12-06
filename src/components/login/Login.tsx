@@ -14,7 +14,7 @@ import {
   loginUserWithGoogle,
   loginUserWithFacebook,
 } from "../../redux/action-creators";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export type Input = {
   email: string;
@@ -35,10 +35,10 @@ export default function Login() {
     password: "",
   });
   const [token, setToken] = useState<string | null>("");
-  const history = window.history;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (token && token?.length > 0) history.back();
+    if (token && token?.length > 0) navigate("/");
   }, [token]);
 
   //Existing user signing in

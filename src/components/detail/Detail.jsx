@@ -1,18 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getWineDetail, buyItem } from "../../redux/action-creators";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getWineDetail,
+  buyItem,
+  showLoginModal,
+} from "../../redux/action-creators";
 import { DetailStyled, WineData } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
 import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
+import LoginModal from "../login-modal/LoginModal";
 
 export default function Detail() {
   const { id } = useParams();
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState("");
   const dispatch = useDispatch();
+  const loginModal = useSelector((state) => state.loginModal);
+  const navigate = useNavigate();
 
   const {
     name,
@@ -32,7 +39,21 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getWineDetail(id));
-  }, [dispatch, id]);
+    if (token?.length === 0 && localStorage.getItem("token"))
+      setToken(localStorage.getItem("token"));
+  }, [dispatch, id, token]);
+
+  const handleAddItemToCart = () => {
+    if (token.length === 0) {
+      dispatch(showLoginModal());
+    } else
+      addStorageItem(id, name, images, description, price, rating, dispatch);
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+    dispatch(showLoginModal());
+  };
 
   //<div className={"bg-container"}><img className={"bg"} src={images} alt="bg" /></div>
   return (
@@ -71,17 +92,7 @@ export default function Detail() {
           <p className={"add"}>Add to WishList +</p>
           <div className="btns">
             <ButtonAddToCart
-              onClick={() =>
-                addStorageItem(
-                  id,
-                  name,
-                  images,
-                  description,
-                  price,
-                  rating,
-                  dispatch
-                )
-              }
+              onClick={handleAddItemToCart}
               style={{ transform: "scale(1.5)", margin: "1.2rem" }}
             >
               Add to Cart
@@ -94,6 +105,7 @@ export default function Detail() {
             </ButtonBuyNow>
           </div>
         </div>
+        {loginModal && <LoginModal handleLogin={handleLogin} />}
       </DetailStyled>
       <Footer />
     </>

@@ -3,6 +3,8 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import { CardContainer, CardInformation } from "./CardStyle";
 import { ButtonAddToCart } from "../utils/utils";
+import { showLoginModal } from "../../redux/action-creators";
+import { useDispatch } from "react-redux";
 
 interface CardProps {
   _id: string;
@@ -24,13 +26,14 @@ const Card: React.FC<CardProps> = ({
   descriptions,
   price,
   rating,
-  dispatch,
+  // dispatch,
   token,
-  setShowModal,
+  // setShowModal,
 }) => {
+  const dispatch = useDispatch();
   const handleAddItemToCart = () => {
-    if (token?.length === 0 && setShowModal) {
-      setShowModal(true);
+    if (token?.length === 0) {
+      dispatch(showLoginModal());
     } else
       addStorageItem(_id, name, img, descriptions, price, rating, dispatch!);
   };
