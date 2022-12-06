@@ -8,8 +8,8 @@ import WineClubp from "./components/section-wine-club";
 import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import User from "./components/user-profile/User";
-import "./App.css";
 import Newsletter from "./components/newsletter/Newsletter";
+import "./App.css";
 
 function App() {
   return (
