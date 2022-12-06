@@ -10,6 +10,7 @@ import SignUp from "./components/sign-up/SignUp";
 import User from "./components/user-profile/User";
 import "./App.css";
 import Error from "./components/error/Error";
+import Newsletter from "./components/newsletter/Newsletter";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/admin" element={<Form />} />
         <Route path="/user" element={<User />} />
         <Route path="*" element={<Error />} />
+        <Route path="/newsletter" element={<Newsletter />} />
       </Routes>
     </div>
   );

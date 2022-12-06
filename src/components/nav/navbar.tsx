@@ -47,7 +47,7 @@ const Navbar= () =>{
             </div>
           </li>
           <li>
-            <Link className={"link line"} to="/user">
+            <Link className={"link line"} to="/login">
               <UserOutlined />
             </Link>
           </li>
