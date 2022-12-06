@@ -12,6 +12,7 @@ import {
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
   OPEN_CART,
+  SHOW_LOGIN_MODAL,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -97,6 +98,12 @@ export const loginUser = async (email: string, password: string) => {
     password,
   });
   localStorage.setItem("token", JSON.stringify(resp.data.token));
+};
+
+export const showLoginModal = () => {
+  return {
+    type: SHOW_LOGIN_MODAL,
+  };
 };
 
 export const signUpUser = async (

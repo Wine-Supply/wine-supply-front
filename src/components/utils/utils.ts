@@ -137,6 +137,10 @@ const ButtonToScrollUp = styled.button`
 `;
 
 const Modal = styled.div`
+  .login-modal p {
+    color: var(--black);
+  }
+
   .login-modal {
     display: flex;
     flex-direction: column;
