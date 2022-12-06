@@ -10,7 +10,8 @@ export const DivStyled = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  .loading-img {
+  .loading-img,
+  .error-img {
     height: 30rem;
   }
 
@@ -21,7 +22,8 @@ export const DivStyled = styled.div`
   }
 
   @media (min-width: 600px) {
-    .loading-img {
+    .loading-img,
+    .error-img {
       height: 35rem;
     }
   }

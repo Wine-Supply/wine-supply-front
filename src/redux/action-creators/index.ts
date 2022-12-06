@@ -18,14 +18,18 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
-const URL = "https://wine-supply-back-production.up.railway.app";
+const URL = "http://localhost:3001";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`${URL}/wines`);
-    const data = await resp.json();
-    //console.log("ac", data);
-    return dispatch({ type: GET_WINES, payload: data });
+    try {
+      const resp = await fetch(`${URL}/wines`);
+      const data = await resp.json();
+      //console.log("ac", data);
+      return dispatch({ type: GET_WINES, payload: data });
+    } catch (error) {
+      return error;
+    }
   };
 };
 

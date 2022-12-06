@@ -9,7 +9,6 @@ import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import User from "./components/user-profile/User";
 import "./App.css";
-import Error from "./components/error/Error";
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
         <Route path="/wineClubp" element={<WineClubp />} />
         <Route path="/admin" element={<Form />} />
         <Route path="/user" element={<User />} />
-        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );
