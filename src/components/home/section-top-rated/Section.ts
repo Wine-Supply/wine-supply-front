@@ -11,9 +11,9 @@ export const Section = styled.section`
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
     background-color: var(--background-color);
-    padding: 2rem 6rem;
     min-height: 30rem;
   }
 

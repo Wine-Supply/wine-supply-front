@@ -9,6 +9,7 @@ import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import User from "./components/user-profile/User";
 import "./App.css";
+import Newsletter from "./components/newsletter/Newsletter";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/wineClubp" element={<WineClubp />} />
         <Route path="/admin" element={<Form />} />
         <Route path="/user" element={<User />} />
+        <Route path="/newsletter" element={<Newsletter />} />
       </Routes>
     </div>
   );
