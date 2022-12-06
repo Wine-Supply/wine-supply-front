@@ -3,7 +3,7 @@ import styled from "styled-components";
 const CatalogoContainer = styled.div`
   background-color: var(--background-color);
   padding: 5px 0;
-
+  
   .productCointainer {
     position: relative;
     margin-inline: 2rem;
@@ -13,6 +13,25 @@ const CatalogoContainer = styled.div`
     margin-bottom: 40px;
     min-height: 60rem;
   }
+
+  @media (max-width: 920px) {
+    .productCointainer {
+      margin-bottom: 6rem;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .productCointainer {
+      margin-bottom: 6rem;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  
 `;
 const TitleCategory = styled.h2`
   margin-left: 6rem;
@@ -20,6 +39,7 @@ const TitleCategory = styled.h2`
   color: var(--font-color);
   font-size: 3rem;
   margin-bottom: 10px;
+  margin-top: 2.5rem;
 `;
 
 export { CatalogoContainer, TitleCategory };
