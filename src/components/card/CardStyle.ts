@@ -31,7 +31,20 @@ const CardContainer = styled.div`
     max-width: 11.4rem;
     max-height: 9rem;
   }
-  `
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    min-width: 16rem;
+    max-width: 16rem;
+    min-height: 25rem;
+    max-height: 25rem;
+    margin-bottom: 6rem;
+    align-items: center;
+    margin: 5.5rem 3rem;
+  }
+
+
+`
 const CardInformation = styled.div`
 display: grid;
 grid-template-columns: 1fr;
