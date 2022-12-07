@@ -152,13 +152,18 @@ export const getTotalPrice = (price: number) => {
 };
 
 export const buyItems = async (cart: any, token: any) => {
-  const res = await axios.post(`${URL}/payment`, cart, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`,
-      items: JSON.stringify(cart),
-    },
-  });
-  window.location.replace(res.data);
+  try {
+    const res = await axios.post(`${URL}/payment`, cart, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+        items: JSON.stringify(cart),
+      },
+    });
+    window.location.replace(res.data);
+    localStorage.setItem("item", JSON.stringify([]));
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const buyItem = async (id: any, token: any) => {
