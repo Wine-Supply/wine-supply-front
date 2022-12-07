@@ -23,7 +23,7 @@ export const DivStyled = styled.div`
   }
 
   .form-input {
-    color: var(--font-color);
+    color: var(--black);
     font-size: 1.4rem;
     padding: 1.2rem 1.6rem;
     border: none;
@@ -101,6 +101,11 @@ export const DivStyled = styled.div`
     .summary,
     .input-container {
       width: 100%;
+    }
+
+    .summary {
+      grid-column: 2;
+      grid-row: 1;
     }
   }
 `;
