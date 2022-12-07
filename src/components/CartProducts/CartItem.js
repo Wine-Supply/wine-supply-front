@@ -38,7 +38,6 @@ const CartItem = ({
 
   useEffect(() => {
     setTotalPrice(price * totalItem);
-
   }, [totalItem]);
 
   const handleOpen = () => {
@@ -49,7 +48,7 @@ const CartItem = ({
   };
 
   const addItem = () => {
-/*     let getStorage = localStorage.getItem("item");
+    /*     let getStorage = localStorage.getItem("item");
     let localItem = JSON.parse(getStorage)
     console.log(localItem)
     let itemSearch = localItem.find(e => e._id == _id)
@@ -91,6 +90,8 @@ const CartItem = ({
             <Button
               onClick={() => {
                 clearItem(_id);
+                setTotal(total - totalItem);
+                setTotalMoney((totalMoney - totalPrice).toFixed(2));
               }}
             >
               ACCEPT
