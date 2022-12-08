@@ -7,6 +7,7 @@ import {
   getWineReviews,
   getUserId,
   showLoginModal,
+  getWines,
 } from "../../redux/action-creators";
 import {
   Comments,
@@ -56,7 +57,7 @@ export default function Detail() {
     dispatch(getWineReviews(id));
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
-  }, [dispatch, id, token, wineDetail.length, WineReview.length]);
+  }, [dispatch, id, token, wineDetail.length]);
 
   const handleAddItemToCart = () => {
     if (token.length === 0) {
@@ -109,6 +110,8 @@ export default function Detail() {
         .then((response) => alert(response.message))
         .catch((error) => console.error("Error:", error));
     }
+    dispatch(getWineReviews(id));
+    dispatch(getWines());
     setUserComments("");
     document
       .querySelectorAll(".rating-check")
