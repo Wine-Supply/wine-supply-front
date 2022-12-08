@@ -12,6 +12,8 @@ import {
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
   OPEN_CART,
+  GET_WINE_REVIEWS,
+  GET_USER_ID,
   SHOW_LOGIN_MODAL,
 } from "../actions";
 import axios from "axios";
@@ -19,6 +21,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
+//const URL = "https://wine-supply-back-production.up.railway.app";
 const URL = "http://localhost:3001";
 
 export const getWines = () => {
@@ -26,7 +29,6 @@ export const getWines = () => {
     try {
       const resp = await fetch(`${URL}/wines`);
       const data = await resp.json();
-      //console.log("ac", data);
       return dispatch({ type: GET_WINES, payload: data });
     } catch (error) {
       return error;
@@ -65,7 +67,6 @@ export const searchWines = (query: string) => {
 };
 
 export const getWineDetail = (_id: string) => {
-  //console.log("ac", _id);
   return async function (dispatch: Dispatch) {
     const resp = await fetch(`${URL}/wine/${_id}`);
     const data = await resp.json();
@@ -178,8 +179,29 @@ export const buyItem = async (id: any, token: any) => {
   window.location.replace(res.data);
 };
 
+export const getUserId = () => {
+  let token = localStorage.getItem('token')
+  return async function (dispatch: Dispatch) {
+    const res = await axios.get(`${URL}/getuser`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token || '')}`,
+        'Content-Type': 'application/json, charset=utf-8'
+      },
+    })
+    return dispatch({ type: GET_USER_ID, payload: res });
+  }
+}
+
 export const openCart = () => {
   return {
     type: OPEN_CART,
   };
 };
+
+export const getWineReviews = (_id: String) => {
+  return async function (dispatch: Dispatch) {
+    const resp = await fetch(`${URL}/getWineReviews/${_id}`);
+    const data = await resp.json();
+    return dispatch({ type: GET_WINE_REVIEWS, payload: data });
+  };
+}

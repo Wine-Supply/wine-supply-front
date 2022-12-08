@@ -1,20 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getWineDetail,
-  buyItem,
-  showLoginModal,
-} from "../../redux/action-creators";
-import { DetailStyled, WineData } from "./DetailStyled";
+import { getWineDetail, 
+  buyItem, 
+  getWineReviews, 
+  getUserId, 
+  showLoginModal } from "../../redux/action-creators";
+import { Comments, CommentsUsers, DetailStyled, RankingValue, WineData } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import LoginModal from "../login-modal/LoginModal";
 
 export default function Detail() {
+  const [userComments, setUserComments] = useState('');
+  const [userRating, setUserRating] = useState(3);
+  const UserId = useSelector((state) => state.user);
+  const WineReview = useSelector((state) => state.wineReviews)
   const { id } = useParams();
   const [token, setToken] = useState("");
   const dispatch = useDispatch();
@@ -39,6 +43,8 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getWineDetail(id));
+    dispatch(getWineReviews(id))
+    dispatch(getUserId())
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
   }, [dispatch, id, token]);
@@ -54,6 +60,46 @@ export default function Detail() {
     navigate("/login");
     dispatch(showLoginModal());
   };
+
+
+  const AddComment = async () => {
+    const verifyComments = WineReview.filter(wr => wr.user_id === UserId.data._id)
+    if (verifyComments.length > 0) {
+      let data = await {
+        review_id: verifyComments[0]._id,
+        wine_id: id,
+        comment: userComments,
+        rating: parseInt(userRating)
+      }
+      await fetch('http://localhost:3001/updateReviews', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(response => alert(response.message))
+        .catch(error => console.error('Error:', error));
+    } else {
+      let data = await {
+        user_id: UserId.data._id,
+        wine_id: id,
+        comment: userComments,
+        rating: userRating
+      }
+      await fetch('http://localhost:3001/postReviews', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(response => alert(response.message))
+        .catch(error => console.error('Error:', error));
+    }
+
+    navigate("/home/products")
+  }
 
   //<div className={"bg-container"}><img className={"bg"} src={images} alt="bg" /></div>
   return (
@@ -107,6 +153,51 @@ export default function Detail() {
         </div>
         {loginModal && <LoginModal handleLogin={handleLogin} />}
       </DetailStyled>
+
+      <Comments>
+        {token !== '' &&
+          <>
+            <h2 className="comment-title">Leave your comment about this product</h2>
+            <textarea onChange={(e) => setUserComments(e.target.value)} type="text" name="textarea" rows="4" className="textarea" placeholder="Write your comment..." />
+            <RankingValue>
+              <div className="checkPoint">
+                <input type="radio" name="ranking" id='1' onChange={(e) => setUserRating(e.target.id)} />1★
+              </div>
+              <div className="checkPoint">
+                <input type="radio" name="ranking" id='2' onChange={(e) => setUserRating(e.target.id)} />2★
+              </div>
+              <div className="checkPoint">
+                <input type="radio" name="ranking" id='3' onChange={(e) => setUserRating(e.target.id)} />3★
+              </div>
+              <div className="checkPoint">
+                <input type="radio" name="ranking" id='4' onChange={(e) => setUserRating(e.target.id)} />4★
+              </div>
+              <div className="checkPoint">
+                <input type="radio" name="ranking" id='5' onChange={(e) => setUserRating(e.target.id)} />5★
+              </div>
+            </RankingValue>
+            <ButtonBuyNow onClick={() => { AddComment() }}>Add comment</ButtonBuyNow>
+          </>
+        }
+        <div>
+          {WineReview.length > 0 && <h2 className="comment-title">Comments</h2>}
+          {WineReview.length > 0 ?
+            WineReview.map(rew => {
+              const date = new Date(rew.date).toLocaleDateString('es')
+              return <CommentsUsers>
+                <h3>{rew.rating}/5★</h3>
+                <div className="user">
+                  <h4>{rew.user_id}</h4>
+                </div>
+                <p>{rew.comment}</p>
+                <span>date: {date}</span>
+              </CommentsUsers>
+            })
+            :
+            <h2 className="comment-title">No comments were made about this wine</h2>
+          }
+        </div>
+      </Comments>
       <Footer />
     </>
   );

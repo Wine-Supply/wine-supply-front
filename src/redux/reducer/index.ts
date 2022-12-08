@@ -13,6 +13,8 @@ import {
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
   OPEN_CART,
+  GET_WINE_REVIEWS,
+  GET_USER_ID,
   SHOW_LOGIN_MODAL,
 } from "../actions/index";
 
@@ -49,6 +51,7 @@ export interface State {
   loginModal: boolean;
   totalItems: number;
   totalPrice: number;
+  user: Object;
 }
 
 const initialState = {
@@ -57,11 +60,13 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
+  wineReviews: [],
   itemsStorage: [],
   openCart: false,
   loginModal: false,
   totalItems: 0,
   totalPrice: 0,
+  user: {}
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -168,6 +173,18 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         openCart: !state.openCart,
       };
 
+      case GET_WINE_REVIEWS:
+        return {
+          ...state,
+          wineReviews: action.payload,
+        };
+
+    case GET_USER_ID:
+      return{
+        ...state,
+        user: action.payload,
+      }
+      
     case SHOW_LOGIN_MODAL:
       return {
         ...state,
