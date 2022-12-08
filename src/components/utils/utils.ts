@@ -40,9 +40,9 @@ const ButtonAddToCart = styled.button`
   }
 `;
 const ButtonSaveChanges = styled.button`
-  background-color: var(--black);
-  color: var(--white);
-  border: 0.1rem solid var(--black);
+  background-color: var(--primary-color);
+  color: var(--font-color);
+  border: 0.1rem solid var(--primary-color);
   padding: 0.7rem 1rem;
   min-width: 10rem;
   height: 4.5rem;
@@ -51,7 +51,8 @@ const ButtonSaveChanges = styled.button`
 
   :hover {
     cursor: pointer;
-    color: var(--color-dark);
+    color: var(--primary-color);
+    background-color: var(--font-color);
   }
 
   :disabled {
@@ -90,7 +91,7 @@ const ButtonSubscribe = styled.button`
 
   :hover {
     cursor: pointer;
-    color: var(--background);
+    color: var(--primary-color);
     background-color: var(--btn-color-hover2);
   }
 `;
@@ -136,6 +137,10 @@ const ButtonToScrollUp = styled.button`
 `;
 
 const Modal = styled.div`
+  .login-modal p {
+    color: var(--black);
+  }
+
   .login-modal {
     display: flex;
     flex-direction: column;

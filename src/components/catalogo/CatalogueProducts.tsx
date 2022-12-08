@@ -5,6 +5,7 @@ import {
   addItemsStorage,
   getItemsStorage,
   getWines,
+  showLoginModal,
 } from "../../redux/action-creators";
 import Filter from "../filter/Filter";
 import Card from "../card/Card";
@@ -15,6 +16,7 @@ import Footer from "../Footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../login-modal/LoginModal";
+import Loading from "../loading/Loading";
 
 export const addStorageItem = (
   _id: string,
@@ -34,7 +36,7 @@ export const addStorageItem = (
     return localStorage.setItem("item", addItem);
   } else {
     let localItems = JSON.parse(getStorage);
-    let searchItem = localItems.some((el: any) => el._id == _id);
+    let searchItem = localItems.some((el: any) => el._id === _id);
     if (searchItem) return;
     localItems.push({ _id, name, img, descriptions, price, rating });
     let addItemStorage = JSON.stringify(localItems);
@@ -44,7 +46,8 @@ export const addStorageItem = (
 
 export default function CatalogueProducts() {
   const [token, setToken] = useState<string | null>("");
-  const [showModal, setShowModal] = useState<boolean>(false);
+  // const [showModal, setShowModal] = useState<boolean>(false);
+  const loginModal = useSelector((state: State) => state.loginModal);
   const Products = useSelector((state: State) => state.allWines);
   const Items = useSelector((state: State) => state.itemsStorage);
   let dispatch: Dispatch<any> = useDispatch();
@@ -61,7 +64,7 @@ export default function CatalogueProducts() {
 
   const handleLogin = () => {
     navigate("/login");
-    setShowModal(false);
+    dispatch(showLoginModal());
   };
 
   return (
@@ -70,31 +73,30 @@ export default function CatalogueProducts() {
       <CarritoFull />
       <CatalogoContainer>
         <Filter />
-        <div>
-          <TitleCategory>Most Recommended</TitleCategory>
-          <div className="productCointainer">
-            {Products?.map((el) => {
+        <TitleCategory>Most Recommended</TitleCategory>
+        <div className="productCointainer">
+          {Products.length === 0 ? (
+            <Loading />
+          ) : (
+            Products?.map((el) => {
               return (
-                <div key={el._id}>
-                  <Card
-                    _id={el._id}
-                    name={el.name}
-                    descriptions={el.description}
-                    img={el.images[0]}
-                    price={el.price}
-                    rating={el.rating}
-                    dispatch={dispatch}
-                    token={token}
-                    setShowModal={setShowModal}
-                  />
-                </div>
+                <Card
+                  key={el._id}
+                  _id={el._id}
+                  name={el.name}
+                  descriptions={el.description}
+                  img={el.images[0]}
+                  price={el.price}
+                  rating={el.rating}
+                  dispatch={dispatch}
+                  token={token}
+                  // setShowModal={setShowModal}
+                />
               );
-            })}
-          </div>
+            })
+          )}
         </div>
-        {showModal && (
-          <LoginModal handleLogin={handleLogin} setShowModal={setShowModal} />
-        )}
+        {loginModal && <LoginModal handleLogin={handleLogin} />}
       </CatalogoContainer>
       <Footer />
     </>

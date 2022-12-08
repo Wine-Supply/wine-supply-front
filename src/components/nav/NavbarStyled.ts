@@ -85,4 +85,15 @@ export const NavbarStyled = styled.nav`
       display: inline;
     }
   }
+
+  @media (max-width: 280px) {
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    .logo {
+      display: none;
+    }
+
+  }
 `;

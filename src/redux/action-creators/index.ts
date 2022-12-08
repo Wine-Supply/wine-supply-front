@@ -13,7 +13,8 @@ import {
   GET_TOTAL_PRICE,
   OPEN_CART,
   GET_WINE_REVIEWS,
-  GET_USER_ID
+  GET_USER_ID,
+  SHOW_LOGIN_MODAL,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -25,9 +26,14 @@ const URL = "http://localhost:3001";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`${URL}/wines`);
-    const data = await resp.json();
-    return dispatch({ type: GET_WINES, payload: data });
+    try {
+      const resp = await fetch(`${URL}/wines`);
+      const data = await resp.json();
+      //console.log("ac", data);
+      return dispatch({ type: GET_WINES, payload: data });
+    } catch (error) {
+      return error;
+    }
   };
 };
 
@@ -96,6 +102,12 @@ export const loginUser = async (email: string, password: string) => {
   localStorage.setItem("token", JSON.stringify(resp.data.token));
 };
 
+export const showLoginModal = () => {
+  return {
+    type: SHOW_LOGIN_MODAL,
+  };
+};
+
 export const signUpUser = async (
   name: string | undefined,
   lastName: string | undefined,
@@ -142,13 +154,18 @@ export const getTotalPrice = (price: number) => {
 };
 
 export const buyItems = async (cart: any, token: any) => {
-  const res = await axios.post(`${URL}/payment`, cart, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`,
-      items: JSON.stringify(cart),
-    },
-  });
-  window.location.replace(res.data);
+  try {
+    const res = await axios.post(`${URL}/payment`, cart, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+        items: JSON.stringify(cart),
+      },
+    });
+    window.location.replace(res.data);
+    localStorage.setItem("item", JSON.stringify([]));
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const buyItem = async (id: any, token: any) => {

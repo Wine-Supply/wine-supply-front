@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Dispatch } from "@reduxjs/toolkit";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
-import { CardContainer, CardInformation, ButtonAddCart } from "./CardStyle";
+import { CardContainer, CardInformation } from "./CardStyle";
 import { ButtonAddToCart } from "../utils/utils";
+import { showLoginModal } from "../../redux/action-creators";
+import { useDispatch } from "react-redux";
 
 interface CardProps {
   _id: string;
@@ -24,23 +26,24 @@ const Card: React.FC<CardProps> = ({
   descriptions,
   price,
   rating,
-  dispatch,
+  // dispatch,
   token,
-  setShowModal,
+  // setShowModal,
 }) => {
+  const dispatch = useDispatch();
   const handleAddItemToCart = () => {
-    if (token?.length === 0 && setShowModal) {
-      setShowModal(true);
+    if (token?.length === 0) {
+      dispatch(showLoginModal());
     } else
       addStorageItem(_id, name, img, descriptions, price, rating, dispatch!);
   };
 
   return (
     <CardContainer>
-      <Link to={`detail/${_id}`}>
+      <Link to={`/home/products/detail/${_id}`}>
         <div className="imageMain">
           <img src={img} alt={name} />
-        </div> 
+        </div>
       </Link>
       <CardInformation>
         <div className="rankingStyle">
@@ -56,9 +59,12 @@ const Card: React.FC<CardProps> = ({
 
         <div className="cardFooter">
           <p>${price}</p>
-          <ButtonAddToCart style={ {transform: "scale(0.8)"}} onClick={handleAddItemToCart}>
+          <ButtonAddToCart
+            style={{ transform: "scale(0.8)" }}
+            onClick={handleAddItemToCart}
+          >
             add to cart
-          </ButtonAddToCart >
+          </ButtonAddToCart>
         </div>
       </CardInformation>
     </CardContainer>

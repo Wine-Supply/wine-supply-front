@@ -22,13 +22,19 @@ export const UserStyled = styled.div`
   }
 
   h2, input, select, textarea, label {
-    margin: 2.5rem 2.5rem;
+    margin: 2.5rem 2rem;
   }
 
   input, select, p, h2 {
     width: 25rem;
     font-size: 1.8rem;
-    line-height: 2.5rem;
+    line-height: 1.5rem;
+    min-height: 4rem;
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
   }
 
   .row{
@@ -42,6 +48,7 @@ export const UserStyled = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: left;
+    min-width: 20rem;
   }
 
   .btn {
@@ -53,10 +60,10 @@ export const UserStyled = styled.div`
   }
 
   label, input, span {
-    width: 25rem;
-    font-size: 1.4rem;
     line-height: 2rem;
     margin: 0.2rem;
+    font-size: 1.8rem;
+    min-width: 35rem;
   }
 
   #newData {
@@ -71,6 +78,23 @@ export const UserStyled = styled.div`
     grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+  }
+
+  .margin {
+    margin-left: 2.5rem;
+  }
+
+  hr {
+    margin-bottom: 2rem;
+    margin-inline: 2.5rem;
+  }
+
+  h2 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 768px) {
