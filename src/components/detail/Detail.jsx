@@ -17,7 +17,7 @@ import LoginModal from "../login-modal/LoginModal";
 export default function Detail() {
   const [userComments, setUserComments] = useState('');
   const [userRating, setUserRating] = useState(3);
-  const UserId = useSelector((state) => state.user);
+  const User = useSelector((state) => state.user);
   const WineReview = useSelector((state) => state.wineReviews)
   const { id } = useParams();
   const [token, setToken] = useState("");
@@ -44,7 +44,6 @@ export default function Detail() {
   useEffect(() => {
     dispatch(getWineDetail(id));
     dispatch(getWineReviews(id))
-    dispatch(getUserId())
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
   }, [dispatch, id, token]);
@@ -63,9 +62,9 @@ export default function Detail() {
 
 
   const AddComment = async () => {
-    const verifyComments = WineReview.filter(wr => wr.user_id === UserId.data._id)
+    const verifyComments = WineReview.filter(wr => wr.user_id === User._id)
     if (verifyComments.length > 0) {
-      let data = await {
+      let data = {
         review_id: verifyComments[0]._id,
         wine_id: id,
         comment: userComments,
@@ -81,8 +80,8 @@ export default function Detail() {
         .then(response => alert(response.message))
         .catch(error => console.error('Error:', error));
     } else {
-      let data = await {
-        user_id: UserId.data._id,
+      let data = {
+        user_id: User._id,
         wine_id: id,
         comment: userComments,
         rating: userRating

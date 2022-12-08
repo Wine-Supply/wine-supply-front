@@ -18,6 +18,23 @@ import {
   SHOW_LOGIN_MODAL,
 } from "../actions/index";
 
+type Users ={
+  name?: string;
+  lastName?: string;
+  userName?: string;
+  address?: string[];
+  email?: string;
+  avatar?: string[];
+  isActive?: boolean;
+  isAdmin?: string;
+  membership_id?: number[];
+  order?: string[];
+  shopping_cart?: object[];
+  updatedAt?: string;
+  createdAt?: string;
+  whishList?: string[];
+}
+
 export interface Wine {
   _id: string;
   name: string;
@@ -51,7 +68,7 @@ export interface State {
   loginModal: boolean;
   totalItems: number;
   totalPrice: number;
-  user: Object;
+  user: Users;
 }
 
 const initialState = {
@@ -66,7 +83,7 @@ const initialState = {
   loginModal: false,
   totalItems: 0,
   totalPrice: 0,
-  user: {}
+  user: {},
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ScrollToTopButton from "./scroll-to-top-button/ScrollToTopButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { getItemsStorage } from "../../redux/action-creators";
+import { getItemsStorage, getUserId } from "../../redux/action-creators";
 import { State } from "../../redux/reducer";
 import AboutUs from "./section-about-us/AboutUs";
 import Navbar from "../nav/navbar";
@@ -22,6 +22,7 @@ export default function Home() {
     if (Items.length === 0) {
       dispatch(getItemsStorage());
     }
+    dispatch(getUserId())
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);
     });
