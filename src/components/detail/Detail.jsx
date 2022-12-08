@@ -26,7 +26,7 @@ import LoginModal from "../login-modal/LoginModal";
 export default function Detail() {
   const [userComments, setUserComments] = useState("");
   const [userRating, setUserRating] = useState(3);
-  const UserId = useSelector((state) => state.user);
+  const User = useSelector((state) => state.user);
   const wineDetail = useSelector((state) => state.wineDetail);
   const WineReview = useSelector((state) => state.wineReviews);
   const { id } = useParams();
@@ -53,8 +53,8 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getWineDetail(id));
-    if (Object.keys(UserId).length === 0) dispatch(getUserId());
-    dispatch(getWineReviews(id));
+    dispatch(getWineReviews(id))
+
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
   }, [dispatch, id, token, wineDetail.length]);
@@ -73,7 +73,7 @@ export default function Detail() {
 
   const AddComment = async () => {
     const verifyComments = WineReview.filter(
-      (wr) => wr.user_id === UserId.data._id
+      (wr) => wr.user_id === User._id
     );
     if (verifyComments.length > 0) {
       let data = {
@@ -94,7 +94,7 @@ export default function Detail() {
         .catch((error) => console.error("Error:", error));
     } else {
       let data = {
-        user_id: UserId.data._id,
+        user_id: User._id,
         wine_id: id,
         comment: userComments,
         rating: userRating,
