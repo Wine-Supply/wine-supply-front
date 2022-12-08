@@ -26,6 +26,7 @@ export default function Detail() {
   const [userComments, setUserComments] = useState("");
   const [userRating, setUserRating] = useState(3);
   const UserId = useSelector((state) => state.user);
+  const wineDetail = useSelector((state) => state.wineDetail);
   const WineReview = useSelector((state) => state.wineReviews);
   const { id } = useParams();
   const [token, setToken] = useState("");
@@ -51,11 +52,11 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getWineDetail(id));
+    if (Object.keys(UserId).length === 0) dispatch(getUserId());
     dispatch(getWineReviews(id));
-    dispatch(getUserId());
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
-  }, [dispatch, id, token, WineReview]);
+  }, [dispatch, id, token, wineDetail.length, WineReview.length]);
 
   const handleAddItemToCart = () => {
     if (token.length === 0) {
