@@ -14,15 +14,15 @@ import CarritoFull from "../carritoFull/CarritoFull";
 
 export default function Home() {
   const [showButton, setShowButton] = useState<boolean>(false);
-  //  const [cartOpen, setCartOpen] = useState<boolean>(true);
   const Items = useSelector((state: State) => state.itemsStorage);
+  const User = useSelector((state: State) => state.user);
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
     if (Items.length === 0) {
       dispatch(getItemsStorage());
     }
-    dispatch(getUserId())
+    if (Object.keys(User).length === 0) dispatch(getUserId())
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);
     });

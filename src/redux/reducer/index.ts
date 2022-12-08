@@ -52,6 +52,13 @@ export interface Wine {
   volume?: number;
 }
 
+interface WineReview {
+  review_id: string;
+  wine_id: string;
+  comment: string;
+  rating: number;
+}
+
 interface Actions {
   type: string;
   payload: Wine[] | any;
@@ -61,6 +68,7 @@ export interface State {
   allWines: Array<Wine>;
   topRatedWines: Array<Wine>;
   wineDetail: Array<Wine>;
+  wineReviews: WineReview[];
   wineNames: string[];
   wineBrands: string[];
   itemsStorage: Object[];
@@ -190,18 +198,18 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         openCart: !state.openCart,
       };
 
-      case GET_WINE_REVIEWS:
-        return {
-          ...state,
-          wineReviews: action.payload,
-        };
+    case GET_WINE_REVIEWS:
+      return {
+        ...state,
+        wineReviews: action.payload,
+      };
 
     case GET_USER_ID:
-      return{
+      return {
         ...state,
         user: action.payload,
-      }
-      
+      };
+
     case SHOW_LOGIN_MODAL:
       return {
         ...state,
