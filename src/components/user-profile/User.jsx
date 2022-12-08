@@ -4,7 +4,7 @@ import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils";
 //import { useAuth, upload } from "../login/FirebaseConfig";
 import axios from "axios";
 import Navbar from "../nav/navbar";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 
 function validate(input) {
   let errors = {};
