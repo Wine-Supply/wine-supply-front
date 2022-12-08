@@ -24,10 +24,8 @@ export default function TopRated() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (topWines.length === 0) {
-      dispatch(getWines());
-      dispatch(getTopRatedWines());
-    }
+    if (Products.length === 0) dispatch(getWines());
+    dispatch(getTopRatedWines());
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
   }, [Products, token]);
