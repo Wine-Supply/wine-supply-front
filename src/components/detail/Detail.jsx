@@ -155,7 +155,7 @@ export default function Detail() {
       </DetailStyled>
 
       <Comments>
-        {token !== null &&
+        {token !== '' &&
           <>
             <h2 className="comment-title">Leave your comment about this product</h2>
             <textarea onChange={(e) => setUserComments(e.target.value)} type="text" name="textarea" rows="4" className="textarea" placeholder="Write your comment..." />

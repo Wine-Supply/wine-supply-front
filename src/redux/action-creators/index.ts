@@ -29,7 +29,6 @@ export const getWines = () => {
     try {
       const resp = await fetch(`${URL}/wines`);
       const data = await resp.json();
-      //console.log("ac", data);
       return dispatch({ type: GET_WINES, payload: data });
     } catch (error) {
       return error;
@@ -201,7 +200,7 @@ export const openCart = () => {
 
 export const getWineReviews = (_id: String) => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`http://localhost:3001/getWineReviews/${_id}`);
+    const resp = await fetch(`${URL}/getWineReviews/${_id}`);
     const data = await resp.json();
     return dispatch({ type: GET_WINE_REVIEWS, payload: data });
   };
