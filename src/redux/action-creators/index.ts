@@ -180,7 +180,7 @@ export const buyItem = async (id: any, token: any) => {
 };
 
 export const getUserId = () => {
-  let token = localStorage.getItem('token')
+  let token = localStorage.getItem("token");
   return async function (dispatch: Dispatch) {
       if(token !== null){
       const res = await axios.get(`${URL}/getuser`, {
@@ -194,6 +194,7 @@ export const getUserId = () => {
   }
 }
 
+
 export const openCart = () => {
   return {
     type: OPEN_CART,
@@ -206,4 +207,4 @@ export const getWineReviews = (_id: String) => {
     const data = await resp.json();
     return dispatch({ type: GET_WINE_REVIEWS, payload: data });
   };
-}
+};
