@@ -17,6 +17,7 @@ import CarritoFull from "../carritoFull/CarritoFull";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../login-modal/LoginModal";
 import Loading from "../loading/Loading";
+import Banner from "../payment-banner/Banner";
 
 export const addStorageItem = (
   _id: string,
@@ -70,6 +71,7 @@ export default function CatalogueProducts() {
     <>
       <Navbar />
       <CarritoFull />
+      <Banner />
       <CatalogoContainer>
         <Filter />
         <TitleCategory>Most Recommended</TitleCategory>
