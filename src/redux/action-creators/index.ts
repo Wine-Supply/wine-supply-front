@@ -180,19 +180,21 @@ export const buyItem = async (id: any, token: any) => {
 };
 
 export const getUserId = () => {
-  let token = localStorage.getItem('token')
+  let token = localStorage.getItem("token");
   return async function (dispatch: Dispatch) {
-      if(token !== null){
+    if (token !== null) {
       const res = await axios.get(`${URL}/getuser`, {
         headers: {
-          Authorization: `Bearer ${JSON.parse(token || '')}`,
-          'Content-Type': 'application/json, charset=utf-8'
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "application/json, charset=utf-8",
         },
-      })
+      });
+      console.log(res);
+
       return dispatch({ type: GET_USER_ID, payload: res.data });
     }
-  }
-}
+  };
+};
 
 export const openCart = () => {
   return {
@@ -206,4 +208,4 @@ export const getWineReviews = (_id: String) => {
     const data = await resp.json();
     return dispatch({ type: GET_WINE_REVIEWS, payload: data });
   };
-}
+};

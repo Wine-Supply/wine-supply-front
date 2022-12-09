@@ -12,7 +12,7 @@ import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../login-modal/LoginModal";
@@ -46,7 +46,6 @@ export const addStorageItem = (
 
 export default function CatalogueProducts() {
   const [token, setToken] = useState<string | null>("");
-  // const [showModal, setShowModal] = useState<boolean>(false);
   const loginModal = useSelector((state: State) => state.loginModal);
   const Products = useSelector((state: State) => state.allWines);
   const Items = useSelector((state: State) => state.itemsStorage);

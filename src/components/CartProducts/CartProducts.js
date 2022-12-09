@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -23,18 +23,26 @@ const CartProducts = () => {
     dispatch(getItemsStorage());
   };
 
+  const handleEmptyCart = () => {
+    localStorage.setItem("item", JSON.stringify([]));
+    dispatch(getItemsStorage());
+  };
+
   return (
     <Wrapper>
       <h2>Your Shopping Cart</h2>
       {Items.length > 0 && (
-        <div>
-          <span style={{ marginRight: "1rem" }}>Items: {total}</span>
-          <span>Total: {totalMoney}</span>
+        <div className="cart-info">
+          <span>Items: {total}</span>
+          <span>Total: ${totalMoney}</span>
+          <button onClick={handleEmptyCart} className="empty-btn">
+            Empty cart
+          </button>
         </div>
       )}
 
       {Items.length === 0 ? (
-        <p>No items in cart.</p>
+        <p className="no-items">No items in cart.</p>
       ) : (
         <div>
           {Items.map((item) => (

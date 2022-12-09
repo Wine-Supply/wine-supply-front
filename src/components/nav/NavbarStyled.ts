@@ -73,6 +73,26 @@ export const NavbarStyled = styled.nav`
     border-bottom: 2px solid currentColor;
   }
 
+  .cart {
+    display: inline-block;
+    position: relative;
+  }
+
+  .items-amount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    font-size: 1.2rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--btn-color);
+    padding: 1rem;
+    border-radius: 50%;
+  }
+
   @media (min-width: 768px) {
     .burguer {
       display: none;
@@ -94,6 +114,5 @@ export const NavbarStyled = styled.nav`
     .logo {
       display: none;
     }
-
   }
 `;
