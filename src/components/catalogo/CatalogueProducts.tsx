@@ -46,7 +46,6 @@ export const addStorageItem = (
 
 export default function CatalogueProducts() {
   const [token, setToken] = useState<string | null>("");
-  // const [showModal, setShowModal] = useState<boolean>(false);
   const loginModal = useSelector((state: State) => state.loginModal);
   const Products = useSelector((state: State) => state.allWines);
   const Items = useSelector((state: State) => state.itemsStorage);

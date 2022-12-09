@@ -97,7 +97,7 @@ export default function Filter() {
   };
 
   useEffect(() => {
-    if (url.length > 0) console.log(dispatch(filterByQuery(url)));
+    if (url.length > 0) dispatch(filterByQuery(url));
   }, [url]);
 
   return (
