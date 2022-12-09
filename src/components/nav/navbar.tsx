@@ -67,7 +67,7 @@ const Navbar = () => {
               <UserOutlined />
             </Link>
           </li>
-          {User.isAdmin !== "no" && (
+          {token && User.isAdmin !== "no" && (
             <li>
               <Link className={"link line"} to="/admin">
                 <IdcardOutlined />
