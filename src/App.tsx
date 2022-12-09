@@ -10,6 +10,7 @@ import SignUp from "./components/sign-up/SignUp";
 import User from "./components/user-profile/User";
 import Newsletter from "./components/newsletter/Newsletter";
 import "./App.css";
+import AdminDash from "./components/admin/Admin";
 
 function App() {
   return (
@@ -25,9 +26,13 @@ function App() {
         <Route path="/admin" element={<Form />} />
         <Route path="/user" element={<User />} />
         <Route path="/newsletter" element={<Newsletter />} />
+        <Route path="/admin/*" element={<AdminDash />} />
       </Routes>
     </div>
   );
 }
+
+// cuatro comp por ruta: crear mostrar editar borrar 
+// get user / get wines
 
 export default App;
