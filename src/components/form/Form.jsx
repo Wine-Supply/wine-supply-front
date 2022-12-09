@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FormStyled } from "./FormStyled";
 import { ButtonSaveChanges } from "../utils/utils";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import Navbar from "../nav/navbar";
 
 function validate(formData) {
