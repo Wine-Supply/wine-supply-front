@@ -22,3 +22,5 @@ export const LOGIN_USER = "LOGIN_USER";
 export const GET_USER_ID = "GET_USER_ID";
 export const SHOW_LOGIN_MODAL = "SHOW_LOGIN_MODAL";
 export const GET_USER = "GET_USER";
+
+export const CLEAR_DETAIL = "CLEAR_DETAIL";

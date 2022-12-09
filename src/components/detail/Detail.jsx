@@ -8,6 +8,7 @@ import {
   getUserId,
   showLoginModal,
   getWines,
+  clearPage,
 } from "../../redux/action-creators";
 import {
   Comments,
@@ -15,6 +16,7 @@ import {
   DetailStyled,
   RankingValue,
   WineData,
+  Container,
 } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
@@ -22,10 +24,12 @@ import Footer from "../Footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import LoginModal from "../login-modal/LoginModal";
+import Load from "../loading/Load";
 
 export default function Detail() {
   const [userComments, setUserComments] = useState("");
   const [userRating, setUserRating] = useState(3);
+  const [isLoading, setIsLoading] = useState(true);
   const User = useSelector((state) => state.user);
   const wineDetail = useSelector((state) => state.wineDetail);
   const WineReview = useSelector((state) => state.wineReviews);
@@ -56,8 +60,19 @@ export default function Detail() {
     dispatch(getWineReviews(id));
 
     if (token?.length === 0 && localStorage.getItem("token"))
-      setToken(localStorage.getItem("token"));
+    setToken(localStorage.getItem("token"));
+
+    return () => {
+      dispatch(clearPage());
+    };
+    
   }, [dispatch, id, token, wineDetail.length]);
+
+  useEffect(() => {
+    if (name) {
+      setIsLoading(false);
+    }
+  }, [name]);
 
   const handleAddItemToCart = () => {
     if (token.length === 0) {
@@ -121,6 +136,12 @@ export default function Detail() {
     <>
       <Navbar />
       <CarritoFull />
+      {isLoading ? (
+        <Container>
+          <Load />
+        </Container>
+      ) : (
+      <Container>
       <DetailStyled>
         <div className={"bg"}>
           <img className={"img"} src={images} alt="img" />
@@ -168,7 +189,6 @@ export default function Detail() {
         </div>
         {loginModal && <LoginModal handleLogin={handleLogin} />}
       </DetailStyled>
-
       <Comments>
         {token !== "" && (
           <>
@@ -268,6 +288,8 @@ export default function Detail() {
           )}
         </div>
       </Comments>
+      </Container>
+      )}
       <Footer />
     </>
   );

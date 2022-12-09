@@ -1,5 +1,13 @@
 import styled from "styled-components"
 
+const Container = styled.div `
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  min-height: 73.7rem;
+  align-items: center;
+`
+
 const DetailStyled = styled.div`
   color: var(--font-color);
   display: flex;
@@ -192,7 +200,7 @@ const Comments = styled.div`
 
   .textarea{
     background-color: var(--background-color);
-    border: solid 2px #fff;
+    border: solid 2px var(--font-color);
     width: 100vh;
     height: 5rem;
     padding: 1rem;
@@ -205,6 +213,20 @@ const Comments = styled.div`
     font-size: 3rem;
     margin-bottom: 2rem;
   }
+
+  @media(max-width: 768px){
+    min-width: 45rem;
+    max-width: 25rem;
+    text-align: center;
+    justify-content: center;
+
+    .textarea{
+      min-width: 41rem;
+      max-width: 41rem;
+      min-height: 15rem;
+      max-height: 15rem;
+    }
+  }
 `
 const RankingValue = styled.div`
     display: flex;
@@ -216,7 +238,7 @@ const RankingValue = styled.div`
     font-size: 1.5rem;
   }
 
-  input[type="radio"] {
+input[type="radio"] {   
 }
 `
 
@@ -228,7 +250,6 @@ const CommentsUsers = styled.div`
   font-size: 2rem;
   padding: 2rem 4rem;
   width: 100vh;
-
 
   .user{
     margin-bottom:2rem;
@@ -242,6 +263,12 @@ const CommentsUsers = styled.div`
   p{
     margin-bottom:2rem;
   }
+  
+  @media(max-width: 768px){
+    min-width: 41rem;
+    max-width: 41rem;
+  }
+  
 `
 
 export {
@@ -249,5 +276,6 @@ export {
   WineData,
   Comments,
   RankingValue,
-  CommentsUsers
+  CommentsUsers,
+  Container
 }

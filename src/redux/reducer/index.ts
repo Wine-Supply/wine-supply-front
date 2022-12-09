@@ -16,6 +16,7 @@ import {
   GET_WINE_REVIEWS,
   GET_USER_ID,
   SHOW_LOGIN_MODAL,
+  CLEAR_DETAIL,
 } from "../actions/index";
 
 type Users ={
@@ -214,6 +215,12 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         loginModal: !state.loginModal,
+      };
+
+    case CLEAR_DETAIL:
+      return{
+        ...state,
+        wineDetail: {},
       };
 
     default:

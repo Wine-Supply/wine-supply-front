@@ -15,6 +15,7 @@ import {
   GET_WINE_REVIEWS,
   GET_USER_ID,
   SHOW_LOGIN_MODAL,
+  CLEAR_DETAIL,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -207,3 +208,9 @@ export const getWineReviews = (_id: String) => {
     return dispatch({ type: GET_WINE_REVIEWS, payload: data });
   };
 };
+
+export function clearPage() {
+  return {
+    type: CLEAR_DETAIL,
+  };
+}
