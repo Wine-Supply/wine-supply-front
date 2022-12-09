@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Dispatch } from "@reduxjs/toolkit";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
@@ -5,6 +6,7 @@ import { CardContainer, CardInformation } from "./CardStyle";
 import { ButtonAddToCart } from "../utils/utils";
 import { showLoginModal } from "../../redux/action-creators";
 import { useDispatch } from "react-redux";
+import { CheckOutlined } from "@ant-design/icons";
 
 interface CardProps {
   _id: string;
@@ -26,16 +28,20 @@ const Card: React.FC<CardProps> = ({
   descriptions,
   price,
   rating,
-  // dispatch,
   token,
-  // setShowModal,
 }) => {
+  const [addedToCart, setAddedToCart] = useState<boolean>(false);
   const dispatch = useDispatch();
   const handleAddItemToCart = () => {
     if (token?.length === 0) {
       dispatch(showLoginModal());
-    } else
+    } else {
       addStorageItem(_id, name, img, descriptions, price, rating, dispatch!);
+      setAddedToCart(true);
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 2000);
+    }
   };
 
   return (
@@ -65,6 +71,9 @@ const Card: React.FC<CardProps> = ({
           >
             add to cart
           </ButtonAddToCart>
+          <CheckOutlined
+            className={`added-to-cart ${addedToCart && "active"}`}
+          />
         </div>
       </CardInformation>
     </CardContainer>

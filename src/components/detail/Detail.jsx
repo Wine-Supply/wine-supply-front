@@ -18,7 +18,7 @@ import {
 } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import LoginModal from "../login-modal/LoginModal";
@@ -53,7 +53,7 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getWineDetail(id));
-    dispatch(getWineReviews(id))
+    dispatch(getWineReviews(id));
 
     if (token?.length === 0 && localStorage.getItem("token"))
       setToken(localStorage.getItem("token"));
@@ -72,9 +72,7 @@ export default function Detail() {
   };
 
   const AddComment = async () => {
-    const verifyComments = WineReview.filter(
-      (wr) => wr.user_id === User._id
-    );
+    const verifyComments = WineReview.filter((wr) => wr.user_id === User._id);
     if (verifyComments.length > 0) {
       let data = {
         review_id: verifyComments[0]._id,
