@@ -15,6 +15,11 @@ const CardContainer = styled.div`
   max-width: 30rem;
   min-height: 12rem;
   max-height: 12rem;
+  position: relative;
+
+  :hover .wishlist {
+    opacity: 1;
+  }
 
   .imageMain {
     text-align: center;
@@ -30,6 +35,16 @@ const CardContainer = styled.div`
     margin-top: 0.5rem;
     max-width: 11.4rem;
     max-height: 9rem;
+  }
+
+  .wishlist {
+    position: absolute;
+    top: -1.6rem;
+    right: -1.6rem;
+    font-size: 2rem;
+    color: var(--btn-color);
+    opacity: 0;
+    transition: all 0.3s;
   }
 
   @media (max-width: 768px) {

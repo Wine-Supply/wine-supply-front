@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   IdcardOutlined,
   UserOutlined,
+  TagOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,6 +62,11 @@ const Navbar = () => {
                 dispatch(openCart());
               }}
             />
+          </li>
+          <li>
+            <Link to="/wishlist">
+              <TagOutlined className="link line" />
+            </Link>
           </li>
           <li>
             <Link className={"link line"} to="/login">

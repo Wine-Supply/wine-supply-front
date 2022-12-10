@@ -4,20 +4,26 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import { CardContainer, CardInformation } from "./CardStyle";
 import { ButtonAddToCart } from "../utils/utils";
-import { showLoginModal } from "../../redux/action-creators";
-import { useDispatch } from "react-redux";
-import { CheckOutlined } from "@ant-design/icons";
+import {
+  addToWishlist,
+  getWishlist,
+  showLoginModal,
+} from "../../redux/action-creators";
+import { useDispatch, useSelector } from "react-redux";
+import { CheckOutlined, TagOutlined } from "@ant-design/icons";
+import { State } from "../../redux/reducer";
 
-interface CardProps {
+export interface CardProps {
   _id: string;
   name: string;
   img: string;
   descriptions: string;
   price: number;
   rating: number;
+  setAddedToWishlist?: React.Dispatch<React.SetStateAction<boolean>>;
+  setItemAddedToWishlist?: React.Dispatch<React.SetStateAction<string>>;
   addStorageItem?: any;
   token?: string | null;
-  setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch?: Dispatch<any>;
 }
 
@@ -29,9 +35,15 @@ const Card: React.FC<CardProps> = ({
   price,
   rating,
   token,
+  setAddedToWishlist,
+  setItemAddedToWishlist,
 }) => {
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
+
+  const wines = useSelector((state: State) => state.allWines);
+  const wishlist = useSelector((state: State) => state.wishList);
   const dispatch = useDispatch();
+
   const handleAddItemToCart = () => {
     if (token?.length === 0) {
       dispatch(showLoginModal());
@@ -44,8 +56,21 @@ const Card: React.FC<CardProps> = ({
     }
   };
 
+  const handleAddToWishlist = () => {
+    const alreadyInList = wishlist.some((item) => item._id === _id);
+    if (token?.length === 0) dispatch(showLoginModal());
+    else if (alreadyInList) return;
+    else {
+      addToWishlist(_id, wines);
+      dispatch(getWishlist());
+      setItemAddedToWishlist!(_id);
+      setAddedToWishlist!(true);
+    }
+  };
+
   return (
     <CardContainer>
+      <TagOutlined onClick={handleAddToWishlist} className="wishlist" />
       <Link to={`/home/products/detail/${_id}`}>
         <div className="imageMain">
           <img src={img} alt={name} />
