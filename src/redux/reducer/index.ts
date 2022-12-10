@@ -17,9 +17,10 @@ import {
   GET_USER_ID,
   SHOW_LOGIN_MODAL,
   CLEAR_DETAIL,
+  GET_WISHLIST,
 } from "../actions/index";
 
-type Users ={
+type Users = {
   name?: string;
   lastName?: string;
   userName?: string;
@@ -34,7 +35,7 @@ type Users ={
   updatedAt?: string;
   createdAt?: string;
   whishList?: string[];
-}
+};
 
 export interface Wine {
   _id: string;
@@ -78,6 +79,7 @@ export interface State {
   totalItems: number;
   totalPrice: number;
   user: Users;
+  wishList: Wine[];
 }
 
 const initialState = {
@@ -93,6 +95,7 @@ const initialState = {
   totalItems: 0,
   totalPrice: 0,
   user: {},
+  wishList: [],
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -218,9 +221,15 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case CLEAR_DETAIL:
-      return{
+      return {
         ...state,
         wineDetail: {},
+      };
+
+    case GET_WISHLIST:
+      return {
+        ...state,
+        wishList: JSON.parse(localStorage.getItem("wishlist") ?? "[]"),
       };
 
     default:

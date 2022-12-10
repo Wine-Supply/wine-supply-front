@@ -24,3 +24,6 @@ export const SHOW_LOGIN_MODAL = "SHOW_LOGIN_MODAL";
 export const GET_USER = "GET_USER";
 
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+export const GET_WISHLIST = "GET_WISHLIST";
