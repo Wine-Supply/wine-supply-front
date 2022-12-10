@@ -1,11 +1,25 @@
 import React from "react";
 
-import { List, Datagrid, TextField, ImageField, NumberField, BooleanField } from 'react-admin'
+import { List, 
+  Datagrid, 
+  TextField, 
+  ImageField, 
+  NumberField, 
+  BooleanField,
+  Filter,
+  SearchInput,
+} from 'react-admin'
 
-const WineList = ({props}: any ) => {
-  return <List {...props}>
-    <Datagrid>
-      <TextField source='id' />
+import { MyDatagrid } from './CustomStyle'
+const CustomFilter = (props) => (
+  <Filter {...props}>
+    <SearchInput placeholder='Search by Name' source='name' resettable alwaysOn />
+  </Filter>
+);
+
+const WineList = (props) => {
+  return <List {...props} filters={<CustomFilter />} title='List of wines'>
+    <MyDatagrid>
       <TextField source='name' />
       <TextField source='brand' />
       <TextField source='description' />
@@ -22,11 +36,9 @@ const WineList = ({props}: any ) => {
       <NumberField source='stock' />
       <NumberField source='price' />
       <BooleanField source='isActive' />
-    </Datagrid>
+      <TextField source='id' />
+    </MyDatagrid>
   </List>
 }
-
-// <ImageField source='images' /> || <UrlField> || <ArrayField> || <TextField>
-//<TextField source='review_id' />   →  ver con david el tema del review_id
-    
+   
 export default WineList

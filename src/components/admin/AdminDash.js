@@ -1,7 +1,9 @@
+import React from 'react';
 import { fetchUtils, Admin, Resource} from 'react-admin'
 import restProvider from 'ra-data-simple-rest'
-import UserList from "./Users";
+//import UserList from "./Users";
 import WineList from './WineList';
+import UserList from './UserList';
 
 
 const httpClient = (url, options = {}) => {
@@ -21,8 +23,10 @@ const AdminDash = () => {
 
     return(
     <Admin basename="/admin" dataProvider={api}>
-        <Resource name='wines' list={WineList} />
-    </Admin>)}
+        <Resource name='admin/wines' list={WineList} delete={WineList}/>
+        <Resource name='admin/users' list={UserList} delete={UserList} />
+    </Admin>)
+}
 
 
 export default AdminDash
