@@ -24,7 +24,7 @@ const CustomFilter = (props) => (
 
 const UserList = (props) => {
   return <List {...props} filters={<CustomFilter />} title='List of users'>
-    <Datagrid>
+    <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='name' />
       <TextField source='userName' />

@@ -11,15 +11,16 @@ import { List,
 } from 'react-admin'
 
 import { MyDatagrid } from './CustomStyle'
+
 const CustomFilter = (props) => (
   <Filter {...props}>
-    <SearchInput placeholder='Search by Name' source='name' resettable alwaysOn />
+    <SearchInput placeholder='Search by id' source='id' resettable alwaysOn />
   </Filter>
 );
 
 const WineList = (props) => {
   return <List {...props} filters={<CustomFilter />} title='List of wines'>
-    <MyDatagrid>
+    <Datagrid rowClick='edit'>
       <TextField source='name' />
       <TextField source='brand' />
       <TextField source='description' />
@@ -37,7 +38,7 @@ const WineList = (props) => {
       <NumberField source='price' />
       <BooleanField source='isActive' />
       <TextField source='id' />
-    </MyDatagrid>
+    </Datagrid>
   </List>
 }
    
