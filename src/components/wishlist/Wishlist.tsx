@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItemsStorage, getWishlist } from "../../redux/action-creators";
 import { State, Wine } from "../../redux/reducer";
 import CarritoFull from "../carritoFull/CarritoFull";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import Navbar from "../nav/navbar";
 import { ListContainer } from "./ListContainer";
 import WishlistCard from "./WishlistCard";

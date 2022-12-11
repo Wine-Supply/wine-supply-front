@@ -6,7 +6,7 @@ import { getItemsStorage, getUserId } from "../../redux/action-creators";
 import { State } from "../../redux/reducer";
 import AboutUs from "./section-about-us/AboutUs";
 import Navbar from "../nav/navbar";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import BanerSection from "./section-baner/BanerSection";
 import Newsletter from "./section-newsletter/Newsletter";
 import TopRated from "./section-top-rated/TopRated";

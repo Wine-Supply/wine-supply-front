@@ -20,7 +20,7 @@ import {
 } from "./DetailStyled";
 import { ButtonBuyNow, ButtonAddToCart } from "../utils/utils";
 import Navbar from "../nav/navbar";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { addStorageItem } from "../catalogo/CatalogueProducts";
 import LoginModal from "../login-modal/LoginModal";
@@ -109,6 +109,7 @@ export default function Detail() {
       let data = {
         user_id: User._id,
         wine_id: id,
+        username: User.userName,
         comment: userComments,
         rating: userRating,
       };
@@ -274,7 +275,7 @@ export default function Detail() {
                 <CommentsUsers>
                   <h3>{rew.rating}/5★</h3>
                   <div className="user">
-                    <h4>{rew.user_id}</h4>
+                    <h4>{rew.username ? rew.username : rew.user_id}</h4>
                   </div>
                   <p>{rew.comment}</p>
                   <span>date: {date}</span>
