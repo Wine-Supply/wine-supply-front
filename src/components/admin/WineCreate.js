@@ -9,11 +9,14 @@ import {
   BooleanInput,
   useNotify,
   useRefresh,
+  useCreateContext,
 } from 'react-admin';
 
-const WineCreate = (props) => {
+const WineCreate = ({id}) => {
   const notify = useNotify();
   const refresh = useRefresh();
+
+  const { save } = useCreateContext();
 
   const onSuccess = () => {
     notify(`New Wine created `);
@@ -21,8 +24,8 @@ const WineCreate = (props) => {
   };
 
   return (
-    <Create {...props} title='Create new Wine' onSuccess={onSuccess}>
-      <SimpleForm>
+    <Create resource="wines" id={id} title='Create new Wine' onSuccess={onSuccess}>
+      <SimpleForm onSubmit={save}>
         <TextInput source='name' />
         <TextInput source='brand'/>
         <TextInput source='description'/>

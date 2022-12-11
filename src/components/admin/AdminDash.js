@@ -25,7 +25,7 @@ const AdminDash = () => {
     return(
     <Admin basename="/admin" dataProvider={api}>
         <Resource name='admin/wines' list={WineList} create={WineCreate} edit={WineEdit} delete={WineList}/>
-        <Resource name='admin/users' list={UserList} edit={UserEdit}/>
+        <Resource name='admin/users' list={UserList} edit={UserEdit} delete={UserList}/>
     </Admin>)
 }
 
