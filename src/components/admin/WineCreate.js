@@ -17,7 +17,7 @@ const validateWineCreation = async (values) => {
   //name
   if (!values.name || values.name?.length === 0) {
     errors.name = "Please enter the product's name";
-  } else if (values.name?.length > 20) {
+  } else if (values.name?.length > 25) {
     errors.name = "The name cannot have more than 20 characters";
   } else if (values.name?.match(blanks)) {
     errors.name = "The name cannot contain only blank spaces";
@@ -79,10 +79,10 @@ const validateWineCreation = async (values) => {
   } else if (
     !values.description ||
     values.description?.length < 20 ||
-    values.description?.length > 150
+    values.description?.length > 300
   )  {
     errors.description ="The description must have between 20 and 150 characters";
-    
+
   //strain
   } else if (!values.strain || values.strain?.length === 0) {
     errors.strain = "Please enter the product's grape variety";
