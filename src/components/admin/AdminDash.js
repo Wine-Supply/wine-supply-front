@@ -7,7 +7,7 @@ import UserList from './UserList';
 import UserEdit from './UserEdit';
 import WineEdit from './WineEdit';
 import WineCreate from './WineCreate';
-
+import Charts from './Charts';
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
@@ -24,8 +24,9 @@ const AdminDash = () => {
 
     return(
     <Admin basename="/admin" dataProvider={api}>
+        <Resource name='admin/chart' list={Charts}/>
         <Resource name='admin/wines' list={WineList} create={WineCreate} edit={WineEdit} delete={WineList}/>
-        <Resource name='admin/users' list={UserList} edit={UserEdit} delete={UserList}/>
+        <Resource name='admin/users' list={UserList} edit={UserEdit}/>
     </Admin>)
 }
 

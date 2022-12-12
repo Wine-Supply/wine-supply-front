@@ -28,11 +28,11 @@ const UserList = (props) => {
       <TextField source='id' />
       <TextField source='name' />
       <TextField source='userName' />
-      <TextField source='lastname' />
+      <TextField source='lastName' />
       <EmailField source='email' />
       <DateField source='date_of_birth' />
       <TextField source='phone' />
-      <TextField source=' isAdmin' />
+      <TextField source='isAdmin' />
       <BooleanField source='isActive' />
       <DateField source='createdAt' />
       <TextField source='whishList' />

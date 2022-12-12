@@ -15,14 +15,20 @@ const UserEdit = (props) => (
       <TextInput disabled source='email' />
       {/* <TextInput disabled source='name' />
       <DateTimeInput disabled source='date_of_birth' /> */}
-      <TextInput disabled source='isAdmin' />
-      {/* <SelectInput
+      <SelectInput
         source='isAdmin'
         choices={[
-          { id: 'borrowed', name: 'yes' },
-          { id: 'delayed', name: 'no' },
+          { id: 'yes', name: 'yes' },
+          { id: 'no', name: 'no' },
         ]}
-      /> */}
+      /> 
+      <SelectInput
+        source='isActive'
+        choices={[
+          { id: 'true', name: 'yes' },
+          { id: 'false', name: 'no' },
+        ]}
+      /> 
     </SimpleForm>
   </Edit>
 );
