@@ -12,14 +12,8 @@ import { List,
 
 import { MyDatagrid } from './CustomStyle'
 
-const CustomFilter = (props) => (
-  <Filter {...props}>
-    <SearchInput placeholder='Search by id' source='id' resettable alwaysOn />
-  </Filter>
-);
-
 const WineList = (props) => {
-  return <List {...props} filters={<CustomFilter />} title='List of wines'>
+  return <List {...props} title='List of wines'>
     <Datagrid rowClick='edit'>
       <TextField source='name' />
       <TextField source='brand' />

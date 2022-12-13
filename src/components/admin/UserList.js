@@ -16,14 +16,9 @@ import { List,
 
 } from 'react-admin'
 
-const CustomFilter = (props) => (
-  <Filter {...props}>
-    <SearchInput placeholder='Search by Email' source='email' resettable alwaysOn />
-  </Filter>
-);
 
 const UserList = (props) => {
-  return <List {...props} filters={<CustomFilter />} title='List of users'>
+  return <List {...props} title='List of users'>
     <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='name' />
