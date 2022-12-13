@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ListContainer = styled.div`
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +15,7 @@ export const ListContainer = styled.div`
     font-size: 2.6rem;
   }
 
+  
   .btn-container {
     display: flex;
     flex-direction: column;
@@ -112,13 +114,19 @@ export const CardContainer = styled.article`
   }
 
   .card-description {
+    margin-right: 2rem;
+    margin-left: 2rem;
     font-size: 1.4rem;
     line-height: 1.4;
     letter-spacing: 0.5px;
     margin-bottom: 2rem;
+    text-overflow: ellipsis;
+    height: 13rem;
+    overflow: hidden;
   }
 
   .card-btns {
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
   }
@@ -157,7 +165,9 @@ export const CardContainer = styled.article`
 
   .card-img {
     width: 7.5rem;
+    max-width: min-content;
     height: 20rem;
+    object-fit: cover;
   }
 
   .added-to-cart {
@@ -244,6 +254,8 @@ export const Modal = styled.div`
 
   .wine-img {
     height: 30rem;
+    max-width: 28rem;
+    object-fit: cover;
   }
 
   .overlay {
