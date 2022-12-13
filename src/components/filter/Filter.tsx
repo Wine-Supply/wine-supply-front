@@ -98,13 +98,14 @@ export default function Filter() {
 
   useEffect(() => {
     if (url.length > 0) dispatch(filterByQuery(url));
-    // eslint-disable-next-line
-    console.log(url);
   }, [url]);
 
   return (
     <FilterStyled>
       <form onSubmit={(e) => e.preventDefault()} className="container">
+        <div className="filter-container">
+          <SearchBar />
+        </div>
         <div className="filter-container mb">
           <label className="options-label" htmlFor="name-filter">
             Filter by:

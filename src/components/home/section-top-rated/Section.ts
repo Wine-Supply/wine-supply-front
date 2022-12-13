@@ -8,11 +8,13 @@ export const Section = styled.section`
   padding: 1.4rem 0 3rem 0;
 
   .cards-container {
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
     background-color: var(--background-color);
-    padding: 2rem 6rem;
+    min-height: 30rem;
   }
 
   .secondary-heading {
@@ -20,7 +22,7 @@ export const Section = styled.section`
     text-align: center;
     font-family: var(--font-title);
     color: var(--font-color);
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   @media (min-width: 600px) {
@@ -30,7 +32,9 @@ export const Section = styled.section`
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
       gap: 2rem;
+      min-height: 40rem;
     }
   }
 `;

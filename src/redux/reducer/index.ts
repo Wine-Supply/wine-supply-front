@@ -13,7 +13,29 @@ import {
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
   OPEN_CART,
+  GET_WINE_REVIEWS,
+  GET_USER_ID,
+  SHOW_LOGIN_MODAL,
+  CLEAR_DETAIL,
+  GET_WISHLIST,
 } from "../actions/index";
+
+type Users = {
+  name?: string;
+  lastName?: string;
+  userName?: string;
+  address?: string[];
+  email?: string;
+  avatar?: string[];
+  isActive?: boolean;
+  isAdmin?: string;
+  membership_id?: number[];
+  order?: string[];
+  shopping_cart?: object[];
+  updatedAt?: string;
+  createdAt?: string;
+  whishList?: string[];
+};
 
 export interface Wine {
   _id: string;
@@ -32,6 +54,13 @@ export interface Wine {
   volume?: number;
 }
 
+interface WineReview {
+  review_id: string;
+  wine_id: string;
+  comment: string;
+  rating: number;
+}
+
 interface Actions {
   type: string;
   payload: Wine[] | any;
@@ -41,12 +70,16 @@ export interface State {
   allWines: Array<Wine>;
   topRatedWines: Array<Wine>;
   wineDetail: Array<Wine>;
+  wineReviews: WineReview[];
   wineNames: string[];
   wineBrands: string[];
   itemsStorage: Object[];
   openCart: boolean;
+  loginModal: boolean;
   totalItems: number;
   totalPrice: number;
+  user: Users;
+  wishList: Wine[];
 }
 
 const initialState = {
@@ -55,10 +88,14 @@ const initialState = {
   wineNames: [],
   wineBrands: [],
   wineDetail: [],
+  wineReviews: [],
   itemsStorage: [],
   openCart: false,
+  loginModal: false,
   totalItems: 0,
   totalPrice: 0,
+  user: {},
+  wishList: [],
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -137,10 +174,14 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case ADD_ITEMS_STORAGE:
-      let searchItem = state.itemsStorage.some((el:any) => el._id == action.payload._id)
+      let searchItem = state.itemsStorage.some(
+        (el: any) => el._id === action.payload._id
+      );
       return {
         ...state,
-        itemsStorage: searchItem ? state.itemsStorage : [...state.itemsStorage, action.payload],
+        itemsStorage: searchItem
+          ? state.itemsStorage
+          : [...state.itemsStorage, action.payload],
       };
 
     case GET_TOTAL_ITEMS:
@@ -159,6 +200,36 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         openCart: !state.openCart,
+      };
+
+    case GET_WINE_REVIEWS:
+      return {
+        ...state,
+        wineReviews: action.payload,
+      };
+
+    case GET_USER_ID:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case SHOW_LOGIN_MODAL:
+      return {
+        ...state,
+        loginModal: !state.loginModal,
+      };
+
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        wineDetail: {},
+      };
+
+    case GET_WISHLIST:
+      return {
+        ...state,
+        wishList: JSON.parse(localStorage.getItem("wishlist") ?? "[]"),
       };
 
     default:

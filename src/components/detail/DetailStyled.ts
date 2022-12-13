@@ -1,5 +1,13 @@
 import styled from "styled-components"
 
+const Container = styled.div `
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  min-height: 73.7rem;
+  align-items: center;
+`
+
 const DetailStyled = styled.div`
   color: var(--font-color);
   display: flex;
@@ -7,8 +15,8 @@ const DetailStyled = styled.div`
   background-color: var(--background-color);
   transition: all 0.3s;
   padding-top: 6rem;
-  padding-bottom: 10rem;
-  min-height: 73.7rem;
+  padding-bottom: 7rem;
+  //min-height: 73.7rem;
   span{
     font-size: 2.5rem;
   }
@@ -182,7 +190,92 @@ const WineData = styled.div`
   }
 `
 
+const Comments = styled.div`
+  background-color: var(--background-color);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  .textarea{
+    background-color: var(--background-color);
+    border: solid 2px var(--font-color);
+    width: 100vh;
+    height: 5rem;
+    padding: 1rem;
+    color: var(--font-color);
+  }
+
+  .comment-title{
+    color: var(--font-color);
+    font-family: var(--font-title);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  @media(max-width: 768px){
+    min-width: 45rem;
+    max-width: 25rem;
+    text-align: center;
+    justify-content: center;
+
+    .textarea{
+      min-width: 41rem;
+      max-width: 41rem;
+      min-height: 15rem;
+      max-height: 15rem;
+    }
+  }
+`
+const RankingValue = styled.div`
+    display: flex;
+    justify-content: space-around;
+    color: var(--font-color);
+
+  .checkPoint{
+    margin: 3rem;
+    font-size: 1.5rem;
+  }
+
+input[type="radio"] {   
+}
+`
+
+const CommentsUsers = styled.div`
+  border: 0.1rem solid var(--font-color);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--font-color);
+  font-size: 2rem;
+  padding: 2rem 4rem;
+  width: 100vh;
+
+  .user{
+    margin-bottom:2rem;
+  }
+
+  h3{
+    text-align: end;
+    top: 0;
+  }
+
+  p{
+    margin-bottom:2rem;
+  }
+  
+  @media(max-width: 768px){
+    min-width: 41rem;
+    max-width: 41rem;
+  }
+  
+`
+
 export {
   DetailStyled,
   WineData,
+  Comments,
+  RankingValue,
+  CommentsUsers,
+  Container
 }

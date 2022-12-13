@@ -10,14 +10,14 @@ export default function AboutUs() {
           <div className="section-text">
             <h2 className="secondary-header">About Us</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-              accusamus qui id provident, earum molestiae et autem nulla?
-              Repudiandae beatae ratione molestiae vitae quia numquam
-              consectetur porro incidunt repellendus laudantium. Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Placeat quo modi
-              doloribus sapiente maiores incidunt labore dolorem, magnam
-              expedita officiis quae ad eum velit repudiandae reiciendis sunt
-              accusamus facere. Amet.
+              We are a small wine retail business, and  we are now launching our 
+              ecommerce to  reach more wine passionate customers who are looking 
+              for the finest variety of wines.<br/>
+                We offer a broad wine selection from 
+              different regions. Now you will be able to look at our cellar from the 
+              online shop.<br/>
+                You can also subscribe to our wine club, to taste and know
+              our selected wines each month
             </p>
           </div>
           <div>
@@ -35,14 +35,14 @@ export default function AboutUs() {
           <div className="section-text our-history-text">
             <h2 className="secondary-header">Our History</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Asperiores, doloribus pariatur incidunt repudiandae eaque hic
-              earum tenetur modi velit, consectetur quisquam rerum, quia impedit
-              officia mollitia magni sed nemo delectus! Lorem ipsum dolor sit
-              amet consectetur, adipisicing elit. Harum dolor ducimus id vero
-              inventore odio doloribus, enim dignissimos tenetur. Odio ducimus
-              vitae repellendus dignissimos pariatur assumenda sequi magnam.
-              Iste, dolorem.
+              Wine -suplly started as small gatherings with friends, where we enjoyed,
+              tasted and talked about wines.<br/>
+                We opened a small  wine retail shop
+              in Buenos Aires five year ago, and the business have been growing since.<br/>
+                Nowadays the wine-suplly team have grown, and we have developed a
+              close relationship with our suppliers, looking for the finest wines
+              across many regions, our aim is to  build an exquisite cellar with the
+              finest varieties.
             </p>
           </div>
         </div>

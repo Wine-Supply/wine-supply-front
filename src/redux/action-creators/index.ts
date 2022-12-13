@@ -12,20 +12,29 @@ import {
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
   OPEN_CART,
+  GET_WINE_REVIEWS,
+  GET_USER_ID,
+  SHOW_LOGIN_MODAL,
+  CLEAR_DETAIL,
+  GET_WISHLIST,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 import { Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
+//const URL = "https://wine-supply-back-production.up.railway.app";
 const URL = "http://localhost:3001";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`${URL}/wines`);
-    const data = await resp.json();
-    //console.log("ac", data);
-    return dispatch({ type: GET_WINES, payload: data });
+    try {
+      const resp = await fetch(`${URL}/wines`);
+      const data = await resp.json();
+      return dispatch({ type: GET_WINES, payload: data });
+    } catch (error) {
+      return error;
+    }
   };
 };
 
@@ -43,9 +52,9 @@ export const sortWinesByRating = () => ({
   type: SORT_WINES_BY_RATING,
 });
 
-export const filterByQuery = (url: string) => {
+export const filterByQuery = (query: string) => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`${URL}/wines/filters?${url}`);
+    const resp = await fetch(`${URL}/wines/filters?${query}`);
     const data = await resp.json();
     return dispatch({ type: FILTER_BY_QUERY, payload: data });
   };
@@ -60,7 +69,6 @@ export const searchWines = (query: string) => {
 };
 
 export const getWineDetail = (_id: string) => {
-  //console.log("ac", _id);
   return async function (dispatch: Dispatch) {
     const resp = await fetch(`${URL}/wine/${_id}`);
     const data = await resp.json();
@@ -93,6 +101,12 @@ export const loginUser = async (email: string, password: string) => {
     password,
   });
   localStorage.setItem("token", JSON.stringify(resp.data.token));
+};
+
+export const showLoginModal = () => {
+  return {
+    type: SHOW_LOGIN_MODAL,
+  };
 };
 
 export const signUpUser = async (
@@ -141,13 +155,18 @@ export const getTotalPrice = (price: number) => {
 };
 
 export const buyItems = async (cart: any, token: any) => {
-  const res = await axios.post(`${URL}/payment`, cart, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`,
-      items: JSON.stringify(cart),
-    },
-  });
-  window.location.replace(res.data);
+  try {
+    const res = await axios.post(`${URL}/payment`, cart, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+        items: JSON.stringify(cart),
+      },
+    });
+    window.location.replace(res.data);
+    localStorage.setItem("item", JSON.stringify([]));
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const buyItem = async (id: any, token: any) => {
@@ -162,8 +181,52 @@ export const buyItem = async (id: any, token: any) => {
   window.location.replace(res.data);
 };
 
+export const getUserId = () => {
+  let token = localStorage.getItem("token");
+  return async function (dispatch: Dispatch) {
+    if (token !== null) {
+      const res = await axios.get(`${URL}/getuser`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "application/json, charset=utf-8",
+        },
+      });
+      return dispatch({ type: GET_USER_ID, payload: res.data });
+    }
+  };
+};
+
 export const openCart = () => {
   return {
     type: OPEN_CART,
+  };
+};
+
+export const getWineReviews = (_id: String) => {
+  return async function (dispatch: Dispatch) {
+    const resp = await fetch(`${URL}/getWineReviews/${_id}`);
+    const data = await resp.json();
+    return dispatch({ type: GET_WINE_REVIEWS, payload: data });
+  };
+};
+
+export function clearPage() {
+  return {
+    type: CLEAR_DETAIL,
+  };
+}
+
+export const addToWishlist = (id: string, wines: Wine[]) => {
+  const wineAdded = wines.find((wine) => wine._id === id);
+  const existingWishlist = localStorage.getItem("wishlist");
+  if (existingWishlist) {
+    const parsed = JSON.parse(existingWishlist);
+    localStorage.setItem("wishlist", JSON.stringify([...parsed, wineAdded]));
+  } else localStorage.setItem("wishlist", JSON.stringify([wineAdded]));
+};
+
+export const getWishlist = () => {
+  return {
+    type: GET_WISHLIST,
   };
 };

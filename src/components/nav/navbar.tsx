@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavbarStyled } from "./NavbarStyled";
 import { BurguerButtonStyled } from "./BurguerButtonStyled";
 import logo from "../../images/logo.svg";
@@ -7,17 +7,28 @@ import {
   ShoppingCartOutlined,
   IdcardOutlined,
   UserOutlined,
+  TagOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { openCart } from "../../redux/action-creators";
 import DarkMode from "../dark-mode/darkmode";
+import { State } from "../../redux/reducer";
 
-const Navbar= () =>{
-  let dispatch:Dispatch<any> = useDispatch()
+const Navbar = () => {
+  let dispatch: Dispatch<any> = useDispatch();
 
   const [clicked, setClicked] = useState(false);
+  const [token, setToken] = useState("");
+  const User = useSelector((state: State) => state.user);
+  const cart = useSelector((state: State) => state.itemsStorage);
+
+  useEffect(() => {
+    if (token?.length === 0 && localStorage.getItem("token"))
+      setToken(localStorage.getItem("token") || "");
+  }, []);
+
   const handleClicked = () => {
     setClicked(!clicked);
   };
@@ -41,24 +52,37 @@ const Navbar= () =>{
               Shop
             </Link>
           </li>
-          <li>
-            <div className={"link line"} onClick={()=>{dispatch(openCart())}}>
-              <ShoppingCartOutlined />
-            </div>
+          <li className="cart">
+            {cart.length > 0 && (
+              <span className="items-amount">{cart.length}</span>
+            )}
+            <ShoppingCartOutlined
+              className={"link line"}
+              onClick={() => {
+                dispatch(openCart());
+              }}
+            />
           </li>
           <li>
-            <Link className={"link line"} to="/user">
+            <Link to="/wishlist">
+              <TagOutlined className="link line" />
+            </Link>
+          </li>
+          <li>
+            <Link className={"link line"} to="/login">
               <UserOutlined />
             </Link>
           </li>
-          <li>
-            <Link className={"link line"} to="/admin">
-            <IdcardOutlined />
-            </Link>
-          </li>
+          {token && User.isAdmin !== "no" && (
+            <li>
+              <Link className={"link line"} to="/admin">
+                <IdcardOutlined />
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
-      <DarkMode/>
+      <DarkMode />
       <div className="burguer">
         <BurguerButton clicked={clicked} handleClick={handleClicked} />
       </div>
@@ -67,6 +91,6 @@ const Navbar= () =>{
       ></BurguerButtonStyled>
     </NavbarStyled>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

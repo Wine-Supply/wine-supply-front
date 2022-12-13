@@ -2,20 +2,20 @@
 
 html {
   /*colors*/
-  --black: #744237; 
+  --black: #744237;
   --white: #fdfdfd;
   --red: #997754;
   --color-dark: #997754;
-  --color-light: #FDF1E0;
+  --color-light: #fdf1e0;
 
-  --background-color: #FDF1E0;
+  --background-color: #fdf1e0;
   --font-color: #141414;
-  --font-color-hover: #CF8800;
-  --primary-color: #FDFDFD;
-  --secondary-color: #FFEECD;
-  --btn-color: #FFDE59;
+  --font-color-hover: #cf8800;
+  --primary-color: #fdfdfd;
+  --secondary-color: #ffeecd;
+  --btn-color: #ffde59;
   --btn-color-hover: #edb545;
-  --btn-color2: #FFFFFF;
+  --btn-color2: #ffffff;
   --btn-color-hover2: #141414;
 }
 
@@ -53,14 +53,14 @@ html[data-theme="dark"] {
   --color-light: #dedede;
 
   --background-color: #474540;
-  --font-color: #FDFDFD;
-  --font-color-hover: #D4505E;
+  --font-color: #fdfdfd;
+  --font-color-hover: #d4505e;
   --primary-color: #141414;
-  --secondary-color: #8D8D8D;
-  --btn-color: #A21524;
-  --btn-color-hover: #64030D;
+  --secondary-color: #8d8d8d;
+  --btn-color: #a21524;
+  --btn-color-hover: #64030d;
   --btn-color2: #141414;
-  --btn-color-hover2: #FFFFFF;
+  --btn-color-hover2: #ffffff;
 }
 
 * {
@@ -86,4 +86,22 @@ body {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.map {
+  width: 100%;
+  height: 20rem;
+  border: 0;
+}
+
+@media (min-width: 600px) {
+  .map {
+    height: 30rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .map {
+    grid-column: 1/-1;
+  }
 }

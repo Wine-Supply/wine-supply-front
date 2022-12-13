@@ -8,8 +8,18 @@ import baner1b from "../../../images/banner1-light.png";
 import baner2b from "../../../images/banner2-light.png";
 import baner1c from "../../../images/banner1-neutro.png";
 import baner2c from "../../../images/banner2-neutro.png";
+import { useDispatch } from "react-redux";
+import { filterByQuery } from "../../../redux/action-creators";
+import { Dispatch } from "redux";
 
 const BanerSection = () => {
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const handleClick = (e: React.BaseSyntheticEvent) => {
+    const target = e.target.innerHTML;
+    dispatch(filterByQuery(`type=${target.toLowerCase()}`));
+  };
+
   return (
     <SectionStyled>
       <div className="baner-container explore-baner">
@@ -21,19 +31,19 @@ const BanerSection = () => {
         />
         <div className="explore-baner-info">
           <h1 className="main-heading">EXPLORE OUR WINES</h1>
-          <ul className="wine-types">
+          <ul onClick={(e) => handleClick(e)} className="wine-types">
             <li className="wine-type">
-              <Link className="wine-link" to="">
+              <Link className="wine-link" to="/home/products">
                 RED
               </Link>
             </li>
             <li className="wine-type">
-              <Link className="wine-link" to="">
+              <Link className="wine-link" to="/home/products">
                 WHITE
               </Link>
             </li>
             <li className="wine-type">
-              <Link className="wine-link" to="">
+              <Link className="wine-link" to="/home/products">
                 SPARKLING
               </Link>
             </li>
@@ -41,13 +51,15 @@ const BanerSection = () => {
         </div>
       </div>
       <div className="baner-container club-baner">
-        <img 
-          className="section-img" 
+        <img
+          className="section-img"
           src={baner2c}
           //src={baner2b}
-          alt="Bottles of wine" 
+          alt="Bottles of wine"
         />
-        <ButtonSubscribe className="sub-btn"><Link className="no-style" to="/WineClubp">SUBSCRIBE</Link></ButtonSubscribe>
+        <Link className="no-style" to="/WineClubp">
+          <ButtonSubscribe className="sub-btn">SUBSCRIBE</ButtonSubscribe>
+        </Link>
       </div>
     </SectionStyled>
   );
