@@ -16,6 +16,7 @@ import {
   GET_USER_ID,
   SHOW_LOGIN_MODAL,
   CLEAR_DETAIL,
+  GET_WISHLIST,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -190,8 +191,6 @@ export const getUserId = () => {
           "Content-Type": "application/json, charset=utf-8",
         },
       });
-      console.log(res);
-
       return dispatch({ type: GET_USER_ID, payload: res.data });
     }
   };
@@ -216,3 +215,18 @@ export function clearPage() {
     type: CLEAR_DETAIL,
   };
 }
+
+export const addToWishlist = (id: string, wines: Wine[]) => {
+  const wineAdded = wines.find((wine) => wine._id === id);
+  const existingWishlist = localStorage.getItem("wishlist");
+  if (existingWishlist) {
+    const parsed = JSON.parse(existingWishlist);
+    localStorage.setItem("wishlist", JSON.stringify([...parsed, wineAdded]));
+  } else localStorage.setItem("wishlist", JSON.stringify([wineAdded]));
+};
+
+export const getWishlist = () => {
+  return {
+    type: GET_WISHLIST,
+  };
+};

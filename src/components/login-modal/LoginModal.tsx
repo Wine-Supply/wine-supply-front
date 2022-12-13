@@ -13,7 +13,7 @@ export default function LoginModal({ handleLogin }: Props) {
     <Modal>
       <div className="overlay"></div>
       <div className="login-modal">
-        <p>Login to purchase products</p>
+        <p>Please login to continue</p>
         <div className="btn-container">
           <button onClick={handleLogin} className="modal-btn">
             Login

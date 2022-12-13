@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   IdcardOutlined,
   UserOutlined,
+  TagOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,11 +64,16 @@ const Navbar = () => {
             />
           </li>
           <li>
+            <Link to="/wishlist">
+              <TagOutlined className="link line" />
+            </Link>
+          </li>
+          <li>
             <Link className={"link line"} to="/login">
               <UserOutlined />
             </Link>
           </li>
-          {User.isAdmin !== "no" && (
+          {token && User.isAdmin !== "no" && (
             <li>
               <Link className={"link line"} to="/admin">
                 <IdcardOutlined />
