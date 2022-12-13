@@ -24,8 +24,8 @@ const api = restProvider('http://localhost:3001', httpClient)
 const AdminDash = () => {
 
     return(
-    <Admin basename="/admin" dataProvider={api}>
-        <Resource name='chart' list={Charts}/>
+    <Admin basename="/admin" dataProvider={api} dashboard={Charts}>
+        {/* <Resource name='chart' list={Charts}/> */}
         <Resource name='admin/wines' list={WineList} create={WineCreate} edit={WineEdit} delete={WineList}/>
         <Resource name='admin/users' list={UserList} edit={UserEdit}/>
         <Resource name='newsletter' list={NewsletterForm} />
