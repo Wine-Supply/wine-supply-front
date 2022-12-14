@@ -132,6 +132,11 @@ const DetailStyled = styled.div`
     }
 
   }
+
+  @media(max-width: 768px){
+    min-width: 25rem;
+    max-width: 20rem;
+  }
 `
 const WineData = styled.div`
   margin-top: 5rem;
@@ -172,6 +177,7 @@ const WineData = styled.div`
 
   @media(max-width: 768px){
     margin-top: 1.5rem;
+    
     h1 {
       width: auto;
     }
@@ -184,10 +190,13 @@ const WineData = styled.div`
       margin: 2rem 7rem 2rem 3rem;
     }
     .description{
-      margin-right: 4rem;
+      margin-left: 3.5rem;
+      min-width: 20rem;
+      max-width: 20rem;
     }
     
   }
+  
 `
 
 const Comments = styled.div`
@@ -201,7 +210,7 @@ const Comments = styled.div`
   .textarea{
     background-color: var(--background-color);
     border: solid 2px var(--font-color);
-    width: 100vh;
+    width: 60vh;
     height: 5rem;
     padding: 1rem;
     color: var(--font-color);
@@ -221,10 +230,22 @@ const Comments = styled.div`
     justify-content: center;
 
     .textarea{
-      min-width: 41rem;
-      max-width: 41rem;
+      min-width: 20rem;
+      max-width: 20rem;
       min-height: 15rem;
       max-height: 15rem;
+    }
+  }
+
+  @media(max-width: 400px){
+    min-width: 20rem;
+    max-width: 408px;
+
+    .textarea{
+      min-width: 20rem;
+      max-width: 20rem;
+      min-height: 20rem;
+      max-height: 20rem;
     }
   }
 `
@@ -238,8 +259,18 @@ const RankingValue = styled.div`
     font-size: 1.5rem;
   }
 
-input[type="radio"] {   
-}
+  input[type="radio"] {   
+  }
+
+  @media(max-width: 768px){
+    min-width: 10rem;
+    max-width: 768px;
+    
+    .checkPoint{
+      margin: 1rem;
+    }
+  }
+
 `
 
 const CommentsUsers = styled.div`
@@ -265,8 +296,8 @@ const CommentsUsers = styled.div`
   }
   
   @media(max-width: 768px){
-    min-width: 41rem;
-    max-width: 41rem;
+    min-width: 20rem;
+    max-width: 20rem;
   }
   
 `
