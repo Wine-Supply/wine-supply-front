@@ -29,7 +29,7 @@ import { Users, Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
 const URL = "https://wine-supply-back-production.up.railway.app";
-// const URL = "http://localhost:3001";
+// const URL = "https://wine-supply-back-production.up.railway.app";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
