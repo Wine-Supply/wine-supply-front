@@ -20,12 +20,13 @@ import {
   SHOW_LOGIN_MODAL,
   CLEAR_DETAIL,
   GET_WISHLIST,
+  GET_USER_ORDERS,
   CLEAR_ITEM_CART,
   HANDLE_EMPTY_CART,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
-import { Wine } from "../reducer";
+import { Users, Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
 //const URL = "https://wine-supply-back-production.up.railway.app";
@@ -60,14 +61,18 @@ export const sortWinesByRating = () => ({
 export const filterByQuery = (query: string) => {
   return async function (dispatch: Dispatch) {
     const resp = await fetch(`${URL}/wines/filters?${query}`);
+
     const data = await resp.json();
+
     return dispatch({ type: FILTER_BY_QUERY, payload: data });
   };
 };
 
 export const searchWines = (query: string) => {
   return async function (dispatch: Dispatch) {
-    const resp = await fetch(`${URL}/wines/search?input=${query}`);
+    const resp = await fetch(
+      `${URL}/wines/search?input=${query}&isActive=true`
+    );
     const data = await resp.json();
     return dispatch({ type: SEARCH_WINES, payload: data });
   };
@@ -242,6 +247,8 @@ export const getUserId = () => {
           "Content-Type": "application/json, charset=utf-8",
         },
       });
+      console.log(res.data);
+
       return dispatch({ type: GET_USER_ID, payload: res.data });
     }
   };
@@ -282,6 +289,40 @@ export const getWishlist = () => {
   };
 };
 
+
+export const getUserOrders = (id: string | undefined) => {
+  return async function (dispatch: Dispatch) {
+    const res = await axios.get(`${URL}/getorders`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          localStorage.getItem("token") ?? ""
+        )}`,
+        user: id,
+        "Content-Type": "application/json, charset=utf-8",
+      },
+    });
+    console.log(res.data);
+    return dispatch({ type: GET_USER_ORDERS, payload: res.data });
+  };
+};
+
+export const updateUserInfo = async (data: {
+  email: string;
+  userName: string;
+  // avatar: string[];
+  isActive: boolean | undefined;
+  user: Users;
+}) => {
+  const res = await axios.put(`${URL}/user/update`, data, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("token") ?? ""
+      )}`,
+    },
+  });
+  return res.status;
+};
+
 export const clearItemToCart = (_id:string) =>{
   return{
     type: CLEAR_ITEM_CART,
@@ -294,3 +335,4 @@ export const handleEmptyCart = () =>{
     type: HANDLE_EMPTY_CART,
   }
 }
+

@@ -17,7 +17,7 @@ const BanerSection = () => {
 
   const handleClick = (e: React.BaseSyntheticEvent) => {
     const target = e.target.innerHTML;
-    dispatch(filterByQuery(`type=${target.toLowerCase()}`));
+    dispatch(filterByQuery(`type=${target.toLowerCase()}&isActive=true`));
   };
 
   return (
@@ -44,7 +44,7 @@ const BanerSection = () => {
             </li>
             <li className="wine-type">
               <Link className="wine-link" to="/home/products">
-                SPARKLING
+                ROSE
               </Link>
             </li>
           </ul>

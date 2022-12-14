@@ -21,15 +21,17 @@ import {
   SHOW_LOGIN_MODAL,
   CLEAR_DETAIL,
   GET_WISHLIST,
+  GET_USER_ORDERS,
   CLEAR_ITEM_CART,
   HANDLE_EMPTY_CART,
 } from "../actions/index";
 
-type Users = {
+export type Users = {
+  _id?: string;
   name?: string;
   lastName?: string;
   userName?: string;
-  address?: string[];
+  address?: any[];
   email?: string;
   avatar?: string[];
   isActive?: boolean;
@@ -40,6 +42,33 @@ type Users = {
   updatedAt?: string;
   createdAt?: string;
   whishList?: string[];
+};
+
+type Item = {
+  id: string;
+  category_id: string;
+  currency_id: string;
+  description: string;
+  picture_url: string | null;
+  title: string;
+  quantity: number;
+  unit_price: number;
+};
+
+type ShopOrder = {
+  _id: string;
+  user_id: string;
+  user: string;
+  order_address: string;
+  items: Item[];
+  orderDate: string;
+  payment: string;
+  shippingMethod: string;
+  orderTotal: number;
+  orderStatus: number;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
 };
 
 export interface Wine {
@@ -74,6 +103,7 @@ interface Actions {
 
 export interface State {
   allWines: Array<Wine>;
+  noWinesMessage: string;
   topRatedWines: Array<Wine>;
   wineDetail: Array<Wine>;
   wineReviews: WineReview[];
@@ -86,10 +116,12 @@ export interface State {
   totalPrice: number;
   user: Users;
   wishList: Wine[];
+  userOrders: ShopOrder[];
 }
 
 const initialState = {
   allWines: [],
+  noWinesMessage: "",
   topRatedWines: [],
   wineNames: [],
   wineBrands: [],
@@ -102,6 +134,7 @@ const initialState = {
   totalPrice: 0,
   user: {},
   wishList: [],
+  userOrders: [],
 };
 
 const rootReducer = (state: State = initialState, action: Actions) => {
@@ -110,6 +143,7 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         allWines: action.payload,
+        noWinesMessage: "",
       };
 
     case GET_TOP_RATED_WINES:
@@ -131,15 +165,21 @@ const rootReducer = (state: State = initialState, action: Actions) => {
 
       return {
         ...state,
-        wineNames: names,
-        wineBrands: brands,
+        wineNames: names.sort(),
+        wineBrands: brands.sort(),
       };
 
     case FILTER_BY_QUERY:
-      return {
-        ...state,
-        allWines: action.payload,
-      };
+      if (typeof action.payload[0] === "object")
+        return {
+          ...state,
+          allWines: action.payload,
+        };
+      else
+        return {
+          ...state,
+          noWinesMessage: action.payload[0],
+        };
 
     case SEARCH_WINES:
       return {
@@ -306,6 +346,12 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         wishList: JSON.parse(localStorage.getItem("wishlist") ?? "[]"),
+      };
+
+    case GET_USER_ORDERS:
+      return {
+        ...state,
+        userOrders: action.payload,
       };
 
     default:

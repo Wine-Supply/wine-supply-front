@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWishlist } from "../../redux/action-creators";
 import { State, Wine } from "../../redux/reducer";
 import CarritoFull from "../carritoFull/CarritoFull";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import Navbar from "../nav/navbar";
 import { ListContainer } from "./ListContainer";
 import WishlistCard from "./WishlistCard";
@@ -41,19 +41,29 @@ export default function Wishlist() {
       <Navbar />
       <CarritoFull />
       <ListContainer>
-        {wishlist.length === 0 && (
-          <p className="no-items-text">No items added yet.</p>
-        )}
-        {wishlist.length > 0 && (
+        {
           <>
-            <div className="btn-container">
-              <button className="empty-btn" onClick={emptyWishlist}>
-                Empty wishlist
-              </button>
-              <button className="empty-btn" onClick={addAllToCart}>
-                Add all to cart
-              </button>
-            </div>
+            <header className="wishlist-header">
+              <h2 className="wishlist-title">Welcome to your wishlist!</h2>
+              <p className="header-text">
+                Select the items that you want to buy or remove those that don't
+                interest you anymore.
+              </p>
+              {wishlist.length === 0 && (
+                <p className="no-items-text">No items added yet.</p>
+              )}
+            </header>
+            {wishlist.length > 0 && (
+              <div className="btn-container">
+                <button className="empty-btn" onClick={emptyWishlist}>
+                  Empty wishlist
+                </button>
+                <button className="empty-btn" onClick={addAllToCart}>
+                  Add all to cart
+                </button>
+              </div>
+            )}
+
             {wishlist.map((item: Wine) => (
               <WishlistCard
                 key={item._id}
@@ -66,7 +76,7 @@ export default function Wishlist() {
               />
             ))}
           </>
-        )}
+        }
       </ListContainer>
       <Footer />
     </>
