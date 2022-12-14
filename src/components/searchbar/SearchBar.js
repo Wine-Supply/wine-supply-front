@@ -21,7 +21,7 @@ const SearchBar = () => {
     // e.preventDefault();
     // try {
     //   const response = await axios.get(
-    //     `http://localhost:3001/wines/search?input=${input}`
+    //     `https://wine-supply-back-production.up.railway.app/wines/search?input=${input}`
     //   );
     //   if (response.status >= 200 && response.status <= 205) {
     //     setMatched(response.data);

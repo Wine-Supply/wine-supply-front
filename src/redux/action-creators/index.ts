@@ -28,8 +28,8 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { Users, Wine } from "../reducer";
 import { AdditionalUserInfo, User } from "firebase/auth";
 
-//const URL = "https://wine-supply-back-production.up.railway.app";
-const URL = "http://localhost:3001";
+const URL = "https://wine-supply-back-production.up.railway.app";
+// const URL = "https://wine-supply-back-production.up.railway.app";
 
 export const getWines = () => {
   return async function (dispatch: Dispatch) {
@@ -135,7 +135,6 @@ export const signUpUser = async (
   return resp.data;
 };
 
-
 //---REVISAR PARA TRAER DESDE BACK
 /* export const getItemsStorage = () => {
   return {
@@ -148,14 +147,14 @@ export const subtractCuantityItems = (_id: string) => {
   return {
     type: SUBTRACT_CUANTITY_ITEMS,
     payload: _id,
-  }
+  };
 };
 
 export const addCuantityItems = (_id: string) => {
   return {
     type: ADD_CUANTITY_ITEMS,
     payload: _id,
-  }
+  };
 };
 
 export const addItemsStorage = (object: Object) => {
@@ -172,14 +171,14 @@ export const getTotalItems = () => {
 };
 
 export const getTotalPrice = () => {
-    return {
-      type: GET_TOTAL_PRICE,
-    };
+  return {
+    type: GET_TOTAL_PRICE,
+  };
 };
 
 export const addItemsCartDataBase = async (cart: Array<Wine>) => {
-  let token = localStorage.getItem("token") || '';
-  if(token){
+  let token = localStorage.getItem("token") || "";
+  if (token) {
     try {
       const res = await axios.post(`${URL}/addcartitem`, cart, {
         headers: {
@@ -203,7 +202,7 @@ export const buyItems = async (cart: any, token: any) => {
       },
     });
     window.location.replace(res.data);
-    handleEmptyCart()
+    handleEmptyCart();
   } catch (error) {
     console.error(error);
   }
@@ -273,7 +272,6 @@ export const getWishlist = () => {
   };
 };
 
-
 export const getUserOrders = (id: string | undefined) => {
   return async function (dispatch: Dispatch) {
     const res = await axios.get(`${URL}/getorders`, {
@@ -307,16 +305,15 @@ export const updateUserInfo = async (data: {
   return res.status;
 };
 
-export const clearItemToCart = (_id:string) =>{
-  return{
+export const clearItemToCart = (_id: string) => {
+  return {
     type: CLEAR_ITEM_CART,
     payload: _id,
-  }
-}
+  };
+};
 
-export const handleEmptyCart = () =>{
-  return{
+export const handleEmptyCart = () => {
+  return {
     type: HANDLE_EMPTY_CART,
-  }
-}
-
+  };
+};

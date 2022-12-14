@@ -94,7 +94,7 @@ export default function ContactForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/contacusmail",
+        "https://wine-supply-back-production.up.railway.app/contacusmail",
         input
       );
       if (response.status >= 200 && response.status <= 205) {

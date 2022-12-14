@@ -21,20 +21,20 @@ export default function Wishlist() {
     dispatch(getWishlist());
   };
 
-  const addAllToCart = () => {
-    const current = JSON.parse(localStorage.getItem("item") ?? "[]");
-    const wishlistWithStringImg = wishlist.map((item: Wine) => ({
-      ...item,
-      img: item.images[0],
-    }));
-    let notRepeated: Wine[] = [];
-    const idArray = current.map((item: Wine) => item._id);
-    wishlistWithStringImg.forEach((listItem) => {
-      if (!idArray.includes(listItem._id)) notRepeated.push(listItem);
-    });
-   /*  localStorage.setItem("item", JSON.stringify([...current, ...notRepeated]));
-    dispatch(getItemsStorage()); */
-  };
+  // const addAllToCart = () => {
+  //   const current = JSON.parse(localStorage.getItem("item") ?? "[]");
+  //   const wishlistWithStringImg = wishlist.map((item: Wine) => ({
+  //     ...item,
+  //     img: item.images[0],
+  //   }));
+  //   let notRepeated: Wine[] = [];
+  //   const idArray = current.map((item: Wine) => item._id);
+  //   wishlistWithStringImg.forEach((listItem) => {
+  //     if (!idArray.includes(listItem._id)) notRepeated.push(listItem);
+  //   });
+  //  /*  localStorage.setItem("item", JSON.stringify([...current, ...notRepeated]));
+  //   dispatch(getItemsStorage()); */
+  // };
 
   return (
     <>
@@ -57,9 +57,6 @@ export default function Wishlist() {
               <div className="btn-container">
                 <button className="empty-btn" onClick={emptyWishlist}>
                   Empty wishlist
-                </button>
-                <button className="empty-btn" onClick={addAllToCart}>
-                  Add all to cart
                 </button>
               </div>
             )}

@@ -95,7 +95,7 @@ export default function Detail() {
         comment: userComments,
         rating: parseInt(userRating),
       };
-      await fetch("http://localhost:3001/updateReviews", {
+      await fetch("https://wine-supply-back-production.up.railway.app/updateReviews", {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {
@@ -113,7 +113,7 @@ export default function Detail() {
         comment: userComments,
         rating: userRating,
       };
-      await fetch("http://localhost:3001/postReviews", {
+      await fetch("https://wine-supply-back-production.up.railway.app/postReviews", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
