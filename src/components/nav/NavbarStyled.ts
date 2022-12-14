@@ -94,7 +94,7 @@ export const NavbarStyled = styled.nav`
   }
 
   .user-photo {
-    width: 4rem;
+    width: 2.5rem;
     border-radius: 50%;
   }
 

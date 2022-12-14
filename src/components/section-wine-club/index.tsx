@@ -47,7 +47,7 @@ export default function WineClubp() {
           <h2>Join our Exclusive community</h2>
         </Container>
         <CardContainer>
-          <WineClub title={"Beginners Subsciption "  + " Easy Drinking Wines"} date={1} imgUrl={img1} />
+          <WineClub title={"Regular Subscription "  + " Easy Drinking Wines"} date={1} imgUrl={img1} />
           <WineClub title={"Premium Subscription More Complex Flavours"} date={2} imgUrl={img2} />
           <WineClub title={"Sommeliere Subscription Limited Editions"} date={2} imgUrl={img2} />
         </CardContainer>
