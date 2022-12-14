@@ -11,19 +11,19 @@ import BanerSection from "./section-baner/BanerSection";
 import Newsletter from "./section-newsletter/Newsletter";
 import TopRated from "./section-top-rated/TopRated";
 import CartProducts from "../CartProducts/CartProducts";
-import { Drawer } from '@mui/material'
+import { Drawer } from "@mui/material";
 import CarritoFull from "../carritoFull/CarritoFull";
 import ContactForm from "../contact-form/ContactUs";
 
 export default function Home() {
   const [showButton, setShowButton] = useState<boolean>(false);
- // const Items = useSelector((state: State) => state.itemsStorage);
+  // const Items = useSelector((state: State) => state.itemsStorage);
   const User = useSelector((state: State) => state.user);
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
     //---REVISAR PARA TRAER DEL BACK
-   /*  if (Items.length === 0) {
+    /*  if (Items.length === 0) {
       dispatch(getItemsStorage());
 
     }
@@ -31,7 +31,7 @@ export default function Home() {
 
     } */
     if (Object.keys(User)) dispatch(getUserId());
-    dispatch(getTotalItems())
+    dispatch(getTotalItems());
 
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);
