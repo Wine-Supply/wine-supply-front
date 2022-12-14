@@ -11,6 +11,8 @@ import Charts from './Charts';
 import NewsletterForm from './NewsletterForm';
 import { Layout } from 'react-admin';
 import { MyMenu } from './CustomStyle';
+import axios from "axios"
+import React, { useState, useEffect } from 'react';
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
