@@ -160,11 +160,11 @@ function Charts () {
   </Grid>
   <Grid item lg={7} md={6} xs={10}>
       <Grid item lg={6} md={12} xs={12}>
-        <h2>New user per week</h2>
+        <h2 style={{color: '#069bff'}} >New user per week</h2>
         <BarChart chartData={userDataWeek} />
       </Grid>
       <Grid item lg={6} md={12} xs={12}>
-      <h2>New orders per week</h2>
+      <h2 style={{color: '#ff6384'}} >New orders per week</h2>
         <LineChart chartData={shoppingDataWeek} />
       </Grid>
   </Grid>
