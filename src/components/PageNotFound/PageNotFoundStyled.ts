@@ -9,6 +9,8 @@ export const PageNotFoundStyled = styled.div`
   
   div {
     background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
     width: fit-content;
     font-family: var(--font-title);
     color: var(--font-color);
@@ -17,7 +19,7 @@ export const PageNotFoundStyled = styled.div`
     text-align: center;
     padding: 2.5rem;
     margin-inline: 4rem;
-    margin-top: 15rem;
+    margin-top: 5rem;
     border-radius: 2rem;
   }
 
@@ -27,23 +29,15 @@ export const PageNotFoundStyled = styled.div`
     color: var(--font-color-hover)
   }
 
-  p{
-    margin: 2rem 3rem;
-  }
-
   .btn {
     transform: scale(1.5);
-    margin-bottom: 3.5rem;
-    margin-top: 2rem;
+    margin-bottom: 0;
+    margin-top: 1rem;
     align-items: center;
   }
 
-  .welcome{
-    font-size: 2.4rem;
-  }
-  
   .section-img {
-    max-width: 100%;
+    max-width: 50rem;
   }
 
   @media (max-width: 920px) {
