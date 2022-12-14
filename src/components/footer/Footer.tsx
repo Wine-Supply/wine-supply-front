@@ -23,7 +23,7 @@ export default function Footer() {
             <a
               target="_blank"
               rel="noreferrer"
-              href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
+              href="https://www.instagram.com/wines_supply/?igshid=YmMyMTA2M2Y%3D"
               className="social-icon"
             >
               <InstagramOutlined />
@@ -31,7 +31,7 @@ export default function Footer() {
             <a
               target="_blank"
               rel="noreferrer"
-              href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
+              href="https://www.instagram.com/wines_supply/?igshid=YmMyMTA2M2Y%3D"
               className="social-icon"
             >
               <TwitterOutlined />
@@ -39,7 +39,7 @@ export default function Footer() {
             <a
               target="_blank"
               rel="noreferrer"
-              href="https://www.linkedin.com/in/efra%C3%ADn-chac%C3%B3n-521485234/"
+              href="https://www.instagram.com/wines_supply/?igshid=YmMyMTA2M2Y%3D"
               className="social-icon"
             >
               <YoutubeOutlined />
