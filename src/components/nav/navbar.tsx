@@ -22,7 +22,7 @@ const Navbar = () => {
   const [clicked, setClicked] = useState(false);
   const [token, setToken] = useState("");
   const User = useSelector((state: State) => state.user);
-  const cart = useSelector((state: State) => state.itemsStorage);
+  const TotalItemsCart = useSelector((state: State) => state.totalItems);
 
   useEffect(() => {
     if (token?.length === 0 && localStorage.getItem("token"))
@@ -53,8 +53,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="cart">
-            {cart.length > 0 && (
-              <span className="items-amount">{cart.length}</span>
+            {TotalItemsCart > 0 && (
+              <span className="items-amount">{TotalItemsCart}</span>
             )}
             <ShoppingCartOutlined
               className={"link line"}
@@ -73,7 +73,7 @@ const Navbar = () => {
               <UserOutlined />
             </Link>
           </li>
-          {token && User.isAdmin !== "no" && (
+          {token && User.isAdmin === "yes" && (
             <li>
               <Link className={"link line"} to="/admin">
                 <IdcardOutlined />
