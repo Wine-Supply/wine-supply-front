@@ -41,6 +41,10 @@ export const PageNotFoundStyled = styled.div`
   .welcome{
     font-size: 2.4rem;
   }
+  
+  .section-img {
+    max-width: 100%;
+  }
 
   @media (max-width: 920px) {
     min-height: 100vmax;
