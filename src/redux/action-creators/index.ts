@@ -190,16 +190,18 @@ export const subtractTotalPrice = (price: number) => {
 
 export const addItemsCartDataBase = async (cart: Array<Wine>) => {
   let token = localStorage.getItem("token") || '';
-  try {
-    const res = await axios.post(`${URL}/addcartitem`, cart, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(token)}`,
-        items: JSON.stringify(cart),
-      },
-    });
-    console.log(res.data);
-  } catch (error) {
-    console.error(error);
+  if(token){
+    try {
+      const res = await axios.post(`${URL}/addcartitem`, cart, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          items: JSON.stringify(cart),
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 
