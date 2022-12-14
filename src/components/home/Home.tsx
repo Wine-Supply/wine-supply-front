@@ -30,8 +30,8 @@ export default function Home() {
     if (Object.keys(User).length === 0) dispatch(getUserId());
 
     } */
-    dispatch(getTotalItems())
     if (Object.keys(User)) dispatch(getUserId());
+    dispatch(getTotalItems())
 
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);

@@ -275,15 +275,14 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_TOTAL_PRICE:
-      let otro:number[] = []
+      let priceArray:number[] = []
       state.itemsStorage.map(i =>{
-        otro.push(i.price * i.cuantity)
+        priceArray.push(i.price * i.cuantity)
       })
-      const priceTotal = otro.reduce(
+      const priceTotal = priceArray.reduce(
         (acc, curr) => acc + curr,
         0
       );
-      console.log(priceTotal)
       return{
         ...state,
         totalPrice: parseFloat(priceTotal.toString().substring(0, 5))
