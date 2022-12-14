@@ -34,7 +34,8 @@ export default function Filter() {
     const targetInnerHTML = e.target[0].innerHTML;
     switch (targetInnerHTML) {
       case "Name":
-        if (!url.includes(targetInnerHTML.toLowerCase())) {
+        if (targetValue === "Name") return;
+        else if (!url.includes(targetInnerHTML.toLowerCase())) {
           setUrl((url) =>
             url.length > 0
               ? `${url}&name=${targetValue}`
@@ -50,7 +51,8 @@ export default function Filter() {
         break;
 
       case "Brand":
-        if (!url.includes(targetInnerHTML.toLowerCase())) {
+        if (targetValue === "Brand") return;
+        else if (!url.includes(targetInnerHTML.toLowerCase())) {
           setUrl((url) =>
             url.length > 0
               ? `${url}&brand=${targetValue}`
@@ -66,7 +68,8 @@ export default function Filter() {
         break;
 
       case "Rating":
-        if (!url.includes(targetInnerHTML.toLowerCase())) {
+        if (targetValue === "Rating") return;
+        else if (!url.includes(targetInnerHTML.toLowerCase())) {
           setUrl((url) =>
             url.length > 0
               ? `${url}&rating=${targetValue[0]}`
@@ -116,7 +119,9 @@ export default function Filter() {
               id="name-filter"
               className="options"
             >
-              <option value="Name">Name</option>
+              <option className="filter-option" value="Name">
+                Name
+              </option>
               {wineNames.map((name) => (
                 <option key={name} value={name}>
                   {name}
@@ -124,7 +129,9 @@ export default function Filter() {
               ))}
             </select>
             <select onChange={(e) => handleFilter(e)} className="options">
-              <option value="Brand">Brand</option>
+              <option className="filter-option" value="Brand">
+                Brand
+              </option>
               {wineBrands.map((brand) => (
                 <option key={brand} value={brand}>
                   {brand}
@@ -140,7 +147,9 @@ export default function Filter() {
               ))}
             </select> */}
             <select onChange={(e) => handleFilter(e)} className="options">
-              <option value="Rating">Rating</option>
+              <option className="filter-option" value="Rating">
+                Rating
+              </option>
               {ratings.map((num) => (
                 <option key={num} value={num}>
                   {num === 1 ? `${num} star` : `${num} stars`}

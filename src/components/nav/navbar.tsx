@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { openCart } from "../../redux/action-creators";
+import { getWines, openCart } from "../../redux/action-creators";
 import DarkMode from "../dark-mode/darkmode";
 import { State } from "../../redux/reducer";
 
@@ -36,7 +36,7 @@ const Navbar = () => {
     <NavbarStyled>
       <div>
         <img className={"logo"} src={logo} alt="ws" />
-        <Link className={"link"} to="/">
+        <Link onClick={() => dispatch(getWines())} className={"link"} to="/">
           <h2>WINES SUPPLY</h2>
         </Link>
       </div>
@@ -47,9 +47,22 @@ const Navbar = () => {
               The Club
             </Link>
           </li>
-          <li>
+          <li onClick={() => dispatch(getWines())}>
             <Link className={"link line"} to="/home/products">
               Shop
+            </Link>
+          </li>
+          <li onClick={() => dispatch(getWines())}>
+            <Link className={"link line"} to={`/user/${User.name}/profile`}>
+              <img
+                className="user-photo"
+                src={
+                  User.avatar && User.avatar.length > 0
+                    ? User.avatar[0]
+                    : "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
+                }
+                alt=""
+              />
             </Link>
           </li>
           <li className="cart">

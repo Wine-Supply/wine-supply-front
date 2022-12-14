@@ -27,3 +27,5 @@ export const CLEAR_DETAIL = "CLEAR_DETAIL";
 
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const GET_WISHLIST = "GET_WISHLIST";
+
+export const GET_USER_ORDERS = "GET_USER_ORDERS";

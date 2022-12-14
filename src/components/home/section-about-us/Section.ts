@@ -5,6 +5,7 @@ export const Section = styled.section`
   color: var(--font-color);
   padding: 2rem 0;
   transition: all 0.3s;
+  padding-bottom: 9.6rem;
 
   .container {
     display: flex;
@@ -66,7 +67,7 @@ export const Section = styled.section`
   }
 
   @media (min-width: 1024px) {
-    padding: 2.5rem 5rem;
+    padding: 2.5rem 5rem 9.6rem 5rem;
     transition: all 0.3s;
 
     .container {

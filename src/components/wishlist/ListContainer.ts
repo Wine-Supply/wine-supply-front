@@ -11,6 +11,10 @@ export const ListContainer = styled.div`
   min-height: 100vh;
 
   .no-items-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 2.6rem;
   }
 
@@ -38,11 +42,37 @@ export const ListContainer = styled.div`
     background-color: var(--btn-color-hover);
   }
 
+  .wishlist-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .wishlist-title {
+    font-family: var(--font-title);
+    font-size: 3rem;
+  }
+
+  .header-text {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
   @media (min-width: 600px) {
     gap: 3rem;
     .empty-btn {
       font-size: 2rem;
       padding: 1rem 1.4rem;
+    }
+
+    .wishlist-title {
+      font-size: 3.6rem;
+    }
+
+    .header-text {
+      font-size: 2.4rem;
+      margin-bottom: 3rem;
     }
   }
 
@@ -67,6 +97,10 @@ export const ListContainer = styled.div`
     .no-items-text {
       grid-column: 1 / -1;
       font-size: 3rem;
+    }
+
+    .wishlist-header {
+      grid-column: 1/-1;
     }
   }
 `;

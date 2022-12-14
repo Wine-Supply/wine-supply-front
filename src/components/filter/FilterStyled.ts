@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const FilterStyled = styled.div`
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   padding: 1.6rem 0;
-  
- 
+
   .filter-container {
     display: flex;
     flex-direction: column;
@@ -39,8 +38,8 @@ export const FilterStyled = styled.div`
     border: none;
     border-radius: 8px;
     margin: 0.5rem;
-    
-    :hover{
+
+    :hover {
       background-color: #dedede;
     }
   }
@@ -53,10 +52,8 @@ export const FilterStyled = styled.div`
   div {
     display: flex;
     flex-direction: row;
-    
   }
 
-  
   @media (min-width: 600px) {
     .container {
       display: flex;
@@ -64,7 +61,7 @@ export const FilterStyled = styled.div`
       flex-direction: row;
     }
   }
-/*
+  /*
   @media (min-width: 1024px) {
     .container {
       display: flex;
@@ -95,5 +92,4 @@ export const FilterStyled = styled.div`
       flex-direction: column;
     }
   }
-  
 `;

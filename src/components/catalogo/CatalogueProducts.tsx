@@ -13,7 +13,7 @@ import Card from "../card/Card";
 import { CatalogoContainer, TitleCategory } from "./CatalogoStyle";
 import { State } from "../../redux/reducer/index";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../login-modal/LoginModal";
@@ -55,6 +55,7 @@ export default function CatalogueProducts() {
   const Products = useSelector((state: State) => state.allWines);
   const Items = useSelector((state: State) => state.itemsStorage);
   const wishlist = useSelector((state: State) => state.wishList);
+  const noFilterMatch = useSelector((state: State) => state.noWinesMessage);
   let dispatch: Dispatch<any> = useDispatch();
   const navigate = useNavigate();
 
@@ -83,7 +84,9 @@ export default function CatalogueProducts() {
         <Filter />
         <TitleCategory>Most Recommended</TitleCategory>
         <div className="productCointainer">
-          {Products.length === 0 ? (
+          {noFilterMatch.length > 0 ? (
+            <p className="no-wines">{noFilterMatch}</p>
+          ) : Products.length === 0 ? (
             <Loading />
           ) : (
             Products?.map((el) => {

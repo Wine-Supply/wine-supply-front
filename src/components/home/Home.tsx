@@ -6,11 +6,12 @@ import { getItemsStorage, getUserId } from "../../redux/action-creators";
 import { State } from "../../redux/reducer";
 import AboutUs from "./section-about-us/AboutUs";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import BanerSection from "./section-baner/BanerSection";
 import Newsletter from "./section-newsletter/Newsletter";
 import TopRated from "./section-top-rated/TopRated";
 import CarritoFull from "../carritoFull/CarritoFull";
+import ContactForm from "../contact-form/ContactUs";
 
 export default function Home() {
   const [showButton, setShowButton] = useState<boolean>(false);
@@ -22,7 +23,7 @@ export default function Home() {
     if (Items.length === 0) {
       dispatch(getItemsStorage());
     }
-    if (Object.keys(User)) dispatch(getUserId());
+    if (Object.keys(User).length === 0) dispatch(getUserId());
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);
     });
@@ -36,6 +37,7 @@ export default function Home() {
       <TopRated />
       <Newsletter />
       <AboutUs />
+      <ContactForm />
       <Footer />
       {showButton && <ScrollToTopButton />}
     </main>

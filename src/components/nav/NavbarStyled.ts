@@ -93,6 +93,11 @@ export const NavbarStyled = styled.nav`
     border-radius: 50%;
   }
 
+  .user-photo {
+    width: 4rem;
+    border-radius: 50%;
+  }
+
   @media (min-width: 768px) {
     .burguer {
       display: none;

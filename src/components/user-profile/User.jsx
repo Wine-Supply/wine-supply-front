@@ -5,7 +5,8 @@ import { ButtonSaveChanges, ButtonSubscribe } from "../utils/utils";
 import { useAuth, upload } from "../login/FirebaseConfig";
 import axios from "axios";
 import Navbar from "../nav/navbar";
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
+import { useSelector } from "react-redux";
 
 function validate(input) {
   let errors = {};
@@ -55,7 +56,8 @@ function validate(input) {
 }
 
 export default function User() {
-  let userData = JSON.parse(localStorage.getItem("user"));
+  let userData = useSelector((state) => state.user);
+  console.log(userData);
   //console.log("userData", userData)
 
   /*nt. El user llega sin 'phone'
@@ -211,7 +213,7 @@ export default function User() {
         <h2>Account Data</h2>
         <hr></hr>
         <label className="margin">
-          Currently logged in as: {currentUser?.email}{" "}
+          Currently logged in as: {userData.email}{" "}
         </label>
         <div className="row">
           <img src={input.avatar} alt="Avatar" className="avatar" />
