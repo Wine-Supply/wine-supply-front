@@ -29,6 +29,31 @@ export const MyLayout = props => <Layout {...props} menu={MyMenu} />;
 
 const AdminDash = () => {
 
+    const token = localStorage.getItem("token");
+    const data = {}
+    // const navigate = useNavigate()
+    const [isAdmin, setIsAdmin] = useState("loading")
+    const checkadmin =  async() => {
+        let response = await axios.post('http://localhost:3001/AdminStatuscheck', null, {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+              "Content-Type": "application/json, charset=utf-8",
+            }} )
+        if (response.data === 'Admin User') {
+            setIsAdmin("granted")
+        } else {
+            // setIsAdmin("notgranted")
+            // navigate("/");
+            // window.location.replace("http://localhost:3000")
+        }
+    }
+
+    useEffect(() => {
+        checkadmin()
+    }, [isAdmin])
+
+    if (isAdmin === 'loading') return (<p>Loading ...</p>)
+
     return(
     <Admin basename="/admin" layout={MyLayout} dataProvider={api} dashboard={Charts}>
         {/* <Resource name='chart' list={Charts}/> */}
