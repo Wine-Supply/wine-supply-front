@@ -208,6 +208,21 @@ export const buyItems = async (cart: any, token: any) => {
   }
 };
 
+export const buyMembership = async (sub_type: any, token: any) => {
+  try {
+    const res = await axios.post(`${URL}/paymentsub`, sub_type, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+        items: JSON.stringify(sub_type),
+      },
+    });
+    window.location.replace(res.data);
+    handleEmptyCart();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const buyItem = async (id: any, token: any) => {
   console.log(id);
   const res = await axios.post(`${URL}/payment`, id, {

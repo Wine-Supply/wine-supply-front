@@ -52,19 +52,7 @@ const Navbar = () => {
               Shop
             </Link>
           </li>
-          <li onClick={() => dispatch(getWines())}>
-            <Link className={"link line"} to={`/user/${User.name}/profile`}>
-              <img
-                className="user-photo"
-                src={
-                  User.avatar && User.avatar.length > 0
-                    ? User.avatar[0]
-                    : "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
-                }
-                alt=""
-              />
-            </Link>
-          </li>
+          
           <li className="cart">
             {TotalItemsCart > 0 && (
               <span className="items-amount">{TotalItemsCart}</span>
@@ -84,6 +72,19 @@ const Navbar = () => {
           <li>
             <Link className={"link line"} to="/login">
               <UserOutlined />
+            </Link>
+          </li>
+          <li onClick={() => dispatch(getWines())}>
+            <Link className={"link line"} to={`/user/${User.name}/profile`}>
+              <img
+                className="user-photo"
+                src={
+                  User.avatar && User.avatar.length > 0
+                    ? User.avatar[0]
+                    : "https://static.vecteezy.com/system/resources/previews/002/732/063/original/full-glass-of-red-wine-icon-illustration-free-vector.jpg"
+                }
+                alt=""
+              />
             </Link>
           </li>
           {token && User.isAdmin === "yes" && (
