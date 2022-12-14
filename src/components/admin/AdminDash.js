@@ -22,7 +22,10 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 };
 
-const api = restProvider("http://localhost:3001", httpClient);
+const api = restProvider(
+  "https://wine-supply-back-production.up.railway.app",
+  httpClient
+);
 
 export const MyLayout = (props) => <Layout {...props} menu={MyMenu} />;
 
@@ -33,7 +36,7 @@ const AdminDash = () => {
   const [isAdmin, setIsAdmin] = useState("loading");
   const checkadmin = async () => {
     let response = await axios.post(
-      "http://localhost:3001/AdminStatuscheck",
+      "https://wine-supply-back-production.up.railway.app/AdminStatuscheck",
       null,
       {
         headers: {

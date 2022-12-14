@@ -198,7 +198,7 @@ export default function Form() {
       data.append("images", formData.images);
 
       const response = await axios.post(
-        "http://localhost:3001/admin/post",
+        "https://wine-supply-back-production.up.railway.app/admin/post",
         data
       );
       if (response.status >= 200 && response.status <= 205) {

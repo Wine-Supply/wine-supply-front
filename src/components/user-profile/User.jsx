@@ -177,7 +177,10 @@ export default function User() {
       data.append("address", input.address);
       data.append("whishList", input.whishList);
 
-      const resp = await axios.put("http://localhost:3001/user/update", data);
+      const resp = await axios.put(
+        "https://wine-supply-back-production.up.railway.app/user/update",
+        data
+      );
 
       if (resp.status >= 200 && resp.status <= 205) {
         alert("Data changed");
