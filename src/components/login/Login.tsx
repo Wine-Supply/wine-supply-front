@@ -62,6 +62,7 @@ export default function Login() {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode, errorMessage);
+      return alert('Inactive user, do you want to recover it? Send a email to winesupplyback@gmail.com');
     }
   };
 
@@ -76,6 +77,7 @@ export default function Login() {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode, errorMessage);
+      return alert('Inactive user, do you want to recover it? Send a email to winesupplyback@gmail.com');
     }
   };
 

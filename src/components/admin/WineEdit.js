@@ -111,11 +111,11 @@ const validateWineCreation = async (values) => {
   //price
   } else if (!values.price || values.price?.length === 0) {
     errors.price = "Please enter the product's price";
-
-  //images
-  } else if (!values.images1 || values.images1?.length === 0) {
-    errors.images1 = "Please upload an image";
   }
+  //images
+  // else if (!values.images1 || values.images1?.length === 0) {
+  //   errors.images1 = "Please upload an image";
+  // }
   
   return errors
 };
@@ -137,7 +137,7 @@ const WineEdit = (props) => (
       <NumberInput source='rating' />
       <NumberInput source='stock' />
       <NumberInput source='price' />
-      <TextInput source='images1' />
+      {/* <TextInput source='images1' /> */}
       {/* <ImageInput source='images' label="Wine Image (preferably in png)">
         <ImageField source="src" title="title" />
       </ImageInput> */}
