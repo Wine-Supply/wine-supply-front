@@ -12,7 +12,11 @@ import User from "./components/user-profile/User";
 import Newsletter from "./components/newsletter/Newsletter";
 import "./App.css";
 import AdminDash from "./components/admin/AdminDash";
+
 import Profile from "./components/profile/Profile";
+
+import PageNotFound from "./components/PageNotFound/PageNotFound";
+
 
 function App() {
   return (
@@ -32,6 +36,10 @@ function App() {
         <Route path="/newsletter" element={<Newsletter />} />
 
         <Route path="/admin/*" element={<AdminDash />} />
+
+
+        <Route path="*"element={<PageNotFound/>} />
+
       </Routes>
     </div>
   );

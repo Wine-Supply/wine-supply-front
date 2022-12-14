@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItemsStorage, getWishlist } from "../../redux/action-creators";
+import { getWishlist } from "../../redux/action-creators";
 import { State, Wine } from "../../redux/reducer";
 import CarritoFull from "../carritoFull/CarritoFull";
 import Footer from "../footer/Footer";
@@ -32,8 +32,8 @@ export default function Wishlist() {
     wishlistWithStringImg.forEach((listItem) => {
       if (!idArray.includes(listItem._id)) notRepeated.push(listItem);
     });
-    localStorage.setItem("item", JSON.stringify([...current, ...notRepeated]));
-    dispatch(getItemsStorage());
+   /*  localStorage.setItem("item", JSON.stringify([...current, ...notRepeated]));
+    dispatch(getItemsStorage()); */
   };
 
   return (

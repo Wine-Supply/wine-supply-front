@@ -3,6 +3,15 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
 import { Wrapper } from "./CartItemStyle";
+import { useDispatch } from "react-redux";
+import {
+  addCuantityItems,
+  clearItemToCart,
+  getTotalItems,
+  getTotalPrice,
+  subtractCuantityItems,
+  subtractTotalPrice
+} from "../../redux/action-creators";
 
 const style = {
   position: "absolute",
@@ -23,22 +32,18 @@ const CartItem = ({
   img,
   name,
   price,
-  clearItem,
-  valor,
-  total,
-  setTotal,
-  totalMoney,
-  setTotalMoney,
+  cuantity,
 }) => {
   let stock = 10;
 
-  const [totalItem, setTotalItem] = useState(1);
   const [totalPrice, setTotalPrice] = useState(price);
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    setTotalPrice(price * totalItem);
-  }, [totalItem]);
+    setTotalPrice(price * cuantity);
+    dispatch(getTotalItems())
+  }, [cuantity]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -48,27 +53,18 @@ const CartItem = ({
   };
 
   const addItem = () => {
-    /*     let getStorage = localStorage.getItem("item");
-    let localItem = JSON.parse(getStorage)
-    console.log(localItem)
-    let itemSearch = localItem.find(e => e._id == _id)
-    itemSearch.cuantity = totalItem + 1
-    let addItemStorage = JSON.stringify(itemSearch);
-    localStorage.setItem("item", addItemStorage);
-    //////////////////////////// */
-    if (totalItem === stock) return;
-    setTotalItem(totalItem + 1);
-    setTotal(total + 1);
-    setTotalMoney((Number(totalMoney) + Number(price)).toFixed(2));
+    if (cuantity === stock) return;
+    dispatch(getTotalPrice(price))
+    dispatch(addCuantityItems(_id))
   };
+
   const subsItem = () => {
-    if (totalItem < 2) {
+    if (cuantity < 2) {
       handleOpen();
-      return totalItem;
+      return cuantity;
     } else {
-      setTotalItem(totalItem - 1);
-      setTotal(total - 1);
-      setTotalMoney((Number(totalMoney) - Number(price)).toFixed(2));
+      dispatch(subtractTotalPrice(price))
+      dispatch(subtractCuantityItems(_id))
     }
   };
 
@@ -89,9 +85,9 @@ const CartItem = ({
 
             <Button
               onClick={() => {
-                clearItem(_id);
-                setTotal(total - totalItem);
-                setTotalMoney((totalMoney - totalPrice).toFixed(2));
+                dispatch(subtractTotalPrice(price * cuantity))
+                dispatch(clearItemToCart(_id))
+                dispatch(getTotalItems())
               }}
             >
               ACCEPT
@@ -122,7 +118,7 @@ const CartItem = ({
             >
               -
             </Button>
-            <p>{totalItem}</p>
+            <p>{cuantity}</p>
             <Button
               size="small"
               disableElevation

@@ -9,9 +9,12 @@ import {
   SORT_WINES_BY_RATING,
   SEARCH_WINES,
   ADD_ITEMS_STORAGE,
+  SUBTRACT_CUANTITY_ITEMS,
+  ADD_CUANTITY_ITEMS,
   GET_ITEMS_STORAGE,
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
+  SUBTRACT_TOTAL_PRICE,
   OPEN_CART,
   GET_WINE_REVIEWS,
   GET_USER_ID,
@@ -19,6 +22,8 @@ import {
   CLEAR_DETAIL,
   GET_WISHLIST,
   GET_USER_ORDERS,
+  CLEAR_ITEM_CART,
+  HANDLE_EMPTY_CART,
 } from "../actions/index";
 
 export type Users = {
@@ -81,6 +86,7 @@ export interface Wine {
   origin?: string;
   strain?: string;
   volume?: number;
+  cuantity: number;
 }
 
 interface WineReview {
@@ -103,7 +109,7 @@ export interface State {
   wineReviews: WineReview[];
   wineNames: string[];
   wineBrands: string[];
-  itemsStorage: Object[];
+  itemsStorage: Array<Wine>;
   openCart: boolean;
   loginModal: boolean;
   totalItems: number;
@@ -224,16 +230,71 @@ const rootReducer = (state: State = initialState, action: Actions) => {
           : [...state.itemsStorage, action.payload],
       };
 
-    case GET_TOTAL_ITEMS:
+    case SUBTRACT_CUANTITY_ITEMS:
+      let item: Wine | undefined = state.itemsStorage.find(
+        (el: any) => el._id === action.payload
+      );
+      let index = state.itemsStorage.findIndex(
+        (el: any) => el._id === action.payload
+      );
+      let itemFilter = state.itemsStorage.filter(
+        (el: any) => el._id !== action.payload
+      );
+      if (item !== undefined) {
+        item.cuantity -= 1
+        itemFilter.splice(index, 0, item)
+      }
       return {
         ...state,
-        totalItems: action.payload,
+        itemsStorage: itemFilter
+      };
+
+    case ADD_CUANTITY_ITEMS:
+      let itemSearch: Wine | undefined = state.itemsStorage.find(
+        (el: any) => el._id === action.payload
+      );
+      let indexItem = state.itemsStorage.findIndex(
+        (el: any) => el._id === action.payload
+      );
+      let itemsFilter = state.itemsStorage.filter(
+        (el: any) => el._id !== action.payload
+      );
+      if (itemSearch !== undefined) {
+        itemSearch.cuantity += 1
+        itemsFilter.splice(indexItem, 0, itemSearch)
+      }
+      return {
+        ...state,
+        itemsStorage: itemsFilter
+      };
+
+    case GET_TOTAL_ITEMS:
+      let totalItems = state.itemsStorage.reduce((acc, item) => acc + item.cuantity, 0)
+      return {
+        ...state,
+        totalItems: totalItems
       };
 
     case GET_TOTAL_PRICE:
+      if (action.payload._id) {
+        let searchItem = state.itemsStorage.some(
+          (el: any) => el._id === action.payload._id
+        );
+        return {
+          ...state,
+          totalPrice: searchItem ? parseFloat(state.totalPrice.toString().substring(0, 5)) : parseFloat(state.totalPrice.toString().substring(0, 5)) + Number(action.payload.price.toString().substring(0, 5)),
+        };
+      } else {
+        return {
+          ...state,
+          totalPrice: parseFloat(state.totalPrice.toString().substring(0, 5)) + parseFloat(action.payload.toString().substring(0, 6)),
+        };
+      };
+
+    case SUBTRACT_TOTAL_PRICE:
       return {
         ...state,
-        totalPrice: action.payload,
+        totalPrice: parseFloat(state.totalPrice.toString().substring(0, 5)) - parseFloat(action.payload.toString().substring(0, 5)),
       };
 
     case OPEN_CART:
@@ -241,6 +302,21 @@ const rootReducer = (state: State = initialState, action: Actions) => {
         ...state,
         openCart: !state.openCart,
       };
+
+    case CLEAR_ITEM_CART:
+      let itemCart = state.itemsStorage.filter(it => it._id !== action.payload)
+      return{
+        ...state,
+        itemsStorage: itemCart,
+      };
+      
+    case HANDLE_EMPTY_CART:
+      return{
+        ...state,
+        itemsStorage: [],
+        totalItems: 0,
+        totalPrice: 0,
+      }
 
     case GET_WINE_REVIEWS:
       return {
