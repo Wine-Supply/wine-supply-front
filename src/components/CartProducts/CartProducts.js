@@ -1,51 +1,43 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  getItemsStorage,
-  getTotalItems,
-  getTotalPrice,
-} from "../../redux/action-creators";
 import { Wrapper } from "./CartProductsStyle";
 import CartItem from "./CartItem";
+import { addItemsCartDataBase, handleEmptyCart } from "../../redux/action-creators";
 
 const CartProducts = () => {
   const Items = useSelector((state) => state.itemsStorage);
-  const [total, setTotal] = useState(Items.length);
-  const [totalMoney, setTotalMoney] = useState(
-    Items.reduce((acc, item) => acc + item.price, 0).toFixed(2)
-  );
-  let dispatch = useDispatch();
-  const clearItem = (_id) => {
-    let algo = Items.filter((item) => item._id !== _id);
-    let addItemStorage = JSON.stringify(algo);
-    localStorage.setItem("item", addItemStorage);
-    dispatch(getItemsStorage());
-  };
+  const TotalItemsCart = useSelector((state) => state.totalItems);
+  const TotalPriceMoney = useSelector((state) => state.totalPrice);
+  const [allItemToCart, setAllItemsToCart] = useState([])
+  const dispatch = useDispatch()
 
-  const handleEmptyCart = () => {
-    localStorage.setItem("item", JSON.stringify([]));
-    dispatch(getItemsStorage());
-  };
+    useEffect(() => {
+      setAllItemsToCart(Items)
+    }, [Items.length])
+
+    useEffect(() =>{
+      return ()=>{addItemsCartDataBase(Items)}
+    })
 
   return (
     <Wrapper>
       <h2>Your Shopping Cart</h2>
-      {Items.length > 0 && (
+      {allItemToCart.length > 0 && (
         <div className="cart-info">
-          <span>Items: {total}</span>
-          <span>Total: ${totalMoney}</span>
-          <button onClick={handleEmptyCart} className="empty-btn">
+          <span>Items: {TotalItemsCart}</span>
+          <span>Total: ${TotalPriceMoney.toString().substring(0, 5)}</span>
+          <button onClick={()=>{dispatch(handleEmptyCart())}} className="empty-btn">
             Empty cart
           </button>
         </div>
       )}
 
-      {Items.length === 0 ? (
+      {allItemToCart.length === 0 ? (
         <p className="no-items">No items in cart.</p>
       ) : (
         <div>
-          {Items.map((item) => (
+          {allItemToCart.map((item) => (
             <CartItem
               key={item._id}
               item={item}
@@ -53,21 +45,13 @@ const CartProducts = () => {
               name={item.name}
               img={item.img}
               price={item.price}
-              clearItem={clearItem}
-              total={total}
-              setTotal={setTotal}
-              totalMoney={totalMoney}
-              setTotalMoney={setTotalMoney}
+              cuantity={item.cuantity}
             />
           ))}
         </div>
       )}
-      {Items.length > 0 && (
+      {allItemToCart.length > 0 && (
         <Link
-          onClick={() => {
-            dispatch(getTotalItems(total));
-            dispatch(getTotalPrice(totalMoney));
-          }}
           className="checkout"
           to="/cart/checkout"
         >

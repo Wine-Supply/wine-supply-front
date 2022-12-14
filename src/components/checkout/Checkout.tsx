@@ -1,12 +1,11 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DivStyled } from "./DivStyled";
 import Navbar from "../nav/navbar";
 import Footer from "../Footer/Footer";
 import { useSelector } from "react-redux";
 import { State } from "../../redux/reducer";
-import { buyItems } from "../../redux/action-creators";
+import { addItemsCartDataBase, buyItems } from "../../redux/action-creators";
 import Map from "../google-maps/Map";
-import React, { useState } from "react";
 
 type Address = {
   name: string;
@@ -25,6 +24,11 @@ export default function Checkout() {
   const price = useSelector((state: State) => state.totalPrice);
   const shippingFee = 10;
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    addItemsCartDataBase(items)
+  }, [])
+  
 
   const [address, setAddress] = useState<Address>({
     name: "",
@@ -138,11 +142,11 @@ export default function Checkout() {
             </div>
             <div className="summary-info">
               <span>Subtotal</span>
-              <span>{`$${price} USD`}</span>
+              <span>{`$${price.toString().substring(0, 5)} USD`}</span>
             </div>
             <div className="summary-info total">
               <span>Total</span>
-              <span>{`$${Number(price) + Number(shippingFee)} USD`}</span>
+              <span>{`$${Number(price.toString().substring(0, 5)) + Number(shippingFee)} USD`}</span>
             </div>
           </div>
           <button onClick={() => buyItems(items, token)} className="pay-btn">

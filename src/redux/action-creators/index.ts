@@ -9,14 +9,19 @@ import {
   SEARCH_WINES,
   GET_ITEMS_STORAGE,
   ADD_ITEMS_STORAGE,
+  SUBTRACT_CUANTITY_ITEMS,
+  ADD_CUANTITY_ITEMS,
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
+  SUBTRACT_TOTAL_PRICE,
   OPEN_CART,
   GET_WINE_REVIEWS,
   GET_USER_ID,
   SHOW_LOGIN_MODAL,
   CLEAR_DETAIL,
   GET_WISHLIST,
+  CLEAR_ITEM_CART,
+  HANDLE_EMPTY_CART,
 } from "../actions";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -126,11 +131,27 @@ export const signUpUser = async (
   return resp.data;
 };
 
-export const getItemsStorage = () => {
+
+//---REVISAR PARA TRAER DESDE BACK
+/* export const getItemsStorage = () => {
   return {
     type: GET_ITEMS_STORAGE,
     payload: localStorage.getItem("item"),
   };
+}; */
+
+export const subtractCuantityItems = (_id: string) => {
+  return {
+    type: SUBTRACT_CUANTITY_ITEMS,
+    payload: _id,
+  }
+};
+
+export const addCuantityItems = (_id: string) => {
+  return {
+    type: ADD_CUANTITY_ITEMS,
+    payload: _id,
+  }
 };
 
 export const addItemsStorage = (object: Object) => {
@@ -140,18 +161,46 @@ export const addItemsStorage = (object: Object) => {
   };
 };
 
-export const getTotalItems = (total: number) => {
+export const getTotalItems = () => {
   return {
     type: GET_TOTAL_ITEMS,
-    payload: total,
   };
 };
 
-export const getTotalPrice = (price: number) => {
+export const getTotalPrice = (price: number, _id: string | null) => {
+  if (_id) {
+    return {
+      type: GET_TOTAL_PRICE,
+      payload: { price, _id },
+    };
+  } else {
+    return {
+      type: GET_TOTAL_PRICE,
+      payload: price,
+    };
+  }
+};
+
+export const subtractTotalPrice = (price: number) => {
   return {
-    type: GET_TOTAL_PRICE,
+    type: SUBTRACT_TOTAL_PRICE,
     payload: price,
   };
+};
+
+export const addItemsCartDataBase = async (cart: Array<Wine>) => {
+  let token = localStorage.getItem("token") || '';
+  try {
+    const res = await axios.post(`${URL}/addcartitem`, cart, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+        items: JSON.stringify(cart),
+      },
+    });
+    console.log(res.data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const buyItems = async (cart: any, token: any) => {
@@ -163,7 +212,7 @@ export const buyItems = async (cart: any, token: any) => {
       },
     });
     window.location.replace(res.data);
-    localStorage.setItem("item", JSON.stringify([]));
+    handleEmptyCart()
   } catch (error) {
     console.error(error);
   }
@@ -230,3 +279,16 @@ export const getWishlist = () => {
     type: GET_WISHLIST,
   };
 };
+
+export const clearItemToCart = (_id:string) =>{
+  return{
+    type: CLEAR_ITEM_CART,
+    payload: _id,
+  }
+}
+
+export const handleEmptyCart = () =>{
+  return{
+    type: HANDLE_EMPTY_CART,
+  }
+}
