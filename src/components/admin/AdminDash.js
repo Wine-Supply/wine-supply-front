@@ -9,6 +9,8 @@ import WineEdit from './WineEdit';
 import WineCreate from './WineCreate';
 import Charts from './Charts';
 import NewsletterForm from './NewsletterForm';
+import { Layout } from 'react-admin';
+import { MyMenu } from './CustomStyle';
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
@@ -21,10 +23,14 @@ const httpClient = (url, options = {}) => {
 
 const api = restProvider('http://localhost:3001', httpClient)
 
+
+
+export const MyLayout = props => <Layout {...props} menu={MyMenu} />;
+
 const AdminDash = () => {
 
     return(
-    <Admin basename="/admin" dataProvider={api} dashboard={Charts}>
+    <Admin basename="/admin" layout={MyLayout} dataProvider={api} dashboard={Charts}>
         {/* <Resource name='chart' list={Charts}/> */}
         <Resource name='admin/wines' list={WineList} create={WineCreate} edit={WineEdit} delete={WineList}/>
         <Resource name='admin/users' list={UserList} edit={UserEdit}/>

@@ -41,16 +41,16 @@ const [data, setData] = useState({
     return (
         <Form defaultValues={defaultValues}>
             <Grid container>
-                <Grid item xs={6}>
+                <Grid item md={7} xs={12}>
                     <TextInput source="subject" name='subject' value={data.subject} onChange={handleChange} fullWidth />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item md={7} xs={12}>
                     <TextInput source="title" name='title' value={data.title} onChange={handleChange} fullWidth />
                 </Grid>
-                <Grid item xs={12}>
-                    <RichTextField source="news" name='news' value={data.news} onChange={handleChange} fullWidth />
+                <Grid item md={7} xs={12}>
+                    <TextInput source="news" name='news' value={data.news} onChange={handleChange} fullWidth />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item md={6} xs={12}>
                     <TextInput source="image" name='image' value={data.image} onChange={handleChange} fullWidth/>
                 </Grid>
                 <Grid item xs={12}>

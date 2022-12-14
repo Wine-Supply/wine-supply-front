@@ -27,7 +27,7 @@ const NewUsers = () => {
         return <div>Loading...</div>;
     }
     return (
-        <div>
+        <div style={{marginTop:'1.8rem'}}>
             <Title title="Last users list" />
             <h2>Last users</h2>
             {/* <TextField
@@ -42,10 +42,10 @@ const NewUsers = () => {
                 <Table sx={{ padding: 2 }} size="small">
                     <TableHead style={{backgroundColor:'#069bff'}}>
                         <TableRow>
-                            <TableCell><b>EMAIL</b></TableCell>
-                            <TableCell><b>NAME</b></TableCell>
-                            <TableCell><b>LAST NAME</b></TableCell>
-                            <TableCell><b>USERNAME</b></TableCell>
+                            <TableCell><b style={{color: "#ffffff"}}>EMAIL</b></TableCell>
+                            <TableCell><b style={{color: "#ffffff"}}>NAME</b></TableCell>
+                            <TableCell><b style={{color: "#ffffff"}}>LAST NAME</b></TableCell>
+                            <TableCell><b style={{color: "#ffffff"}}>USERNAME</b></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
