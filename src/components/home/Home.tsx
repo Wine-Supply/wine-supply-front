@@ -10,6 +10,8 @@ import Footer from "../Footer/Footer";
 import BanerSection from "./section-baner/BanerSection";
 import Newsletter from "./section-newsletter/Newsletter";
 import TopRated from "./section-top-rated/TopRated";
+import CartProducts from "../CartProducts/CartProducts";
+import { Drawer } from '@mui/material'
 import CarritoFull from "../carritoFull/CarritoFull";
 
 export default function Home() {
