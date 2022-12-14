@@ -9,12 +9,12 @@ function PageNotFound() {
      <PageNotFoundStyled>
           <div>
             <h2>Error 404!</h2>
-             <Link to="/" className="link">
+            <Link to="/" className="link">
               <ButtonAddToCart className="btn">
                 Go Home
               </ButtonAddToCart>
-              </Link>
-              <img className="section-img" id="monsterImg" src={oops} alt="Ops Error 404" />
+            </Link>
+            <img className="section-img" src={oops} alt="Ops Error 404" />
           </div>
         </PageNotFoundStyled>
       )
