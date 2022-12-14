@@ -13,7 +13,6 @@ import {
   ADD_CUANTITY_ITEMS,
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
-  SUBTRACT_TOTAL_PRICE,
   OPEN_CART,
   GET_WINE_REVIEWS,
   GET_USER_ID,
@@ -172,25 +171,10 @@ export const getTotalItems = () => {
   };
 };
 
-export const getTotalPrice = (price: number, _id: string | null) => {
-  if (_id) {
+export const getTotalPrice = () => {
     return {
       type: GET_TOTAL_PRICE,
-      payload: { price, _id },
     };
-  } else {
-    return {
-      type: GET_TOTAL_PRICE,
-      payload: price,
-    };
-  }
-};
-
-export const subtractTotalPrice = (price: number) => {
-  return {
-    type: SUBTRACT_TOTAL_PRICE,
-    payload: price,
-  };
 };
 
 export const addItemsCartDataBase = async (cart: Array<Wine>) => {

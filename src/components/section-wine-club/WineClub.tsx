@@ -19,12 +19,11 @@ export const WineClub = ({ title,imgUrl }: CardType) => {
         <CardTextWrapper>
         <CardTextTitle>{title}</CardTextTitle>
           <CardTextBody>
-          Recive every motn 3 bottles og our
+          Recive three bottles per month.
           <br /> 
-          very best selction of wines 
+          of our very best selction of wines 
           <br />
-          $80.00 us Dlls
-           </CardTextBody>
+          </CardTextBody>
         </CardTextWrapper>
       <CardStatWrapper>
           

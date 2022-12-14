@@ -14,7 +14,6 @@ import {
   GET_ITEMS_STORAGE,
   GET_TOTAL_ITEMS,
   GET_TOTAL_PRICE,
-  SUBTRACT_TOTAL_PRICE,
   OPEN_CART,
   GET_WINE_REVIEWS,
   GET_USER_ID,
@@ -276,26 +275,18 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       };
 
     case GET_TOTAL_PRICE:
-      if (action.payload._id) {
-        let searchItem = state.itemsStorage.some(
-          (el: any) => el._id === action.payload._id
-        );
-        return {
-          ...state,
-          totalPrice: searchItem ? parseFloat(state.totalPrice.toString().substring(0, 5)) : parseFloat(state.totalPrice.toString().substring(0, 5)) + Number(action.payload.price.toString().substring(0, 5)),
-        };
-      } else {
-        return {
-          ...state,
-          totalPrice: parseFloat(state.totalPrice.toString().substring(0, 5)) + parseFloat(action.payload.toString().substring(0, 6)),
-        };
-      };
-
-    case SUBTRACT_TOTAL_PRICE:
-      return {
+      let priceArray:number[] = []
+      state.itemsStorage.map(i =>{
+        priceArray.push(i.price * i.cuantity)
+      })
+      const priceTotal = priceArray.reduce(
+        (acc, curr) => acc + curr,
+        0
+      );
+      return{
         ...state,
-        totalPrice: parseFloat(state.totalPrice.toString().substring(0, 5)) - parseFloat(action.payload.toString().substring(0, 5)),
-      };
+        totalPrice: parseFloat(priceTotal.toString().substring(0, 5))
+      }
 
     case OPEN_CART:
       return {
@@ -328,6 +319,7 @@ const rootReducer = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         user: action.payload,
+        itemsStorage: action.payload.shopping_cart.length > 0 ? action.payload.shopping_cart : []
       };
 
     case SHOW_LOGIN_MODAL:

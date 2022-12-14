@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import ScrollToTopButton from "./scroll-to-top-button/ScrollToTopButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { getUserId } from "../../redux/action-creators";
+import { getTotalItems, getUserId } from "../../redux/action-creators";
 import { State } from "../../redux/reducer";
 import AboutUs from "./section-about-us/AboutUs";
 import Navbar from "../nav/navbar";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import BanerSection from "./section-baner/BanerSection";
 import Newsletter from "./section-newsletter/Newsletter";
 import TopRated from "./section-top-rated/TopRated";
@@ -31,6 +31,7 @@ export default function Home() {
 
     } */
     if (Object.keys(User)) dispatch(getUserId());
+    dispatch(getTotalItems())
 
     window.addEventListener("scroll", () => {
       window.scrollY > 200 ? setShowButton(true) : setShowButton(false);
