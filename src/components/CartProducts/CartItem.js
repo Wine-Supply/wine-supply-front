@@ -10,7 +10,6 @@ import {
   getTotalItems,
   getTotalPrice,
   subtractCuantityItems,
-  subtractTotalPrice
 } from "../../redux/action-creators";
 
 const style = {
@@ -43,6 +42,7 @@ const CartItem = ({
   useEffect(() => {
     setTotalPrice(price * cuantity);
     dispatch(getTotalItems())
+    dispatch(getTotalPrice())
   }, [cuantity]);
 
   const handleOpen = () => {
@@ -54,7 +54,6 @@ const CartItem = ({
 
   const addItem = () => {
     if (cuantity === stock) return;
-    dispatch(getTotalPrice(price))
     dispatch(addCuantityItems(_id))
   };
 
@@ -63,7 +62,6 @@ const CartItem = ({
       handleOpen();
       return cuantity;
     } else {
-      dispatch(subtractTotalPrice(price))
       dispatch(subtractCuantityItems(_id))
     }
   };
@@ -85,9 +83,9 @@ const CartItem = ({
 
             <Button
               onClick={() => {
-                dispatch(subtractTotalPrice(price * cuantity))
                 dispatch(clearItemToCart(_id))
                 dispatch(getTotalItems())
+                dispatch(getTotalPrice())
               }}
             >
               ACCEPT

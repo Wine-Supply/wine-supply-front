@@ -9,7 +9,7 @@ import {
   updateUserInfo,
 } from "../../redux/action-creators";
 import { State } from "../../redux/reducer";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import Navbar from "../nav/navbar";
 import { ProfileContainer } from "./ProfileContainer";
 import ShoppingOrder from "./ShoppingOrder";
