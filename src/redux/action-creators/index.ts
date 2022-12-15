@@ -208,16 +208,20 @@ export const buyItems = async (cart: any, token: any) => {
   }
 };
 
-export const buyMembership = async (sub_type: any, token: any) => {
+export const buyMembership = async (type: string) => {
+  console.log(type, localStorage.getItem("token"));
+
   try {
-    const res = await axios.post(`${URL}/paymentsub`, sub_type, {
+    const res = await axios.post(`${URL}/paymentsubs`, type, {
       headers: {
-        Authorization: `Bearer ${JSON.parse(token)}`,
-        items: JSON.stringify(sub_type),
+        Authorization: `Bearer ${JSON.parse(
+          localStorage.getItem("token") ?? ""
+        )}`,
+        sub_type: type,
       },
     });
     window.location.replace(res.data);
-    handleEmptyCart();
+    // handleEmptyCart();
   } catch (error) {
     console.error(error);
   }
